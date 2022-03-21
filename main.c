@@ -7,10 +7,7 @@
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
-//	int	i;
-
-	char *tt = malloc(1000);
-	tt = NULL;
+	int	i;
 
 	ft_bzero(&vars, sizeof(t_vars));
 
@@ -59,10 +56,10 @@ int	main(int argc, char **argv)
 //	ft_draw_vline(&vars, 400, 500, 100);
 
 //	ft_put_image(&vars, &vars.wall, (t_point){.x = -10, .y = -70}, (t_point){.x = 250,.y=200});
-//	ft_put_image(&vars, &vars.wall, (t_point){.x = 810, .y = -70}, (t_point){.x = 550, .y = 200});
+	ft_put_image(&vars, &vars.map.north, (t_point){.x = 810, .y = -70}, (t_point){.x = 550, .y = 200});
 
 
-/*	i = 0;
+	i = 0;
 	while (vars.map.walls[i].type != W_NONE)
 	{
 		t_wall w;
@@ -78,15 +75,15 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
-*/
+
 
 
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.screen.img, 0, 0);
 
 	ft_time();
 
-//	mlx_key_hook(vars.win, ft_hook, &vars);
-//	mlx_hook(vars.win, 17, 0L, ft_free, &vars);
-//	mlx_loop(vars.mlx);
+	mlx_key_hook(vars.win, ft_hook, &vars);
+	mlx_hook(vars.win, 17, 0L, ft_free, &vars);
+	mlx_loop(vars.mlx);
 	ft_free(&vars);
 }

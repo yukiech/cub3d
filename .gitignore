@@ -4,6 +4,9 @@ debugs
 debugs/*
 old
 *.DS_Store
+*.bak
+*.old
+memcheckignore
 
 # Prerequisites
 *.d

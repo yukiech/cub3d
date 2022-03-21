@@ -14,8 +14,6 @@ void	ft_tfree(void *ptr)
 
 int	ft_free(t_vars *vars)
 {
-	(void)vars;
-
 	ft_tfree(vars->map.north.path);
 	ft_tfree(vars->map.south.path);
 	ft_tfree(vars->map.west.path);
@@ -31,6 +29,6 @@ int	ft_free(t_vars *vars)
 	if (vars->win != NULL)
 		mlx_destroy_window(vars->mlx, vars->win);
 
-	while (1) {}
+//	while (1) {}
 	exit(0);
 }
