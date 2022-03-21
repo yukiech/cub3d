@@ -1,3 +1,10 @@
+objs
+objs/*
+debugs
+debugs/*
+old
+*.DS_Store
+
 # Prerequisites
 *.d
 
@@ -29,6 +36,7 @@
 *.dylib
 
 # Executables
+cub3d
 *.exe
 *.out
 *.app
