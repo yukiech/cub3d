@@ -8,12 +8,17 @@ void	ft_load_map(t_vars *vars, char *filename)
 {
 	int	fd;
 
-	fd = open(filename, O_RDONLY);
-	if (fd == -1 || read(fd, NULL, 0) == -1)
-		ft_exit(vars, "Error file");
-	ft_read_args(vars, fd);
-	ft_read_map(vars, fd);
-	close(fd);
+	if (ft_atoi(filename) == 0)
+	{
+		fd = open(filename, O_RDONLY);
+		if (fd == -1 || read(fd, NULL, 0) == -1)
+			ft_exit(vars, "Error file");
+		ft_read_args(vars, fd);
+		ft_read_map(vars, fd);
+		close(fd);
+	}
+	else
+		ft_generate_map(vars, (unsigned int)ft_atoi(filename));
 	ft_load_image(vars, vars->map.north.path, &vars->map.north);
 	ft_load_image(vars, vars->map.south.path, &vars->map.south);
 	ft_load_image(vars, vars->map.west.path, &vars->map.west);

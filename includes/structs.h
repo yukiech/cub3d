@@ -1,6 +1,16 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef struct s_point {
+	int	x;
+	int	y;
+}	t_point;
+
+typedef struct s_vect {
+	int	v1;
+	int	v2;
+}	t_vect;
+
 typedef struct s_imgptr {
 	char	*path;
 	void	*img;
@@ -20,11 +30,6 @@ typedef struct s_color {
 	unsigned char	g;
 	unsigned char	b;
 }	t_color;
-
-typedef struct s_point {
-	int	x;
-	int	y;
-}	t_point;
 
 # define W_NONE 0
 # define W_WALL 1
@@ -52,6 +57,7 @@ typedef struct s_vars {
 	void		*mlx;
 	void		*win;
 
+	t_imgptr	texter;
 	t_map		map;
 	t_imgptr	screen;
 }	t_vars;

@@ -15,7 +15,8 @@ void	ft_load_image(t_vars *vars, char *filename, t_imgptr *ptr)
 
 void	ft_set_px(t_imgptr *img, int x, int y, int color)
 {
-	img->pxs[y * img->line + x] = color;
+	if (!(x < 0 || y < 0 || x >= img->w || y >= img->h))
+		img->pxs[y * img->line + x] = color;
 }
 
 int	ft_get_px(t_imgptr *img, int x, int y)
@@ -23,31 +24,59 @@ int	ft_get_px(t_imgptr *img, int x, int y)
 	return (img->pxs[y * img->line + x]);
 }
 
+int	ft_put_image(t_vars *vars, t_imgptr *img, t_point o1, t_point o2, int hori)
+{
+	int	i;
+	int	j;
+	int	off_y;
+	int	off_len;
+
+	if (o2.x < o1.x)
+		return (ft_put_image(vars, img, o2, o1, hori));
+	i = o1.x - 1;
+	while (++i < o2.x)
+	{
+		off_y = map(i, n_vect(o1.x, o2.x), n_vect(o1.y, o2.y));
+		off_len = map(i, n_vect(o1.x, o2.x),
+				n_vect((hori - o1.y) * 2, (hori - o2.y) * 2));
+		j = off_y - 1;
+		while (++j < off_y + off_len)
+		{
+			ft_set_px(&vars->screen, i, j, ft_get_px(img,
+					map(i, n_vect(o1.x, o2.x), n_vect(0, img->w)),
+					map(j, n_vect(off_y, off_y + off_len),
+						n_vect(0, img->h))));
+		}
+	}
+	return (0);
+}
+
+/*
 int	ft_put_image(t_vars *vars, t_imgptr *img, t_point o1, t_point o2)
 {
 	int	i;
 	int	j;
-	int	offsety;
-	int	offsetl;
+	int	off_y;
+	int	off_len;
 
 	if (o2.x < o1.x)
 		return (ft_put_image(vars, img, o2, o1));
-	i = o1.x;
-	while (i < o2.x)
+	i = o1.x - 1;
+	while (++i < o2.x)
 	{
-		offsety = map(i, o1.x, o2.x, o1.y, o2.y);
-		offsetl = map(i, o1.x, o2.x, (vars->screen.h / 2 - o1.y) * 2,
-				(vars->screen.h / 2 - o2.y) * 2);
-		j = offsety;
-		while (j < offsety + offsetl)
+		off_y = map(i, n_vect(o1.x, o2.x), n_vect(o1.y, o2.y));
+		off_len = map(i, n_vect(o1.x, o2.x),
+				n_vect((vars->screen.h / 2 - o1.y) * 2,
+					(vars->screen.h / 2 - o2.y) * 2));
+		j = off_y - 1;
+		while (++j < off_y + off_len)
 		{
-			if (!(i < 0 || j < 0 || i >= vars->screen.w || j >= vars->screen.h))
-				ft_set_px(&vars->screen, i, j,
-					ft_get_px(img, map(i, o1.x, o2.x, 0, img->w),
-						map(j, offsety, offsety + offsetl, 0, img->h)));
-			j++;
+			ft_set_px(&vars->screen, i, j, ft_get_px(img,
+					map(i, n_vect(o1.x, o2.x), n_vect(0, img->w)),
+					map(j, n_vect(off_y, off_y + off_len),
+						n_vect(0, img->h))));
 		}
-		i++;
 	}
 	return (0);
 }
+*/

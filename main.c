@@ -3,7 +3,6 @@
 
 
 
-
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
@@ -55,12 +54,12 @@ int	main(int argc, char **argv)
 //	ft_draw_hline(&vars, 400, 400, 100);
 //	ft_draw_vline(&vars, 400, 500, 100);
 
-//	ft_put_image(&vars, &vars.wall, (t_point){.x = -10, .y = -70}, (t_point){.x = 250,.y=200});
-	ft_put_image(&vars, &vars.map.north, (t_point){.x = 810, .y = -70}, (t_point){.x = 550, .y = 200});
+//	ft_put_image(&vars, &vars.map.north, (t_point){.x = -10, .y = -70}, (t_point){.x = 550, .y = 190}, 200);
+//	ft_put_image(&vars, &vars.map.north, (t_point){.x = 810, .y = -70}, (t_point){.x = 550, .y = 190}, 200);
 
 
 	i = 0;
-	while (vars.map.walls[i].type != W_NONE)
+/*	while (vars.map.walls[i].type != W_NONE)
 	{
 		t_wall w;
 	
@@ -74,15 +73,21 @@ int	main(int argc, char **argv)
 			ft_draw_hline(&vars, (t_point){.x = w.p1.x * 4 + 100, .y = w.p1.y * 4 + 200}, (w.p2.x - w.p1.x) * 4);
 		}
 		i++;
-	}
+	}*/
 
-
+	ft_load_texter(&vars);
+	ft_write_text(&vars, "Canard$", (t_point){.x = 50, .y = 100}, n_vect(10, ft_color(0, 255, 255, 0)));
 
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.screen.img, 0, 0);
 
 	ft_time();
 
-	mlx_key_hook(vars.win, ft_hook, &vars);
+//	mlx_hook(vars.win, 2, 0L, ft_hook, &vars);
+
+	mlx_hook(vars.win, 2, 1L << 1, ft_key_hook, &vars);
+	mlx_hook(vars.win, 4, 0, ft_click_hook, &vars);
+	mlx_hook(vars.win, 6, 1L << 4, ft_mouse_hook, &vars);
+
 	mlx_hook(vars.win, 17, 0L, ft_free, &vars);
 	mlx_loop(vars.mlx);
 	ft_free(&vars);

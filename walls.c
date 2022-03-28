@@ -26,7 +26,7 @@ int	ft_register_walls(t_vars *vars)
 
 static void	ft_to_register(t_vars *vars, int x, int y)
 {
-	if (vars->map.raw[y][x] == '0')
+	if (ft_strchr(" 1", vars->map.raw[y][x]) == NULL)
 	{
 		if (ft_get_case(vars, x, y - 1) == '1')
 			ft_add_wall(vars->map.walls, x, y, 0);

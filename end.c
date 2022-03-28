@@ -20,15 +20,13 @@ int	ft_free(t_vars *vars)
 	ft_tfree(vars->map.east.path);
 	ft_tfree(vars->map.floor.raw);
 	ft_tfree(vars->map.ceil.raw);
-
 	ft_free_2d(vars->map.raw);
 	ft_tfree(vars->map.walls);
-
 	if (vars->screen.img != NULL)
 		mlx_destroy_image(vars->mlx, vars->screen.img);
 	if (vars->win != NULL)
 		mlx_destroy_window(vars->mlx, vars->win);
-
-//	while (1) {}
+	while (0)
+		;
 	exit(0);
 }
