@@ -2,13 +2,19 @@
 # define STRUCTS_H
 
 typedef struct s_point {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 }	t_point;
 
+typedef struct s_ray {
+	t_point	p;
+	float	t;
+	float	u;
+}	t_ray;
+
 typedef struct s_vect {
-	int	v1;
-	int	v2;
+	float	v1;
+	float	v2;
 }	t_vect;
 
 typedef struct s_imgptr {
@@ -36,8 +42,11 @@ typedef struct s_color {
 
 typedef struct s_wall {
 	int			type;
+	int			dist;
 	t_point		p1;
 	t_point		p2;
+	t_point		draw1;
+	t_point		draw2;
 }	t_wall;
 
 typedef struct s_map {

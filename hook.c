@@ -17,8 +17,11 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 
 int	ft_mouse_hook(int x, int y, t_vars *vars)
 {
-	if (x < 0 || y < 0 || x >= vars->screen.w || y >= vars->screen.h)
-		return (0);
-	printf("MOVE %d %d\n", x, y);
+//	if (x < 0 || y < 0 || x >= vars->screen.w || y >= vars->screen.h)
+//		return (0);
+//	printf("MOVE %d %d\n", x, y);
+	(void)vars;
+	(void)x;
+	(void)y;
 	return (0);
 }

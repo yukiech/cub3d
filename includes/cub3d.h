@@ -8,6 +8,8 @@
 # include <stdio.h>
 # include <sys/time.h>
 
+#include <math.h>
+
 # include <mylibft.h>
 # include <mlx.h>
 

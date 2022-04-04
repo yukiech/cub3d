@@ -11,12 +11,13 @@ int		ft_count_walls(t_vars *vars);
 //-----------------
 //draw.c
 
-void	ft_draw_hline(t_vars *vars, t_point o, int len);
-void	ft_draw_vline(t_vars *vars, t_point o, int len);
+void	ft_draw_hline(t_vars *vars, t_point o, int len, int color);
+void	ft_draw_vline(t_vars *vars, t_point o, int len, int color);
 
 //-----------------
 //end.c
 void	ft_exit(t_vars *vars, char *error);
+void	ft_tfree(void *ptr);
 int		ft_free(t_vars *vars);
 
 //-----------------
@@ -50,8 +51,8 @@ int		ft_put_image(t_vars *vars, t_imgptr *img, t_point o1, t_point o2, int hori)
 //math.c
 
 void	ft_time(void);
-t_vect	*n_vect(int v1, int v2);
-int		map(int x, t_vect *in, t_vect *out);
+t_vect	*n_vect(float v1, float v2);
+float	map(float x, t_vect *in, t_vect *out);
 int		ft_color(UCHAR a, UCHAR r, UCHAR g, UCHAR b);
 char	ft_get_case(t_vars *vars, int x, int y);
 

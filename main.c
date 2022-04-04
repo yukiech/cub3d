@@ -1,12 +1,32 @@
 #include <cub3d.h>
 
 
+float	ft_moy(float a, float b)
+{
+	return ((a + b) / 2);
+}
 
+float	ft_pyta(float a, float b)
+{
+	return (sqrtf(powf(a, 2) + powf(b, 2)));
+}
+
+t_ray	*ray(t_vars *vars, t_point p, t_wall other, float playerx, float playery);
+int		ft_in_fov(float angle, float playerangle, float fov);
+int	ft_fov_dist(float angle, float playerangle, float fov);
+
+int	ft_put_col(t_vars *vars, t_imgptr *img, t_point o1, float ratio, int hori);
+
+
+float	ft_to_rad(float deg)
+{
+	return ((fmod(deg + 360, 360) - 180) * M_PI / 180);
+}
 
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
-	int	i;
+	int		i;
 
 	ft_bzero(&vars, sizeof(t_vars));
 
@@ -31,13 +51,7 @@ int	main(int argc, char **argv)
 	printf("\nEND MAP %d\n\n", ft_count_walls(&vars) + 1);
 
 	ft_register_walls(&vars);
-
-
-
-
-//	vars.screen.img = mlx_new_image(vars.mlx, vars.screen.w, vars.screen.h);
-//	ft_get_im_data(&vars.screen);
-
+	
 
 	printf("bits %d\n", vars.screen.bits);
 	printf("line %d\n", vars.screen.line);
@@ -46,44 +60,129 @@ int	main(int argc, char **argv)
 //	ft_load_image(&vars, "wall.xpm", &vars.wall);
 
 
-//	vars.wall.img = mlx_xpm_file_to_image(vars.mlx, "wall.xpm", &vars.wall.w, &vars.wall.h);
-//	ft_get_im_data(&vars.wall);
 
 	ft_time();
 
-//	ft_draw_hline(&vars, 400, 400, 100);
+	for(int h = 0; h < 400; h++)
+		ft_draw_hline(&vars, (t_point){.x = 0, .y = h}, 800, ft_color(0, 0, 255, 0));
+
+	for(int h = 400; h < 800; h++)
+		ft_draw_hline(&vars, (t_point){.x = 0, .y = h}, 800, ft_color(0, 0, 0, 255));
+
 //	ft_draw_vline(&vars, 400, 500, 100);
 
 //	ft_put_image(&vars, &vars.map.north, (t_point){.x = -10, .y = -70}, (t_point){.x = 550, .y = 190}, 200);
 //	ft_put_image(&vars, &vars.map.north, (t_point){.x = 810, .y = -70}, (t_point){.x = 550, .y = 190}, 200);
 
 
-	i = 0;
-/*	while (vars.map.walls[i].type != W_NONE)
+	float playerx = 24.5;
+	float playery = 20.5;
+	(void)playerx;
+	(void)playery;
+
+	float angle = 90;
+	(void)angle;
+	float fov = 90;
+	(void)fov;
+
+	t_wall w;
+	(void)w;
+
+	int	j;
+	(void)j;
+
+
+	int	px;
+
+
+	px = 0;
+	while (px < 800)
 	{
-		t_wall w;
+		float rayan;
+
+		rayan = map(px, n_vect(0, 800), n_vect(fov/-2, fov/2));
+
+		float	best_dist = 1000000000;
+		t_ray	*best_ray;
+		int		best_wall;
 	
-		w = vars.map.walls[i];
-		if (vars.map.walls[i].p1.x == vars.map.walls[i].p2.x)
+		best_wall = 0;
+		t_point	raypoint;
+
+//		printf("%d %f\n", px, fmod(rayan + angle + 360, 360));
+		raypoint.x = playerx + cos((fmod(rayan + angle + 360, 360) - 180) * M_PI / 180) * 50;
+		raypoint.y = playerx + sin((fmod(rayan + angle + 360, 360) - 180) * M_PI / 180) * 50;
+
+
+		best_ray = NULL;
+
+		i = 0;
+		while (vars.map.walls[i].type != W_NONE)
 		{
-			ft_draw_vline(&vars, (t_point){.x = w.p1.x * 4 + 100, .y = w.p1.y * 4 + 200}, (w.p2.y - w.p1.y) * 4);
+			t_wall w;
+		
+			w = vars.map.walls[i];
+
+			t_ray *r = ray(&vars, raypoint, w, playerx, playery);
+
+			
+			if (r == NULL)
+			{
+				i++;
+				continue;
+			}
+
+			if (r->u < best_dist)
+			{
+				best_dist = r->u;
+				best_wall = i;
+				ft_tfree(best_ray);
+				best_ray = r;
+			}
+			i++;
 		}
-		else
+
+
+		if (best_ray != NULL)
 		{
-			ft_draw_hline(&vars, (t_point){.x = w.p1.x * 4 + 100, .y = w.p1.y * 4 + 200}, (w.p2.x - w.p1.x) * 4);
+//			printf("aa px %d %d, dist %f,\t tap %f            %f   %f\n", px, best_wall, best_dist, best_ray->t,   best_dist * sin(ft_to_rad(rayan + angle)), best_dist * cos(ft_to_rad(rayan + angle)));
+
+			if (vars.map.walls[best_wall].p1.x == vars.map.walls[best_wall].p2.x)
+			{
+				ft_put_col(&vars, &vars.map.west, (t_point){.x = px, .y = map(fabs(best_dist * cos(ft_to_rad(rayan + angle))), n_vect(0, 30), n_vect(100, 400))}, best_ray->t, 400);
+			}
+			else
+			{
+				ft_put_col(&vars, &vars.map.north, (t_point){.x = px, .y = map(fabs(cos(ft_to_rad(rayan + angle)) * best_dist), n_vect(0, 30), n_vect(100, 400))}, best_ray->t, 400);
+			}
+
+
+
 		}
-		i++;
-	}*/
+
+		ft_tfree(best_ray);		
+
+		px++;
+	}
+
 
 	ft_load_texter(&vars);
-	ft_write_text(&vars, "Canard$", (t_point){.x = 50, .y = 100}, n_vect(10, ft_color(0, 255, 255, 0)));
+//	ft_write_text(&vars, "Canard$", (t_point){.x = 50, .y = 100}, n_vect(10, ft_color(0, 255, 255, 0)));
+
+
+//	ft_line(&vars, (t_point){.x = 50, .y = 100}, (t_point){.x = 100, .y = 500});
+
 
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.screen.img, 0, 0);
 
 	ft_time();
 
-//	mlx_hook(vars.win, 2, 0L, ft_hook, &vars);
+	printf("color %d\n", ft_color(0, 0, 0, 255));
+	printf("color %d\n", ft_color(0, 255, 255, 0));
 
+//	mlx_hook(vars.win, 2, 0L, ft_hook, &vars);
+	
+//	mlx_mouse_hide();
 	mlx_hook(vars.win, 2, 1L << 1, ft_key_hook, &vars);
 	mlx_hook(vars.win, 4, 0, ft_click_hook, &vars);
 	mlx_hook(vars.win, 6, 1L << 4, ft_mouse_hook, &vars);
