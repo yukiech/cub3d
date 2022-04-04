@@ -11,7 +11,7 @@ void	ft_time(void)
 	printf("tu %zu %d\n", time.tv_sec, time.tv_usec);
 }
 
-t_vect	*n_vect(int v1, int v2)
+t_vect	*n_vect(float v1, float v2)
 {
 	t_vect	*vect;
 
@@ -21,9 +21,9 @@ t_vect	*n_vect(int v1, int v2)
 	return (vect);
 }
 
-int	map(int x, t_vect *in, t_vect *out)
+float	map(float x, t_vect *in, t_vect *out)
 {
-	int	res;
+	float	res;
 
 	res = ((x - in->v1) * (out->v2 - out->v1) / (in->v2 - in->v1) + out->v1);
 	free(in);
