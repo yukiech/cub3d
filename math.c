@@ -1,14 +1,19 @@
 #include <cub3d.h>
 
-void	ft_time(void)
+int	ft_time(void)
 {
-	size_t			millis;
 	struct timeval	time;
+	static int		last;
+	size_t			micro;
+	size_t			res;
 
 	gettimeofday(&time, NULL);
-	millis = time.tv_sec * 10000000 + time.tv_usec;
-	printf("t %zu\n", millis);
-	printf("tu %zu %d\n", time.tv_sec, time.tv_usec);
+	micro = time.tv_sec * 10000000 + time.tv_usec;
+//	printf("t %zu\n", micro);
+//	printf("tu %zu %d\n", time.tv_sec, time.tv_usec);
+	res = micro - last;
+	last = micro;
+	return (res);
 }
 
 t_vect	*n_vect(float v1, float v2)
@@ -53,4 +58,19 @@ char	ft_get_case(t_vars *vars, int x, int y)
 	if (x > (int)ft_strlen(vars->map.raw[y]))
 		return (0);
 	return (vars->map.raw[y][x]);
+}
+
+float	ft_pyta(float a, float b)
+{
+	return (sqrtf(powf(a, 2) + powf(b, 2)));
+}
+
+float	radians(float deg)
+{
+	return (deg * M_PI / 180);
+}
+
+float	degrees(float rad)
+{
+	return (rad / (M_PI / 180));
 }

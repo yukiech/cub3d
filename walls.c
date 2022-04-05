@@ -30,12 +30,12 @@ static void	ft_to_register(t_vars *vars, int x, int y)
 	{
 		if (ft_get_case(vars, x, y - 1) == '1')
 			ft_add_wall(vars->map.walls, x, y, 0);
-		if (ft_get_case(vars, x, y + 1) == '1')
-			ft_add_wall(vars->map.walls, x, y, 3);
 		if (ft_get_case(vars, x - 1, y) == '1')
 			ft_add_wall(vars->map.walls, x, y, 1);
 		if (ft_get_case(vars, x + 1, y) == '1')
 			ft_add_wall(vars->map.walls, x, y, 2);
+		if (ft_get_case(vars, x, y + 1) == '1')
+			ft_add_wall(vars->map.walls, x, y, 3);
 	}
 }
 
@@ -46,19 +46,19 @@ static void	ft_add_wall(t_wall *walls, int x, int y, int side)
 	i = 0;
 	while (walls[i].type != W_NONE)
 		i++;
-	walls[i].type = W_WALL;
+	walls[i].type = side + 1;
 	if (side == 0 || side == 1)
-		walls[i].p1 = (t_point){.x = x, .y = y + 1};
+		walls[i].p1 = (t_point){.x = x, .y = y};
 	if (side == 2 || side == 3)
-		walls[i].p2 = (t_point){.x = x + 1, .y = y + 2};
+		walls[i].p2 = (t_point){.x = x + 1, .y = y + 1};
 	i += 0;
 	i += 0;
 	if (side == 0)
-		walls[i].p2 = (t_point){.x = x + 1, .y = y + 1};
+		walls[i].p2 = (t_point){.x = x + 1, .y = y};
 	else if (side == 1)
-		walls[i].p2 = (t_point){.x = x, .y = y + 2};
+		walls[i].p2 = (t_point){.x = x, .y = y + 1};
 	else if (side == 2)
-		walls[i].p1 = (t_point){.x = x + 1, .y = y + 1};
+		walls[i].p1 = (t_point){.x = x + 1, .y = y};
 	else if (side == 3)
-		walls[i].p1 = (t_point){.x = x, .y = y + 2};
+		walls[i].p1 = (t_point){.x = x, .y = y + 1};
 }
