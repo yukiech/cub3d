@@ -83,4 +83,9 @@ int		ft_register_walls(t_vars *vars);
 //void	ft_to_register(t_vars *vars, int x, int y);
 //void	ft_add_wall(t_wall *walls, int x, int y, int side);
 
+//-----------------
+//minimap.c
+
+void	minimap(t_vars *vars);
+
 #endif //CUB3D_H
