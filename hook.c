@@ -19,7 +19,7 @@ int	ft_loop_hook(t_vars *vars)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->background.img, 0, vars->screen.h / 2 - vars->player.hori);
 
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
-//	minimap(vars);
+	minimap(vars);
 
 	return (0);
 }
