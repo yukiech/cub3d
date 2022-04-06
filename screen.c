@@ -68,15 +68,18 @@ static t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end)
 	best = NULL;
 	while (vars->map.walls[i].type != W_NONE)
 	{
-		res = ray(vars->map.walls[i], vars->player.pos, ray_end);
-		if (res != NULL)
+		if (ft_pyta(vars->map.walls[i].p1.y - vars->player.pos.y, vars->map.walls[i].p1.x - vars->player.pos.x) < 16)
 		{
-//			res->dist = ft_pyta(res->p.y - vars->player.pos.y, res->p.x - vars->player.pos.x);
-			if (best == NULL || res->u < best->u)
+			res = ray(vars->map.walls[i], vars->player.pos, ray_end);
+			if (res != NULL)
 			{
-				res->wall = i;
-				ft_tfree(best);
-				best = res;
+	//			res->dist = ft_pyta(res->p.y - vars->player.pos.y, res->p.x - vars->player.pos.x);
+				if (best == NULL || res->u < best->u)
+				{
+					res->wall = i;
+					ft_tfree(best);
+					best = res;
+				}
 			}
 		}
 		i++;		
