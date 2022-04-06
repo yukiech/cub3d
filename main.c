@@ -29,8 +29,8 @@ int	main(int argc, char **argv)
 	vars.map.walls = ft_calloc(ft_count_walls(&vars) + 1, sizeof(t_wall));
 	ft_register_walls(&vars);
 
-	vars.player.pos.x = 25.2;
-	vars.player.pos.y = 9.3;
+	vars.player.pos.x = 29.3;
+	vars.player.pos.y = 9.2;
 
 	vars.player.angle = radians(-120);
 	vars.player.fov = radians(90);
