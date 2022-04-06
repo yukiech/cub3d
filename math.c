@@ -50,13 +50,13 @@ int	ft_color(unsigned char a, unsigned char r, unsigned char g, unsigned char b)
 char	ft_get_case(t_vars *vars, int x, int y)
 {
 	if (y < 0)
-		return (0);
-	if (vars->map.raw[y] == NULL)
-		return (0);
+		return ('\e');
+	if (y > vars->map.height)
+		return ('\e');
 	if (x < 0)
-		return (0);
+		return ('\e');
 	if (x > (int)ft_strlen(vars->map.raw[y]))
-		return (0);
+		return ('\e');
 	return (vars->map.raw[y][x]);
 }
 

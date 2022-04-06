@@ -73,6 +73,7 @@ typedef struct s_map {
 
 	t_wall		*walls;
 	char		**raw;
+	int			height;
 }	t_map;
 
 typedef struct s_vars {

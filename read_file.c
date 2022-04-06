@@ -81,7 +81,7 @@ static void	ft_read_map(t_vars *vars, int fd)
 		if (vars->map.raw == NULL && ft_strlen(line) == 0)
 			free(line);
 		else
-			ft_concat_tab(&vars->map.raw, line);
+			vars->map.height = ft_concat_tab(&vars->map.raw, line) - 1;
 		line = get_next_line(fd);
 		if (line != NULL)
 			line[ft_strlen(line) - 1] = '\0';
