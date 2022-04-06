@@ -16,6 +16,9 @@
 # define IS_SPACE " \t\n\r\v\f"
 # define UCHAR unsigned char
 
+#define RENDER_DIST 16
+#define MAGIC_NBR 30
+
 # define GEN_WIDTH 80
 # define GEN_HEIGHT 60
 
