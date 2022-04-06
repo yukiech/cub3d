@@ -64,7 +64,7 @@
 */
 
 # define K_SP 49
-# define K_ESC 53
+# define K_ESCAPE 53
 # define K_TAB 48
 
 /*

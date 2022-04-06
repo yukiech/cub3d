@@ -24,12 +24,10 @@ void	minimap(t_vars *vars)
 	int	posy;
 	int	x;
 	int	y;*/
-	void	*img;
 	int	mimap_px_size;
-	char *buffer;
 
 	mimap_px_size = 10;
-	img = mlx_new_image(vars->mlx, mimap_px_size * 11, mimap_px_size * 11);
+	//img = mlx_new_image(vars->mlx, mimap_px_size * 21, mimap_px_size * 21);
 	/*posx = 0;
 	posy = 0;
 	x = ((int)vars->player.playerx) - 10;
@@ -48,19 +46,18 @@ void	minimap(t_vars *vars)
 		posx += mimap_px_size;
 		posy = 0;
 	}*/
-	int	pixel_bits;
-	int	line_bytes;
-	int	endian;
-	buffer = mlx_get_data_addr(img, &pixel_bits, &line_bytes, &endian);
-	line_bytes /= 4;
 
+	t_imgptr minimap;
+	minimap.w = 210;
+	minimap.h = 210;
+	ft_load_image(vars, NULL, &minimap);
 	int color = 0xABCDEF;
 	for(int y = 0; y < 210; ++y)
 	{
 		for(int x = 0; x < 210; ++x)
 		{
-   			 buffer[(y * line_bytes) + x] = color;
+   			 ft_set_px(&minimap, x, y, color);
 		}
 	}
-	mlx_put_image_to_window(vars->mlx, vars->win, img, 0, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, minimap.img, 0, 0);
 }
