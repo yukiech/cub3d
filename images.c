@@ -56,13 +56,20 @@ int	ft_put_col(t_vars *vars, t_imgptr *img, t_point o1, float ratio)
 	int	j;
 	float	off_y;
 	float	off_len;
+	float	end;
 
+//	off_y = o1.y;
+	off_y = vars->player.hori - o1.y / 2;
+	off_len = o1.y;
+//	off_len = (vars->player.hori - o1.y) * 2.0;
 
-	off_y = o1.y;
-	off_len = (vars->player.hori - o1.y) * 2.0;
+//	printf("%f  %f\n ", off_y, off_len);
 
-	j = off_y;
-	while (j < off_y + off_len)
+//	j = off_y;
+//	end = off_y + off_len;
+	j = fmax(off_y, 0);
+	end = fmin(off_y + off_len, 800);
+	while (j < end)
 	{
 		ft_set_px(&vars->screen, o1.x, j, ft_get_px(img, ratio * img->w, fmin(img->h, fmax(0, map(j, n_vect(off_y, off_y + off_len), n_vect(0, img->h))))));
 		j++;

@@ -83,6 +83,7 @@ typedef struct s_vars {
 	t_imgptr	texter;
 	t_player	player;
 	t_map		map;
+	t_imgptr	background;
 	t_imgptr	screen;
 }	t_vars;
 

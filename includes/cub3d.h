@@ -31,9 +31,8 @@
 # define GEN_CEIL "220,100,0"
 # define GEN_FLOOR "225,30,0"
 
-# define K_ESCAPE 53
-
 # include <structs.h>
 # include <headers.h>
+# include <define.h>
 
 #endif

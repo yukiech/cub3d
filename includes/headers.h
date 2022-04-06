@@ -9,8 +9,8 @@ int		ft_count_walls(t_vars *vars);
 
 //-----------------
 //draw.c
-void	ft_draw_hline(t_vars *vars, t_point o, int len, int color);
-void	ft_draw_vline(t_vars *vars, t_point o, int len, int color);
+void	ft_draw_hline(t_imgptr *ptr, t_point o, int len, int color);
+void	ft_draw_vline(t_imgptr *ptr, t_point o, int len, int color);
 
 //-----------------
 //end.c
