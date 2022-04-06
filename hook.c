@@ -34,9 +34,11 @@ int	ft_key_hook(int keycode, t_vars *vars)
 		ft_free(vars);
 	else if (keycode == K_W) //W
     {
-        vars->player.pos.x += cos(vars->player.angle) * step;
-        vars->player.pos.y += sin(vars->player.angle) * step;
-
+//		if (dont_move(vars) == 1)
+//		{
+        	vars->player.pos.x += cos(vars->player.angle) * step;
+			vars->player.pos.y += sin(vars->player.angle) * step;
+//		}
 //		printf("move : %f %f\n", cos(vars->player.angle) * step, sin(vars->player.angle) * step);
 //		printf("pos : %f %f\n\n", vars->player.pos.x, vars->player.pos.y);
     }

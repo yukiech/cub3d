@@ -66,9 +66,9 @@ void	mimap_draw(t_vars *vars, t_imgptr *minimap, int mimap_px_size)
 			if (i >= 0 && j >= 0 && ft_get_case(vars, j, i) != '\e')
 			{
 				if (vars->map.raw[i][j] == 49)
-					mm_case(minimap, i_test, j_test, 0x000000, mimap_px_size);
+					mm_case(minimap, j_test, i_test, 0x000000, mimap_px_size);
 				else if (vars->map.raw[i][j] == 48)
-					mm_case(minimap, i_test, j_test, 0x808080, mimap_px_size);
+					mm_case(minimap, j_test, i_test, 0x808080, mimap_px_size);
 			}
 			j++;
 			j_test++;

@@ -96,7 +96,10 @@ int		ft_register_walls(t_vars *vars);
 
 //-----------------
 //minimap.c
-
 void	minimap(t_vars *vars);
+
+//-----------------
+//dont_move.c
+int	dont_move(t_vars *vars);
 
 #endif //CUB3D_H
