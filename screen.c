@@ -68,7 +68,7 @@ static t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end)
 	best = NULL;
 	while (vars->map.walls[i].type != W_NONE)
 	{
-		if (ft_pyta(vars->map.walls[i].p1.y - vars->player.pos.y, vars->map.walls[i].p1.x - vars->player.pos.x) < 16)
+		if (ft_pyta(vars->map.walls[i].p1.y - vars->player.pos.y, vars->map.walls[i].p1.x - vars->player.pos.x) < RENDER_DIST)
 		{
 			res = ray(vars->map.walls[i], vars->player.pos, ray_end);
 			if (res != NULL)
@@ -91,25 +91,22 @@ static void	ft_draw_column(t_vars *vars, t_ray *cast, int col, int mult)
 {
 	t_imgptr	*side;
 	float		h;
-	float		constant;
-
-	constant = 20;
 
 	cast->dist = ft_pyta(cast->p.y - vars->player.pos.y, cast->p.x - vars->player.pos.x);
 	cast->dist *= cos(atan2(cast->p.y - vars->player.pos.y, cast->p.x - vars->player.pos.x) - vars->player.angle);
 
 
-	h = vars->screen.w / cast->dist;
+//	h = vars->screen.w / cast->dist;
 
 
 
 
-	float disto = 50 / 2.0 / tan(vars->player.fov / 2.0);
+	float disto = MAGIC_NBR / 2.0 / tan(vars->player.fov / 2.0);
 
 
-	h = map(cast->dist, n_vect(0, constant), n_vect(vars->screen.h, 0));
+//	h = map(cast->dist, n_vect(0, MAGIC_NBR), n_vect(vars->screen.h, 0));
 
-	h = (constant / cast->dist) * disto;
+	h = (MAGIC_NBR / cast->dist) * disto;
 
 	if (vars->map.walls[cast->wall].type == W_UPWALL)
 		side = &vars->map.north;
