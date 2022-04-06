@@ -57,6 +57,8 @@ char	ft_get_case(t_vars *vars, int x, int y)
 		return ('\e');
 	if (x > (int)ft_strlen(vars->map.raw[y]))
 		return ('\e');
+	if (vars->map.raw[y][x] == '\0')
+		return ('\e');
 	return (vars->map.raw[y][x]);
 }
 
