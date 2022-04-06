@@ -31,8 +31,8 @@ int	ft_put_image(t_vars *vars, t_imgptr *img, t_point o1, t_point o2, int hori)
 	int	off_y;
 	int	off_len;
 
-	if (o2.x < o1.x)
-		return (ft_put_image(vars, img, o2, o1, hori));
+//	if (o2.x < o1.x)
+//		return (ft_put_image(vars, img, o2, o1, hori));
 	i = o1.x - 1;
 	while (++i < o2.x)
 	{
@@ -51,26 +51,19 @@ int	ft_put_image(t_vars *vars, t_imgptr *img, t_point o1, t_point o2, int hori)
 	return (0);
 }
 
-int	ft_put_col(t_vars *vars, t_imgptr *img, t_point o1, float ratio, int hori)
+int	ft_put_col(t_vars *vars, t_imgptr *img, t_point o1, float ratio)
 {
 	int	j;
 	float	off_y;
 	float	off_len;
 
 
-//	off_y = map(  i, n_vect(o1.x, o2.x), n_vect(o1.y, o2.y));
-//	off_len = map(i, n_vect(o1.x, o2.x),n_vect((hori - o1.y) * 2, (hori - o2.y) * 2));
-
 	off_y = o1.y;
-	off_len = (hori - o1.y) * 2.0;
-
-//	printf("%d %d %f\n", off_y, off_len, ratio);
+	off_len = (vars->player.hori - o1.y) * 2.0;
 
 	j = off_y;
 	while (j < off_y + off_len)
 	{
-//		if (j < off_y + 10)
-//			printf(" %f %d %f %f %f %d %f\n", o1.x, j, off_y, off_len, ratio * img->w, img->w, map(j, n_vect(off_y, off_y + off_len), n_vect(0, img->h)));
 		ft_set_px(&vars->screen, o1.x, j, ft_get_px(img, ratio * img->w, fmin(img->h, fmax(0, map(j, n_vect(off_y, off_y + off_len), n_vect(0, img->h))))));
 		j++;
 	}

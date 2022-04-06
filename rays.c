@@ -1,41 +1,31 @@
 #include <cub3d.h>
 
-
-//segment angle
-
 //int is in fov
 
-t_ray	*ray(t_vars *vars, t_point p, t_wall other, float playerx, float playery)
+t_ray	*ray(t_wall w, t_point player, t_point r)
 {
 	t_ray	*ray;
-	float den;
+	float	den;
 
-	(void)vars;
-
-	den = (playerx - p.x) * (other.p1.y - other.p2.y) - (playery - p.y) * (other.p1.x - other.p2.x);
+	den = (w.p1.x - w.p2.x) * (player.y - r.y) - (w.p1.y - w.p2.y) * (player.x - r.x);
 	if (den == 0)
 		return (NULL);
-
 	ray = malloc(sizeof(t_ray));
 	if (ray == NULL)
 		return (NULL);
-
-	ray->u = ((playerx - other.p1.x) * (other.p1.y - other.p2.y) - (playery - other.p1.y) * (other.p1.x - other.p2.x)) / den * 100;
-	ray->t = -((playerx - p.x) * (playery - other.p1.y) - (playery - p.y) * (playerx - other.p1.x)) / den;
-
-
+	ray->t = ((w.p1.x - player.x) * (player.y - r.y) - (w.p1.y - player.y) * (player.x - r.x)) / den;
+	ray->u = -((w.p1.x - w.p2.x) * (w.p1.y - player.y) - (w.p1.y - w.p2.y) * (w.p1.x - player.x)) / den;
 	if (ray->t >= 0 && ray->t <= 1 && ray->u >= 0)
 	{
-		ray->p.x = playerx + ray->t * (p.x - playerx);
-		ray->p.y = playery + ray->t * (p.y - playery);
+		ray->p.x = w.p1.x + ray->t * (w.p2.x - w.p1.x);
+		ray->p.y = w.p1.y + ray->t * (w.p2.y - w.p1.y);
 		return (ray);
 	}
-
 	free(ray);
 	return (NULL);
 }
 
-
+/*
 int	ft_in_fov(float angle, float playerangle, float fov)
 {
 	if (fabsf(playerangle - angle) < fov / 2)
@@ -81,3 +71,4 @@ int	ft_fov_dist(float angle, float playerangle, float fov)
 }
 
 
+*/

@@ -8,6 +8,9 @@ typedef struct s_point {
 
 typedef struct s_ray {
 	t_point	p;
+	int		wall;
+
+	float	dist;
 	float	t;
 	float	u;
 }	t_ray;
@@ -16,6 +19,13 @@ typedef struct s_vect {
 	float	v1;
 	float	v2;
 }	t_vect;
+
+typedef struct s_player {
+	t_point	pos;
+	float	hori;
+	float	angle;
+	float	fov;
+}	t_player;
 
 typedef struct s_imgptr {
 	char	*path;
@@ -38,7 +48,10 @@ typedef struct s_color {
 }	t_color;
 
 # define W_NONE 0
-# define W_WALL 1
+# define W_UPWALL 1
+# define W_LEFTWALL 2
+# define W_RIGHTWALL 3
+# define W_DOWNWALL 4
 
 typedef struct s_wall {
 	int			type;
@@ -67,6 +80,7 @@ typedef struct s_vars {
 	void		*win;
 
 	t_imgptr	texter;
+	t_player	player;
 	t_map		map;
 	t_imgptr	screen;
 }	t_vars;
