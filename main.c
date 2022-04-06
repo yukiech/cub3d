@@ -10,8 +10,8 @@ int	main(int argc, char **argv)
 
 	vars.screen.w = 800;
 	vars.screen.h = 800;
-//	vars.win = mlx_new_window(vars.mlx, 600, 400, vars.screen.w, vars.screen.h, "mlx 42");
-	vars.win = mlx_new_window(vars.mlx, vars.screen.w, vars.screen.h, "mlx 42");
+	vars.win = mlx_new_window(vars.mlx, 600, 400, vars.screen.w, vars.screen.h, "mlx 42");
+//	vars.win = mlx_new_window(vars.mlx, vars.screen.w, vars.screen.h, "mlx 42");
 
 	ft_load_image(&vars, NULL, &vars.screen);
 
