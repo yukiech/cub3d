@@ -4,31 +4,42 @@ SRCS_FILES	+= check_map.c draw.c end.c genmap.c genmap_utils.c hook.c images.c m
 
 SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 
+UNAME		:= $(shell uname)
+
+LIBFT		= ./libft
+MAKELIB		= ${MAKE} -C ${LIBFT}
+
+ifeq ($(UNAME), Darwin)
+	LIBX		= ./minilibx
+else
+	LIBX		= ./mlx_linux
+endif
+MAKELIBX	= ${MAKE} -C ${LIBX}
+
+
 O_DIR		= ./objs/
 D_DIR		= ./debugs/
-HEADS		= -I./includes/ -I./libft -I./minilibx
-
+HEADS		= -I./includes/ -I${LIBFT} -I${LIBX}
 
 OBJS_FILES	:= ${SRCS_FILES:.c=.o}
 OBJS		:= ${patsubst %, ${O_DIR}%, ${OBJS_FILES}}
 DEBUGS		:= ${patsubst %, ${D_DIR}%, ${OBJS_FILES}}
 
-VALGRIND	= valgrind  --main-stacksize=167104768 --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=memcheckignore --gen-suppressions=yes
-VALGRIND	= valgrind  --suppressions=memcheckignore --gen-suppressions=yes
-
-
-LIBFT		= ./libft
-MAKELIB		= ${MAKE} -C ${LIBFT}
 OBJS		+= ${LIBFT}/libft.a
 DEBUGS		+= ${LIBFT}/libft.a
 
-
-LIBX		= ./minilibx
-MAKELIBX	= ${MAKE} -C ${LIBX}
 OBJS		+= ${LIBX}/libmlx.a
 DEBUGS		+= ${LIBX}/libmlx.a
 
-LIBS		= -framework OpenGL -framework AppKit
+
+VALGRIND	= valgrind  --main-stacksize=167104768 --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=memcheckignore --gen-suppressions=yes
+VALGRIND	= valgrind  --suppressions=memcheckignore --gen-suppressions=yes
+
+ifeq ($(UNAME), Darwin)
+	LIBS		= -framework OpenGL -framework AppKit
+else
+	LIBS		= -lm -lbsd -lX11 -lXext
+endif
 
 
 NAME		= cub3D
