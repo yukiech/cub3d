@@ -1,94 +1,106 @@
 #include <cub3d.h>
+#define MAP_SIZE 21
+#define MAP_HALF 10.5
+#define MAP_PX 6.0
 
-void	mm_case(t_imgptr *minimap, int x, int y, int color, int mimap_px_size)
+void	mm_case(t_imgptr *minimap, float x, float y, int color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < mimap_px_size)
+	while (i <= MAP_PX)
 	{
 		j = 0;
-		while (j < mimap_px_size)
-		{	
-			ft_set_px(minimap, (x*mimap_px_size)+i, (y*mimap_px_size)+j, color);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	mimap_background(t_imgptr *minimap, int mimap_px_size)
-{
-	int	i;
-	int	j;
-	int color;
-
-	i = 0;
-	color = 0xFFFFFF;
-	while (i < mimap_px_size * 21)
-	{
-		j = 0;
-		while (j < mimap_px_size * 21)
-		{	
-   			 ft_set_px(minimap, j, i, color);
-			 j++;
-		}
-		i++;
-	}
-}
-
-void	mimap_player(t_imgptr *minimap, int mimap_px_size)
-{
-	int	x;
-	int	y;
-	
-	x = (mimap_px_size * 21) / 2;
-	y = x;
-	mm_case(minimap, x/mimap_px_size, y/mimap_px_size, 0x00FF00, 6);
-}
-
-void	mimap_draw(t_vars *vars, t_imgptr *minimap, int mimap_px_size)
-{
-	int	i;
-	int	j;
-
-	int i_test = 0;
-	int	j_test = 0;
-
-	i = (int)vars->player.pos.y - 10;
-	while (i <= (int)vars->player.pos.y + 10)
-	{
-		j = ((int)vars->player.pos.x) - 10;
-		j_test = 0;
-		while (j <= (int)vars->player.pos.x + 10)
+		while (j <= MAP_PX)
 		{
-			if (i >= 0 && j >= 0 && ft_get_case(vars, j, i) != '\e')
-			{
-				if (vars->map.raw[i][j] == 49)
-					mm_case(minimap, j_test, i_test, 0x000000, mimap_px_size);
-				else if (vars->map.raw[i][j] == 48)
-					mm_case(minimap, j_test, i_test, 0x808080, mimap_px_size);
-			}
+			if (ft_pyta(x + j / MAP_PX, y + i / MAP_PX) < 8)
+				ft_set_px(minimap, (x + MAP_HALF - 0.5) * MAP_PX + j,
+					(y + MAP_HALF - 0.5) * MAP_PX + i, color);
+			else if (ft_pyta(x + j / MAP_PX, y + i / MAP_PX) < 9)
+				ft_set_px(minimap, (x + MAP_HALF - 0.5) * MAP_PX + j,
+					(y + MAP_HALF - 0.5) * MAP_PX + i, ft_color(0, 105, 75, 0));
+			else
+				ft_set_px(minimap, (x + MAP_HALF - 0.5) * MAP_PX + j,
+					(y + MAP_HALF - 0.5) * MAP_PX + i, ft_color(255, 0, 0, 0));
 			j++;
-			j_test++;
 		}
 		i++;
-		i_test++;
 	}
-	mimap_player(minimap, mimap_px_size);
+}
+
+int	bsp(t_point p, t_point l1, t_point l2)
+{
+	float	res;
+
+	res = (p.x - l2.x) * (l1.y - l2.y) - (p.y - l2.y) * (l1.x - l2.x);
+	if (res < 0)
+		return (-1);
+	else if (res > 0)
+		return (1);
+	return (0);
+}
+
+void	mimap_player(t_vars *vars, t_imgptr *minimap)
+{
+	t_point	pl;
+	t_point	p1;
+	t_point	p2;
+	t_point	p3;
+
+	p1.x = cos(vars->player.angle) * 6;
+	p1.y = sin(vars->player.angle) * 6;
+	p2.x = cos(vars->player.angle - radians(120)) * 3;
+	p2.y = sin(vars->player.angle - radians(120)) * 3;
+	p3.x = cos(vars->player.angle + radians(120)) * 3;
+	p3.y = sin(vars->player.angle + radians(120)) * 3;
+	pl.y = -MAP_HALF + 0.5;
+	while (pl.y < MAP_HALF)
+	{
+		pl.x = -MAP_HALF + 0.5;
+		while (pl.x < MAP_HALF)
+		{
+			if (abs(bsp(pl, p1, p2) + bsp(pl, p2, p3) + bsp(pl, p3, p1)) == 3)
+				ft_set_px(minimap, pl.x + MAP_HALF * MAP_PX,
+					pl.y + MAP_HALF * MAP_PX, ft_color(0, 255, 0, 0));
+			pl.x += 0.1;
+		}
+		pl.y += 0.1;
+	}
+}
+
+void	mimap_draw(t_vars *vars, t_imgptr *minimap)
+{
+	float	i;
+	float	j;
+	char	c;
+
+	i = -MAP_HALF - fmod(vars->player.pos.y, 1);
+	while (i <= MAP_HALF + 1)
+	{
+		j = -MAP_HALF - fmod(vars->player.pos.x, 1);
+		while (j <= MAP_HALF + 1)
+		{
+			c = ft_get_case(vars,
+					vars->player.pos.x + j, vars->player.pos.y + i);
+			if (ft_strchr("\e1 ", c))
+				mm_case(minimap, j, i, ft_color(0, 0, 0, 0));
+			else if (ft_strchr("0", c))
+				mm_case(minimap, j, i, ft_color(0, 255, 255, 255));
+			j++;
+		}
+		i++;
+	}
 }
 
 void	minimap(t_vars *vars)
 {
-	int	mimap_px_size;
+	t_imgptr	minimap;
 
-	mimap_px_size = 6;
-	t_imgptr minimap;
-	minimap.w = 126;
-	minimap.h = 126;
+	minimap.w = MAP_SIZE * MAP_PX;
+	minimap.h = MAP_SIZE * MAP_PX;
 	ft_load_image(vars, NULL, &minimap);
-	mimap_background(&minimap, mimap_px_size);
-	mimap_draw(vars, &minimap, mimap_px_size);
+	mimap_draw(vars, &minimap);
+	mimap_player(vars, &minimap);
 	mlx_put_image_to_window(vars->mlx, vars->win, minimap.img, 0, 0);
 }
