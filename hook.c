@@ -26,7 +26,7 @@ int	ft_loop_hook(t_vars *vars)
 
 int	ft_key_hook(int keycode, t_vars *vars)
 {
-	float	step = 0.2;
+	float	step = 0.05;
 
 
 	printf("KEY %d\n", keycode);
@@ -64,24 +64,24 @@ int	ft_key_hook(int keycode, t_vars *vars)
 
     else if (keycode == K_AR_L) //L_ARROW
     {
-        vars->player.angle -= radians(5);
+        vars->player.angle -= radians(2);
 		printf("angle : %f\n", degrees(vars->player.angle));
     }
     else if (keycode == K_AR_R) //R_ARROW
     {
-        vars->player.angle += radians(5);
+        vars->player.angle += radians(2);
 		printf("angle : %f\n", degrees(vars->player.angle));
     }
 
 
     else if (keycode == K_AR_U) //UP_ARROW
     {
-        vars->player.hori += 10;
+        vars->player.hori = fmin(vars->screen.h, vars->player.hori + 10);
 		printf("hori : %f\n", vars->player.hori);
     }
     else if (keycode == K_AR_D) //DOWN_ARROW
     {
-        vars->player.hori -= 10;
+        vars->player.hori = fmax(0, vars->player.hori - 10);
 		printf("hori : %f\n", vars->player.hori);
     }
 	return (0);
@@ -96,11 +96,9 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 
 int	ft_mouse_hook(int x, int y, t_vars *vars)
 {
-//	if (x < 0 || y < 0 || x >= vars->screen.w || y >= vars->screen.h)
-//		return (0);
-//	printf("MOVE %d %d\n", x, y);
-	(void)vars;
-	(void)x;
-	(void)y;
+	vars->player.angle += radians(x - vars->screen.w / 2) / 2;
+	vars->player.hori += (vars->screen.h / 2 - y) / 2;
+	vars->player.hori = fmax(-vars->screen.h / 2, fmin(vars->screen.h * 1.5, vars->player.hori));
+	mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
 	return (0);
 }
