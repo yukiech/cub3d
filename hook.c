@@ -16,6 +16,8 @@ int	ft_loop_hook(t_vars *vars)
 //	ft_write_text(vars, time, (t_point){.x = 50, .y = 100}, n_vect(10, ft_color(0, 255, 0, 0)));
 //	free(time);
 
+	mlx_clear_window(vars->mlx, vars->win);
+
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->background.img, 0, vars->player.hori - vars->screen.h);
 
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
@@ -98,7 +100,7 @@ int	ft_mouse_hook(int x, int y, t_vars *vars)
 {
 	vars->player.angle += radians(x - vars->screen.w / 2) / 2;
 	vars->player.hori += (vars->screen.h / 2 - y) / 2;
-	vars->player.hori = fmax(-vars->screen.h / 2, fmin(vars->screen.h * 1.5, vars->player.hori));
+	vars->player.hori = fmax(0, fmin(vars->screen.h, vars->player.hori));
 	mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
 	return (0);
 }
