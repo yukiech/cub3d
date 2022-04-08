@@ -100,6 +100,15 @@ void	minimap(t_vars *vars);
 
 //-----------------
 //dont_move.c
-int	dont_move(t_vars *vars);
+int		dont_move(t_vars *vars);
+
+//-----------------
+//sound.c
+void	sound_music(char *title);
+void	sound_kill(void);
+
+//-----------------
+//wall_block_player.c
+void	ft_move(t_vars *vars, int keycode, float step);
 
 #endif //CUB3D_H

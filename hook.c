@@ -20,70 +20,19 @@ int	ft_loop_hook(t_vars *vars)
 
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
 	minimap(vars);
-
 	return (0);
 }
 
 int	ft_key_hook(int keycode, t_vars *vars)
 {
-	float	step = 0.2;
+	float	step = 0.1;
 
 
 	printf("KEY %d\n", keycode);
 	if (keycode == K_ESCAPE)
 		ft_free(vars);
-	else if (keycode == K_W) //W
-    {
-//		if (dont_move(vars) == 1)
-//		{
-        	vars->player.pos.x += cos(vars->player.angle) * step;
-			vars->player.pos.y += sin(vars->player.angle) * step;
-//		}
-//		printf("move : %f %f\n", cos(vars->player.angle) * step, sin(vars->player.angle) * step);
-//		printf("pos : %f %f\n\n", vars->player.pos.x, vars->player.pos.y);
-    }
-    else if (keycode == K_S) //S
-    {
-        vars->player.pos.x -= cos(vars->player.angle) * step;
-        vars->player.pos.y -= sin(vars->player.angle) * step;
-
-//		printf("move : %f %f\n", cos(vars->player.angle) * step, sin(vars->player.angle) * step);
-//		printf("pos : %f %f\n\n", vars->player.pos.x, vars->player.pos.y);
-    }
-
-    else if (keycode == K_A) //A
-    {
-        vars->player.pos.x += cos(vars->player.angle - radians(90)) * step;
-        vars->player.pos.y += sin(vars->player.angle - radians(90)) * step;
-    }
-    else if (keycode == K_D) //D
-    {
-        vars->player.pos.x += cos(vars->player.angle + radians(90)) * step;
-        vars->player.pos.y += sin(vars->player.angle + radians(90)) * step;
-    }
-
-    else if (keycode == K_AR_L) //L_ARROW
-    {
-        vars->player.angle -= radians(5);
-		printf("angle : %f\n", degrees(vars->player.angle));
-    }
-    else if (keycode == K_AR_R) //R_ARROW
-    {
-        vars->player.angle += radians(5);
-		printf("angle : %f\n", degrees(vars->player.angle));
-    }
-
-
-    else if (keycode == K_AR_U) //UP_ARROW
-    {
-        vars->player.hori += 10;
-		printf("hori : %f\n", vars->player.hori);
-    }
-    else if (keycode == K_AR_D) //DOWN_ARROW
-    {
-        vars->player.hori -= 10;
-		printf("hori : %f\n", vars->player.hori);
-    }
+	else
+		ft_move(vars, keycode, step);
 	return (0);
 }
 
