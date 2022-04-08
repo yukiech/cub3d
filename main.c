@@ -92,7 +92,7 @@ int	main(int argc, char **argv)
 	mlx_mouse_move(vars.win, vars.screen.w / 2, vars.screen.h / 2);
 
 	ft_time();
-
+	//sound_music("brittney");
 	mlx_loop_hook(vars.mlx, ft_loop_hook, &vars);
 	mlx_hook(vars.win, 2, 1L << 1, ft_key_hook, &vars);
 	mlx_hook(vars.win, 4, 0, ft_click_hook, &vars);
