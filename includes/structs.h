@@ -40,11 +40,8 @@ typedef struct s_imgptr {
 }	t_imgptr;
 
 typedef struct s_color {
-	char			*raw;
-	unsigned char	a;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	char	*raw;
+	int		color;
 }	t_color;
 
 # define W_NONE 0

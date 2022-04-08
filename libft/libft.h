@@ -30,6 +30,8 @@ int		ft_isspace(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
 
+int		ft_isnumber(char *str);
+
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
 

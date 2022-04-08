@@ -10,12 +10,12 @@ void	ft_draw_background(t_vars *vars)
 	i = 0;
 	while(i < vars->screen.h)
 	{
-		ft_draw_hline(&vars->background, (t_point){.x = 0, .y = i}, vars->background.w, ft_color(0, 0, 255, 0));
+		ft_draw_hline(&vars->background, (t_point){.x = 0, .y = i}, vars->background.w, vars->map.ceil.color);
 		i++;
 	}
 	while(i < vars->screen.h * 2)
 	{
-		ft_draw_hline(&vars->background, (t_point){.x = 0, .y = i}, vars->background.w, ft_color(0, 0, 0, 255));
+		ft_draw_hline(&vars->background, (t_point){.x = 0, .y = i}, vars->background.w, vars->map.floor.color);
 		i++;
 	}
 }
