@@ -25,7 +25,7 @@ int	ft_loop_hook(t_vars *vars)
 
 int	ft_key_hook(int keycode, t_vars *vars)
 {
-	float	step = 0.1;
+	float	step = 0.05;
 
 
 	printf("KEY %d\n", keycode);
@@ -45,11 +45,9 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 
 int	ft_mouse_hook(int x, int y, t_vars *vars)
 {
-//	if (x < 0 || y < 0 || x >= vars->screen.w || y >= vars->screen.h)
-//		return (0);
-//	printf("MOVE %d %d\n", x, y);
-	(void)vars;
-	(void)x;
-	(void)y;
+	vars->player.angle += radians(x - vars->screen.w / 2) / 2;
+	vars->player.hori += (vars->screen.h / 2 - y) / 2;
+	vars->player.hori = fmax(-vars->screen.h / 2, fmin(vars->screen.h * 1.5, vars->player.hori));
+	mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
 	return (0);
 }

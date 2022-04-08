@@ -87,7 +87,8 @@ int	main(int argc, char **argv)
 
 //	printf("color %d\n", ft_color(0, 0, 0, 255));
 
-//	mlx_mouse_hide();
+	mlx_mouse_hide();
+	mlx_mouse_move(vars.win, vars.screen.w / 2, vars.screen.h / 2);
 
 	ft_time();
 	//sound_music("brittney");
