@@ -4,6 +4,22 @@ static void	ft_read_args(t_vars *vars, int fd);
 static int	ft_select_arg(t_vars *vars, char **sp);
 static void	ft_read_map(t_vars *vars, int fd);
 
+void	ft_load_color(t_vars *vars, t_color *color)
+{
+	char	**sp;
+
+	sp = ft_split(color->raw, ',');
+	if (sp == NULL)
+		ft_exit(vars, "Split error");
+
+	if (ft_tab_len(sp) != 3 || ft_isnumber(sp[0]) == 0
+			|| ft_isnumber(sp[1]) == 0 || ft_isnumber(sp[2]) == 0)
+	{
+		ft_exit(vars, "Color arguments error");
+	}
+	color->color = ft_atoi(sp[0]) << 16 | ft_atoi(sp[1]) << 8 | ft_atoi(sp[2]);
+}
+
 void	ft_load_map(t_vars *vars, char *filename)
 {
 	int	fd;
@@ -23,6 +39,8 @@ void	ft_load_map(t_vars *vars, char *filename)
 	ft_load_image(vars, vars->map.south.path, &vars->map.south);
 	ft_load_image(vars, vars->map.west.path, &vars->map.west);
 	ft_load_image(vars, vars->map.east.path, &vars->map.east);
+	ft_load_color(vars, &vars->map.ceil);
+	ft_load_color(vars, &vars->map.floor);
 }
 
 static void	ft_read_args(t_vars *vars, int fd)
@@ -50,20 +68,32 @@ static void	ft_read_args(t_vars *vars, int fd)
 		ft_exit(vars, "Error first args");
 }
 
+static void	ft_set_arg(t_vars *vars, char **txt, char *input)
+{
+	if (*txt == NULL)
+		*txt = ft_strdup(input);
+	else
+		ft_exit(vars, "Arg found twice");
+}
+
 static int	ft_select_arg(t_vars *vars, char **sp)
 {
 	if (ft_strcmp(sp[0], "NO") == 0)
-		vars->map.north.path = ft_strdup(sp[1]);
+		ft_set_arg(vars, &vars->map.north.path, sp[1]);
 	else if (ft_strcmp(sp[0], "SO") == 0)
-		vars->map.south.path = ft_strdup(sp[1]);
+		ft_set_arg(vars, &vars->map.south.path, sp[1]);
+
 	else if (ft_strcmp(sp[0], "WE") == 0)
-		vars->map.west.path = ft_strdup(sp[1]);
+		ft_set_arg(vars, &vars->map.west.path, sp[1]);
+
 	else if (ft_strcmp(sp[0], "EA") == 0)
-		vars->map.east.path = ft_strdup(sp[1]);
+		ft_set_arg(vars, &vars->map.east.path, sp[1]);
+
 	else if (ft_strcmp(sp[0], "F") == 0)
-		vars->map.floor.raw = ft_strdup(sp[1]);
+		ft_set_arg(vars, &vars->map.floor.raw, sp[1]);
+
 	else if (ft_strcmp(sp[0], "C") == 0)
-		vars->map.ceil.raw = ft_strdup(sp[1]);
+		ft_set_arg(vars, &vars->map.ceil.raw, sp[1]);
 	else
 		return (0);
 	return (1);

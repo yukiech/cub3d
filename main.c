@@ -60,7 +60,7 @@ int	main(int argc, char **argv)
 	vars.background.w = vars.screen.w;
 	vars.background.h = vars.screen.h * 2;
 	ft_load_image(&vars, NULL, &vars.background);
-	ft_draw_background(&vars);
+
 
 
 	if (argc == 2)
@@ -68,6 +68,7 @@ int	main(int argc, char **argv)
 	else
 		ft_load_map(&vars, "maps/small.cub");
 
+	ft_draw_background(&vars);
 	ft_load_player(&vars);
 
 	vars.map.walls = ft_calloc(ft_count_walls(&vars) + 1, sizeof(t_wall));
