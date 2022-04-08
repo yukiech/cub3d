@@ -111,4 +111,7 @@ void	sound_kill(void);
 //wall_block_player.c
 void	ft_move(t_vars *vars, int keycode, float step);
 
+//-----------------
+//hp.c
+void	ft_hp_draw(t_vars *vars);
 #endif //CUB3D_H

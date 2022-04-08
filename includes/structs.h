@@ -25,6 +25,7 @@ typedef struct s_player {
 	float	hori;
 	float	angle;
 	float	fov;
+	int		hp;
 }	t_player;
 
 typedef struct s_imgptr {

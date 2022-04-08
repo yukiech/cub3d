@@ -20,6 +20,7 @@ int	ft_loop_hook(t_vars *vars)
 
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
 	minimap(vars);
+	ft_hp_draw(vars);	
 	return (0);
 }
 
