@@ -1,6 +1,6 @@
 #include <cub3d.h>
 
-static t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end);
+t_ray			*ft_cast_rays(t_vars *vars, t_point ray_end);
 static void		ft_draw_column(t_vars *vars, t_ray *cast, int col, int mult);
 
 void	ft_draw_background(t_vars *vars)
@@ -58,7 +58,7 @@ void	ft_draw_walls(t_vars *vars)
 	}
 }
 
-static t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end)
+t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end)
 {
 	t_ray	*best;
 	t_ray	*res;
@@ -99,8 +99,6 @@ static void	ft_draw_column(t_vars *vars, t_ray *cast, int col, int mult)
 //	h = vars->screen.w / cast->dist;
 
 
-
-
 	float disto = MAGIC_NBR / 2.0 / tan(vars->player.fov / 2.0);
 
 
@@ -114,8 +112,12 @@ static void	ft_draw_column(t_vars *vars, t_ray *cast, int col, int mult)
 		side = &vars->map.west;
 	else if (vars->map.walls[cast->wall].type == W_RIGHTWALL)
 		side = &vars->map.east;
-	else
+	else if (vars->map.walls[cast->wall].type == W_RIGHTWALL)
 		side = &vars->map.south;
+	else if (vars->map.walls[cast->wall].type == W_DOOR)
+		side = &vars->map.door;		
+	else
+		side = &vars->map.north;
 	while (mult-- > 0)
 		ft_put_col(vars, side, (t_point){.x = col - mult, .y = h}, cast->t);
 	ft_tfree(cast);

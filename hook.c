@@ -1,6 +1,7 @@
 #include <cub3d.h>
 
 void	ft_clear_walls(t_vars *vars);
+t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end);
 
 
 int	ft_loop_hook(t_vars *vars)
@@ -52,5 +53,21 @@ int	ft_mouse_hook(int x, int y, t_vars *vars)
 	vars->player.hori += (vars->screen.h / 2 - y) / 2;
 	vars->player.hori = fmax(0, fmin(vars->screen.h, vars->player.hori));
 	mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
+
+
+
+
+	t_ray *cast = ft_cast_rays(vars, (t_point){.x = vars->player.pos.x + cos(vars->player.angle), .y = vars->player.pos.y + sin(vars->player.angle)});
+
+	if (cast != NULL)
+	{
+		if (vars->map.walls[cast->wall].type == W_DOOR)
+		{
+//			vars->map.walls[cast->wall].type = W_DOOR_
+		}
+	}
+
+
+
 	return (0);
 }

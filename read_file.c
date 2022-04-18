@@ -39,6 +39,7 @@ void	ft_load_map(t_vars *vars, char *filename)
 	ft_load_image(vars, vars->map.south.path, &vars->map.south);
 	ft_load_image(vars, vars->map.west.path, &vars->map.west);
 	ft_load_image(vars, vars->map.east.path, &vars->map.east);
+	ft_load_image(vars, "./assets/newdoor.xpm", &vars->map.door);
 	ft_load_color(vars, &vars->map.ceil);
 	ft_load_color(vars, &vars->map.floor);
 }
