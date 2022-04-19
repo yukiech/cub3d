@@ -62,9 +62,9 @@ int	main(int argc, char **argv)
 	ft_load_image(&vars, NULL, &vars.background);
 
 
-	vars.imgbuff.w = 1;
-	vars.imgbuff.h = vars.screen.h;
-	ft_load_image(&vars, NULL, &vars.imgbuff);
+//	vars.imgbuff.w = 1;
+///	vars.imgbuff.h = vars.screen.h;
+//	ft_load_image(&vars, NULL, &vars.imgbuff);
 
 
 
