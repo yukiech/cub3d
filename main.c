@@ -29,6 +29,7 @@ void	ft_load_player(t_vars *vars)
 	vars->player.fov = radians(60);
 	vars->player.hori = 400;
 	vars->player.pos.x = -1;
+	vars->player.hp = 1000;
 	i = 0;
 	while (vars->map.raw[i] != NULL)
 	{
@@ -48,7 +49,6 @@ int	main(int argc, char **argv)
 
 	ft_bzero(&vars, sizeof(t_vars));
 	vars.mlx = mlx_init();
-    
 
 	vars.screen.w = 800;
 	vars.screen.h = 800;
@@ -61,12 +61,9 @@ int	main(int argc, char **argv)
 	vars.background.h = vars.screen.h * 2;
 	ft_load_image(&vars, NULL, &vars.background);
 
-
-//	vars.imgbuff.w = 1;
-///	vars.imgbuff.h = vars.screen.h;
-//	ft_load_image(&vars, NULL, &vars.imgbuff);
-
-
+	vars.game_state = 0;
+	vars.loading.pos = 1;
+	menu_load_image(&vars);
 
 	if (argc == 2)
 		ft_load_map(&vars, argv[1]);

@@ -5,74 +5,72 @@ void	ft_clear_walls(t_vars *vars);
 
 int	ft_loop_hook(t_vars *vars)
 {
-//	static int i = 0;
 
 
 
-//	printf("%d  Start all \t\t", i); ft_time();
+	if (vars->game_state == 0)
+		loading_screen(vars, 0);
+	else if (vars->game_state == 1)
+		loading_screen(vars, vars->loading.pos);
+	else if (vars->game_state == 2)
+	{
 
-
-	mlx_clear_window(vars->mlx, vars->win);
-
-
-//	printf("%d  After clear  \t", i); ft_time();
-
-
-	ft_draw_background(vars);
-
-//	printf("%d  After background \t", i); ft_time();
-
-
-
-//	ft_clear_walls(vars);
-
-
-//	printf("%d  After clear wall \t", i); ft_time();
-
-
-	ft_draw_walls(vars);
-
-
-//	printf("%d  After wall \t\t", i); ft_time();
-
-
-//	char	*time = ft_itoa(ft_time());
-
-//	ft_write_text(vars, time, (t_point){.x = 50, .y = 100}, (t_vect){.v1 = 10, .v2 = ft_color(0, 255, 0, 0)});
-//	free(time);
+		mlx_clear_window(vars->mlx, vars->win);
+		ft_draw_background(vars);
+		ft_draw_walls(vars);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
 
 
 
-
-
-
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
-
-//	printf("%d  Display win \t\t", i); ft_time();
-
-
-	minimap(vars);
-
-//	printf("%d  End minimap \t\t", i); ft_time();
-
-
-//	i++;
-//	if (i > 6)
-//		exit(1);
-
+		minimap(vars);
+		ft_hp_draw(vars);	
+	}
 	return (0);
+}
+
+void	menu_hook(t_vars *vars, int keycode)
+{
+	if (keycode == K_AR_L && vars->loading.pos % 2 == 0)
+		vars->loading.pos -= 1;
+	else if (keycode == K_AR_R && vars->loading.pos % 2 == 1)
+		vars->loading.pos += 1;
+	else if (keycode == K_AR_U && vars->loading.pos > 2)
+		vars->loading.pos -= 2;
+	else if (keycode == K_AR_D && vars->loading.pos < 3)
+		vars->loading.pos += 2;
+	else if (keycode == K_ENTER)
+	{
+		set_char_stats(vars);
+		vars->game_state = 2;
+	}
+	else if (keycode == K_ESCAPE)
+		ft_free(vars);
 }
 
 int	ft_key_hook(int keycode, t_vars *vars)
 {
-	float	step = 0.05;
+	if (vars->player.mspeed == 0)
+		vars->player.mspeed = 0.05;
 
-
-	printf("KEY %d\n", keycode);
-	if (keycode == K_ESCAPE)
-		ft_free(vars);
-	else
-		ft_move(vars, keycode, step);
+	if (vars->game_state == 0)
+	{
+		if (keycode == K_ESCAPE)
+			ft_free(vars);
+		else
+			vars->game_state = 1;
+	}
+	else if (vars->game_state == 1)
+	{
+		menu_hook(vars, keycode);
+	}
+	if (vars->game_state == 2)
+	{
+		printf("KEY %d\n", keycode);
+		if (keycode == K_ESCAPE)
+			ft_free(vars);
+		else
+			ft_move(vars, keycode, vars->player.mspeed);
+	}
 	return (0);
 }
 
