@@ -25,7 +25,9 @@ typedef struct s_player {
 	float	hori;
 	float	angle;
 	float	fov;
-	int		hp;
+	int	hp;
+	float	mspeed;
+	int	ghost;
 }	t_player;
 
 typedef struct s_imgptr {
@@ -74,10 +76,23 @@ typedef struct s_map {
 	int			height;
 }	t_map;
 
+typedef struct s_loading {
+	t_imgptr	loading;
+	t_imgptr	loading2;
+	t_imgptr	ghost;
+	t_imgptr	ninja;
+	t_imgptr	pirate;
+	t_imgptr	franken;
+	int			i;
+	int			pos;
+} t_loading;
+
 typedef struct s_vars {
 	void		*mlx;
 	void		*win;
 
+	int		game_state;
+	t_loading	loading;
 	t_imgptr	texter;
 	t_player	player;
 	t_map		map;

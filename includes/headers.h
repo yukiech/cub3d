@@ -114,4 +114,11 @@ void	ft_move(t_vars *vars, int keycode, float step);
 //-----------------
 //hp.c
 void	ft_hp_draw(t_vars *vars);
+
+//-----------------
+//loading_menu.c
+void    loading_screen(t_vars *vars, int i);
+void	menu_load_image(t_vars *vars);
+void	set_char_stats(t_vars *vars);
+
 #endif //CUB3D_H
