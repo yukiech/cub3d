@@ -18,7 +18,7 @@ void	ft_init_player(t_vars *vars, int x, int y)
 		else if (vars->map.raw[y][x] == 'S')
 			vars->player.angle = radians(90);
 		vars->map.raw[y][x] = '0';
-	}	
+	}
 }
 
 void	ft_load_player(t_vars *vars)
@@ -52,8 +52,8 @@ int	main(int argc, char **argv)
 
 	vars.screen.w = 800;
 	vars.screen.h = 800;
-//	vars.win = mlx_new_window(vars.mlx, 600, 400, vars.screen.w, vars.screen.h, "mlx 42");
-	vars.win = mlx_new_window(vars.mlx, vars.screen.w, vars.screen.h, "mlx 42");
+	vars.win = mlx_new_window(vars.mlx, 600, 400, vars.screen.w, vars.screen.h, "mlx 42");
+//	vars.win = mlx_new_window(vars.mlx, vars.screen.w, vars.screen.h, "mlx 42");
 
 	ft_load_image(&vars, NULL, &vars.screen);
 
@@ -62,6 +62,7 @@ int	main(int argc, char **argv)
 	ft_load_image(&vars, NULL, &vars.background);
 
 
+//	printf("%f\n", atan2(sin(4), cos(4)));
 
 	if (argc == 2)
 		ft_load_map(&vars, argv[1]);
@@ -73,6 +74,8 @@ int	main(int argc, char **argv)
 
 	vars.map.walls = ft_calloc(ft_count_walls(&vars) + 1, sizeof(t_wall));
 	ft_register_walls(&vars);
+
+	ft_register_items(&vars);
 
 	ft_load_texter(&vars);
 

@@ -59,6 +59,11 @@ typedef struct s_wall {
 	t_point		draw2;
 }	t_wall;
 
+typedef struct s_item {
+	int		type;
+	t_point	p;
+}	t_item;
+
 typedef struct s_map {
 	t_color		floor;
 	t_color		ceil;
@@ -69,6 +74,7 @@ typedef struct s_map {
 	t_imgptr	south;
 
 	t_wall		*walls;
+	t_item		*items;
 	char		**raw;
 	int			height;
 }	t_map;

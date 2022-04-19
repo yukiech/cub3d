@@ -82,16 +82,12 @@ static int	ft_select_arg(t_vars *vars, char **sp)
 		ft_set_arg(vars, &vars->map.north.path, sp[1]);
 	else if (ft_strcmp(sp[0], "SO") == 0)
 		ft_set_arg(vars, &vars->map.south.path, sp[1]);
-
 	else if (ft_strcmp(sp[0], "WE") == 0)
 		ft_set_arg(vars, &vars->map.west.path, sp[1]);
-
 	else if (ft_strcmp(sp[0], "EA") == 0)
 		ft_set_arg(vars, &vars->map.east.path, sp[1]);
-
 	else if (ft_strcmp(sp[0], "F") == 0)
 		ft_set_arg(vars, &vars->map.floor.raw, sp[1]);
-
 	else if (ft_strcmp(sp[0], "C") == 0)
 		ft_set_arg(vars, &vars->map.ceil.raw, sp[1]);
 	else
@@ -111,7 +107,7 @@ static void	ft_read_map(t_vars *vars, int fd)
 		if (vars->map.raw == NULL && ft_strlen(line) == 0)
 			free(line);
 		else
-			vars->map.height = ft_concat_tab(&vars->map.raw, line) - 1; 
+			vars->map.height = ft_concat_tab(&vars->map.raw, line) - 1;
 		line = get_next_line(fd);
 		if (line != NULL && ft_strchr(line, '\n'))
 			line[ft_strchr(line, '\n') - line] = '\0';

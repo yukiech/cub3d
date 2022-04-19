@@ -15,7 +15,7 @@ void	ft_draw_vline(t_imgptr *ptr, t_point o, int len, int color);
 //-----------------
 //end.c
 void	ft_exit(t_vars *vars, char *error);
-void	ft_tfree(void *ptr);
+void	ft_tfree(void **ptr);
 int		ft_free(t_vars *vars);
 
 //-----------------
@@ -47,6 +47,10 @@ int		ft_put_image(t_vars *vars, t_imgptr *img, t_point o1, t_point o2, int hori)
 int		ft_put_col(t_vars *vars, t_imgptr *img, t_point o1, float ratio);
 
 //-----------------
+//items.c
+void	ft_register_items(t_vars *vars);
+
+//-----------------
 //math.c
 int		ft_time(void);
 t_vect	*n_vect(float v1, float v2);
@@ -73,7 +77,7 @@ void	ft_load_map(t_vars *vars, char *filename);
 //screen.c
 void	ft_draw_background(t_vars *vars);
 void	ft_draw_walls(t_vars *vars);
-//t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end);
+t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end);
 //void	ft_draw_column(t_vars *vars, t_ray *cast, int col);
 
 

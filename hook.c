@@ -1,6 +1,7 @@
 #include <cub3d.h>
 
 void	ft_clear_walls(t_vars *vars);
+void	ft_draw_items(t_vars *vars);
 
 
 int	ft_loop_hook(t_vars *vars)
@@ -9,6 +10,7 @@ int	ft_loop_hook(t_vars *vars)
 
 	ft_clear_walls(vars);
 	ft_draw_walls(vars);
+	ft_draw_items(vars);
 
 
 //	char	*time = ft_itoa(ft_time());
@@ -47,8 +49,12 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 
 int	ft_mouse_hook(int x, int y, t_vars *vars)
 {
-	vars->player.angle += radians(x - vars->screen.w / 2) / 2;
-	vars->player.hori += (vars->screen.h / 2 - y) / 2;
+	vars->player.angle += radians(x - vars->screen.w / 2) / 6;
+	if (vars->player.angle > M_PI)
+		vars->player.angle -= 2*M_PI;
+	if (vars->player.angle < -M_PI)
+		vars->player.angle += 2*M_PI;
+	vars->player.hori += (vars->screen.h / 2 - y) / 3;
 	vars->player.hori = fmax(0, fmin(vars->screen.h, vars->player.hori));
 	mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
 	return (0);
