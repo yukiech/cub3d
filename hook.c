@@ -5,23 +5,61 @@ void	ft_clear_walls(t_vars *vars);
 
 int	ft_loop_hook(t_vars *vars)
 {
-//	ft_draw_background(vars);
+//	static int i = 0;
 
-	ft_clear_walls(vars);
+
+
+//	printf("%d  Start all \t\t", i); ft_time();
+
+
+	mlx_clear_window(vars->mlx, vars->win);
+
+
+//	printf("%d  After clear  \t", i); ft_time();
+
+
+	ft_draw_background(vars);
+
+//	printf("%d  After background \t", i); ft_time();
+
+
+
+//	ft_clear_walls(vars);
+
+
+//	printf("%d  After clear wall \t", i); ft_time();
+
+
 	ft_draw_walls(vars);
+
+
+//	printf("%d  After wall \t\t", i); ft_time();
 
 
 //	char	*time = ft_itoa(ft_time());
 
-//	ft_write_text(vars, time, (t_point){.x = 50, .y = 100}, n_vect(10, ft_color(0, 255, 0, 0)));
+//	ft_write_text(vars, time, (t_point){.x = 50, .y = 100}, (t_vect){.v1 = 10, .v2 = ft_color(0, 255, 0, 0)});
 //	free(time);
 
-	mlx_clear_window(vars->mlx, vars->win);
 
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->background.img, 0, vars->player.hori - vars->screen.h);
+
+
+
 
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
+
+//	printf("%d  Display win \t\t", i); ft_time();
+
+
 	minimap(vars);
+
+//	printf("%d  End minimap \t\t", i); ft_time();
+
+
+//	i++;
+//	if (i > 6)
+//		exit(1);
+
 	return (0);
 }
 

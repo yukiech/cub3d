@@ -49,8 +49,7 @@ int		ft_put_col(t_vars *vars, t_imgptr *img, t_point o1, float ratio);
 //-----------------
 //math.c
 int		ft_time(void);
-t_vect	*n_vect(float v1, float v2);
-float	map(float x, t_vect *in, t_vect *out);
+float	map(float x, t_vect in, t_vect out);
 int		ft_color(UCHAR a, UCHAR r, UCHAR g, UCHAR b);
 char	ft_get_case(t_vars *vars, int x, int y);
 float	ft_pyta(float a, float b);

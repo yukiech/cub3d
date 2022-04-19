@@ -26,7 +26,7 @@ void	ft_load_player(t_vars *vars)
 	int	i;
 	int	j;
 
-	vars->player.fov = radians(90);
+	vars->player.fov = radians(60);
 	vars->player.hori = 400;
 	vars->player.pos.x = -1;
 	i = 0;
@@ -60,6 +60,11 @@ int	main(int argc, char **argv)
 	vars.background.w = vars.screen.w;
 	vars.background.h = vars.screen.h * 2;
 	ft_load_image(&vars, NULL, &vars.background);
+
+
+	vars.imgbuff.w = 1;
+	vars.imgbuff.h = vars.screen.h;
+	ft_load_image(&vars, NULL, &vars.imgbuff);
 
 
 
