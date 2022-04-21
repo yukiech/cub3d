@@ -52,8 +52,8 @@ int	main(int argc, char **argv)
 
 	vars.screen.w = 800;
 	vars.screen.h = 800;
-	vars.win = mlx_new_window(vars.mlx, 600, 400, vars.screen.w, vars.screen.h, "mlx 42");
-//	vars.win = mlx_new_window(vars.mlx, vars.screen.w, vars.screen.h, "mlx 42");
+//	vars.win = mlx_new_window(vars.mlx, 600, 400, vars.screen.w, vars.screen.h, "mlx 42");
+	vars.win = mlx_new_window(vars.mlx, vars.screen.w, vars.screen.h, "mlx 42");
 
 	ft_load_image(&vars, NULL, &vars.screen);
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 	vars.map.walls = ft_calloc(ft_count_walls(&vars) + 1, sizeof(t_wall));
 	ft_register_walls(&vars);
 
-	ft_register_items(&vars);
+//	ft_register_items(&vars);
 
 	ft_load_texter(&vars);
 

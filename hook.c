@@ -130,20 +130,6 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 			free(cast);
 		}
 	}
-
-<<<<<<< HEAD
-        if (w.type == W_DOOR)
-        {
-          vars->map.walls[cast->wall].type = -1;
-          vars->map.raw[(int)w.pos.y][(int)w.pos.x] = '0';
-			sound_door();
-		}
-      }
-      free(cast);
-    }
-  }
-=======
->>>>>>> 0f7070ac30280f7a66c3a844b9d5886a51d662dd
 	return (0);
 }
 
