@@ -22,20 +22,6 @@ int	ft_loop_hook(t_vars *vars)
 
 		minimap(vars);
 		ft_hp_draw(vars);
-		vars->loading.i += 1;
-		//if (vars->loading.i % 40 < 10)
-		if (vars->pistol.state == 0)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->pistol.pistol1.img, 300, 300);
-		//if (vars->loading.i % 40 < 20 && vars->loading.i % 40 >= 10)
-		if (vars->pistol.state == 1)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->pistol.pistol2.img, 300, 300);
-		//if (vars->loading.i % 40 < 30 && vars->loading.i % 40 >= 20)
-		if (vars->pistol.state == 2)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->pistol.pistol3.img, 300, 300);
-		//if (vars->loading.i % 40 < 40 && vars->loading.i % 40 >= 30)
-		if (vars->pistol.state == 3)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->pistol.pistol4.img, 300, 300);
-		vars->loading.i++;
 	}
 	return (0);
 }
