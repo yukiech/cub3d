@@ -43,7 +43,7 @@ int		ft_mouse_hook(int x, int y, t_vars *vars);
 void	ft_load_image(t_vars *vars, char *filename, t_imgptr *ptr);
 void	ft_set_px(t_imgptr *img, int x, int y, int color);
 int		ft_get_px(t_imgptr *img, int x, int y);
-int		ft_put_image(t_vars *vars, t_imgptr *img, t_point o1, t_point o2, int hori);
+int		ft_put_image(t_vars *vars, t_imgptr *img, t_point o1, t_point o2);
 int		ft_put_col(t_vars *vars, t_imgptr *img, t_point o1, float ratio);
 
 //-----------------

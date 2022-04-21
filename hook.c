@@ -7,11 +7,6 @@ t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end);
 int	ft_loop_hook(t_vars *vars)
 {
 
-	ft_clear_walls(vars);
-	ft_draw_walls(vars);
-	ft_draw_items(vars);
-
-
 	if (vars->game_state == 0)
 		loading_screen(vars, 0);
 	else if (vars->game_state == 1)
@@ -22,6 +17,7 @@ int	ft_loop_hook(t_vars *vars)
 		mlx_clear_window(vars->mlx, vars->win);
 		ft_draw_background(vars);
 		ft_draw_walls(vars);
+		ft_draw_items(vars);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
 
 
@@ -87,42 +83,41 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 //	printf("CLICK %d %d %d\n", x, y, button);
 
 
-  if (vars->game_state == 1 && button == M_CLK_L)
-  {
-    if (x >= 720 && x <= 770 && y >= 30 && y <= 80)
-    {
-      if (vars->loading.sound == 0)
-        vars->loading.sound = 1;
-      else if (vars->loading.sound == 1)
-        vars->loading.sound = 0;
-    }
-  }
-  else if (vars->game_state == 2 && button == M_CLK_L)
-  {
-    t_ray *cast = ft_cast_rays(vars, (t_point){.x = vars->player.pos.x + cos(vars->player.angle), .y = vars->player.pos.y + sin(vars->player.angle)});
+	if (vars->game_state == 1 && button == M_CLK_L)
+	{
+		if (x >= 720 && x <= 770 && y >= 30 && y <= 80)
+		{
+			if (vars->loading.sound == 0)
+				vars->loading.sound = 1;
+			else if (vars->loading.sound == 1)
+				vars->loading.sound = 0;
+		}
+	}
+	else if (vars->game_state == 2 && button == M_CLK_L)
+	{
+	    t_ray *cast = ft_cast_rays(vars, (t_point){.x = vars->player.pos.x + cos(vars->player.angle), .y = vars->player.pos.y + sin(vars->player.angle)});
 
 
-    printf("%p\n", cast);
+		printf("%p\n", cast);
 
-    if (cast != NULL)
-    {
-      t_wall w = vars->map.walls[cast->wall];
+		if (cast != NULL)
+		{
+			t_wall w = vars->map.walls[cast->wall];
 
-      if (ft_pyta(0.5 + w.pos.y - vars->player.pos.y, 0.5 + w.pos.x - vars->player.pos.x) < 2.5)
-      {
+			if (ft_pyta(0.5 + w.pos.y - vars->player.pos.y, 0.5 + w.pos.x - vars->player.pos.x) < 2.5)
+			{
 
-        printf("%f   %f\n", w.pos.y, w.pos.x);
+				printf("%f   %f\n", w.pos.y, w.pos.x);
 
-        if (w.type == W_DOOR)
-        {
-          vars->map.walls[cast->wall].type = -1;
-          vars->map.raw[(int)w.pos.y][(int)w.pos.x] = '0';
-        }
-      }
-      free(cast);
-    }
-  }
-  
+				if (w.type == W_DOOR)
+				{
+					vars->map.walls[cast->wall].type = -1;
+					vars->map.raw[(int)w.pos.y][(int)w.pos.x] = '0';
+				}
+			}
+			free(cast);
+		}
+	}
 	return (0);
 }
 
