@@ -95,8 +95,8 @@ int	ft_mouse_hook(int x, int y, t_vars *vars)
 {
 	if (vars->game_state == 2)
 	{
-		vars->player.angle += radians(x - vars->screen.w / 2) / 2;
-		vars->player.hori += (vars->screen.h / 2 - y) / 2;
+		vars->player.angle += radians(x - vars->screen.w / 2) / 8;
+		vars->player.hori += (vars->screen.h / 2 - y) / 1;
 		vars->player.hori = fmax(0, fmin(vars->screen.h, vars->player.hori));
 		mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
 	}
