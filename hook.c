@@ -17,7 +17,7 @@ int	ft_loop_hook(t_vars *vars)
 		mlx_clear_window(vars->mlx, vars->win);
 		ft_draw_background(vars);
 		ft_draw_walls(vars);
-		ft_draw_items(vars);
+//		ft_draw_items(vars);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
 
 
