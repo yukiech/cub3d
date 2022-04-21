@@ -23,6 +23,7 @@ int	ft_free(t_vars *vars)
 	ft_tfree((void **)&vars->map.ceil.raw);
 	ft_free_2d(vars->map.raw);
 	ft_tfree((void **)&vars->map.walls);
+	sound_kill();
 	if (vars->screen.img != NULL)
 		mlx_destroy_image(vars->mlx, vars->screen.img);
 	if (vars->win != NULL)

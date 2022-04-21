@@ -53,8 +53,7 @@ void	ft_register_items(t_vars *vars);
 //-----------------
 //math.c
 int		ft_time(void);
-t_vect	*n_vect(float v1, float v2);
-float	map(float x, t_vect *in, t_vect *out);
+float	map(float x, t_vect in, t_vect out);
 int		ft_color(UCHAR a, UCHAR r, UCHAR g, UCHAR b);
 char	ft_get_case(t_vars *vars, int x, int y);
 float	ft_pyta(float a, float b);
@@ -114,5 +113,15 @@ void	sound_kill(void);
 //-----------------
 //wall_block_player.c
 void	ft_move(t_vars *vars, int keycode, float step);
+
+//-----------------
+//hp.c
+void	ft_hp_draw(t_vars *vars);
+
+//-----------------
+//loading_menu.c
+void    loading_screen(t_vars *vars, int i);
+void	menu_load_image(t_vars *vars);
+void	set_char_stats(t_vars *vars);
 
 #endif //CUB3D_H
