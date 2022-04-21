@@ -119,11 +119,10 @@ t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end)
 
 			if (res != NULL)
 			{
-	//			res->dist = ft_pyta(res->p.y - vars->player.pos.y, res->p.x - vars->player.pos.x);
 				if (best == NULL || res->u < best->u)
 				{
 					res->wall = i;
-					ft_tfree(best);
+					ft_tfree((void **)&best);
 					best = res;
 				}
 			}
@@ -158,6 +157,6 @@ static void	ft_draw_column(t_vars *vars, t_ray *cast, int col, int mult)
 
 	while (mult-- > 0 && side != NULL)
 		ft_put_col(vars, side, (t_point){.x = col - mult, .y = h}, cast->t);
-	ft_tfree(cast);
+	ft_tfree((void **)&cast);
 }
 
