@@ -26,7 +26,7 @@ void	ft_load_player(t_vars *vars)
 	int	i;
 	int	j;
 
-	vars->player.fov = radians(90);
+	vars->player.fov = radians(60);
 	vars->player.hori = 400;
 	vars->player.pos.x = -1;
 	vars->player.hp = 1000;
@@ -61,7 +61,9 @@ int	main(int argc, char **argv)
 	vars.background.h = vars.screen.h * 2;
 	ft_load_image(&vars, NULL, &vars.background);
 
-
+	vars.game_state = 0;
+	vars.loading.pos = 1;
+	menu_load_image(&vars);
 
 	if (argc == 2)
 		ft_load_map(&vars, argv[1]);

@@ -8,14 +8,21 @@ int	ft_time(void)
 	size_t			res;
 
 	gettimeofday(&time, NULL);
-	micro = time.tv_sec * 10000000 + time.tv_usec;
+	micro = time.tv_usec;
 //	printf("t %zu\n", micro);
 //	printf("tu %zu %d\n", time.tv_sec, time.tv_usec);
+
+
+
+//	printf("tu %d\n", time.tv_usec);
 	res = micro - last;
 	last = micro;
+
+	printf("tu %zu %d     %zu\n", time.tv_sec % 1000, time.tv_usec, res);
 	return (res);
 }
 
+/*
 t_vect	*n_vect(float v1, float v2)
 {
 	t_vect	*vect;
@@ -24,15 +31,13 @@ t_vect	*n_vect(float v1, float v2)
 	vect->v1 = v1;
 	vect->v2 = v2;
 	return (vect);
-}
+}*/
 
-float	map(float x, t_vect *in, t_vect *out)
+float	map(float x, t_vect in, t_vect out)
 {
 	float	res;
 
-	res = ((x - in->v1) * (out->v2 - out->v1) / (in->v2 - in->v1) + out->v1);
-	free(in);
-	free(out);
+	res = ((x - in.v1) * (out.v2 - out.v1) / (in.v2 - in.v1) + out.v1);
 	return (res);
 }
 
@@ -41,9 +46,9 @@ int	ft_color(unsigned char a, unsigned char r, unsigned char g, unsigned char b)
 	int	res;
 
 	res = a;
-	res = (res << 8) + r;
-	res = (res << 8) + g;
-	res = (res << 8) + b;
+	res = (res << 8) | r;
+	res = (res << 8) | g;
+	res = (res << 8) | b;
 	return (res);
 }
 
