@@ -75,6 +75,8 @@ int	main(int argc, char **argv)
 	ft_draw_background(&vars);
 	ft_load_player(&vars);
 
+
+	printf("walls : %d\n", ft_count_walls(&vars));
 	vars.map.walls = ft_calloc(ft_count_walls(&vars) + 1, sizeof(t_wall));
 	ft_register_walls(&vars);
 
