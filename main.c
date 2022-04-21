@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 	vars.background.h = vars.screen.h * 2;
 	ft_load_image(&vars, NULL, &vars.background);
 
-	vars.game_state = 0;
+	vars.game_state = 2;
 	vars.loading.pos = 1;
 	menu_load_image(&vars);
 

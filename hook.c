@@ -95,5 +95,7 @@ int	ft_mouse_hook(int x, int y, t_vars *vars)
 	vars->player.hori += (vars->screen.h / 2 - y) / 3;
 	vars->player.hori = fmax(0, fmin(vars->screen.h, vars->player.hori));
 	mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
+
+
 	return (0);
 }
