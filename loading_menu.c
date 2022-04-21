@@ -1,5 +1,14 @@
 #include <cub3d.h>
 
+void	load_pistol(t_vars *vars)
+{
+	ft_load_image(vars, "./assets/gun_1.xpm", &vars->pistol.pistol1);
+	ft_load_image(vars, "./assets/gun_2.xpm", &vars->pistol.pistol2);
+	ft_load_image(vars, "./assets/gun_3.xpm", &vars->pistol.pistol3);
+	ft_load_image(vars, "./assets/gun_4.xpm", &vars->pistol.pistol4);
+	ft_load_image(vars, "./assets/gun_5.xpm", &vars->pistol.pistol5);
+}
+
 void	menu_load_image(t_vars *vars)
 {	
 	ft_load_image(vars, "./assets/menu_1.xpm", &vars->loading.menu_1);
@@ -12,6 +21,7 @@ void	menu_load_image(t_vars *vars)
 	ft_load_image(vars, "./assets/char_franken.xpm", &vars->loading.franken);
 	ft_load_image(vars, "./assets/sound_on.xpm", &vars->loading.sound_on);
 	ft_load_image(vars, "./assets/sound_off.xpm", &vars->loading.sound_off);
+	load_pistol(vars);
 }
 
 void	set_char_stats(t_vars *vars)

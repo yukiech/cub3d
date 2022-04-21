@@ -21,10 +21,22 @@ int	ft_loop_hook(t_vars *vars)
 		ft_draw_walls(vars);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
 
-
-
 		minimap(vars);
-		ft_hp_draw(vars);	
+		ft_hp_draw(vars);
+		vars->loading.i += 1;
+		//if (vars->loading.i % 40 < 10)
+		if (vars->pistol.state == 0)
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->pistol.pistol1.img, 300, 300);
+		//if (vars->loading.i % 40 < 20 && vars->loading.i % 40 >= 10)
+		if (vars->pistol.state == 1)
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->pistol.pistol2.img, 300, 300);
+		//if (vars->loading.i % 40 < 30 && vars->loading.i % 40 >= 20)
+		if (vars->pistol.state == 2)
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->pistol.pistol3.img, 300, 300);
+		//if (vars->loading.i % 40 < 40 && vars->loading.i % 40 >= 30)
+		if (vars->pistol.state == 3)
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->pistol.pistol4.img, 300, 300);
+		vars->loading.i++;
 	}
 	return (0);
 }
@@ -74,6 +86,8 @@ int	ft_key_hook(int keycode, t_vars *vars)
 	if (vars->game_state == 2)
 	{
 		printf("KEY %d\n", keycode);
+//		if (keycode == K_SP)
+//			pistol_fire(vars);
 		if (keycode == K_ESCAPE)
 			ft_free(vars);
 		else
@@ -118,7 +132,8 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
         {
           vars->map.walls[cast->wall].type = -1;
           vars->map.raw[(int)w.pos.y][(int)w.pos.x] = '0';
-        }
+			sound_door();
+		}
       }
       free(cast);
     }

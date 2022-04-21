@@ -57,6 +57,10 @@ float	radians(float deg);
 float	degrees(float rad);
 
 //-----------------
+//pistol.c
+void	pistol_fire(t_vars *vars);
+
+//-----------------
 //rays.c
 t_ray	*ray(t_wall w, t_point player, t_point r);
 

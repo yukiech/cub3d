@@ -83,6 +83,15 @@ typedef struct s_map {
 	int			height;
 }	t_map;
 
+typedef struct	s_pistol {
+	t_imgptr	pistol1;
+	t_imgptr	pistol2;
+	t_imgptr	pistol3;
+	t_imgptr	pistol4;
+	t_imgptr	pistol5;
+	int			state;
+} t_pistol;
+
 typedef struct s_loading {
 	t_imgptr	menu_1;
 	t_imgptr	menu_2;
@@ -108,6 +117,7 @@ typedef struct s_vars {
 	t_loading	loading;
 	t_imgptr	texter;
 	t_player	player;
+	t_pistol	pistol;
 	t_map		map;
 	t_imgptr	background;
 	t_imgptr	screen;
