@@ -53,13 +53,14 @@ typedef struct s_color {
 # define W_RIGHTWALL 3
 # define W_DOWNWALL 4
 # define W_DOOR 5
+# define W_DOOR_OPEN 6
 
 #define SEE_THROUGH "0H"
 #define SEE_NOT	"1D"
 
 typedef struct s_wall {
 	int			type;
-	int			id;
+	t_point		pos;
 	int			dist;
 	t_point		p1;
 	t_point		p2;

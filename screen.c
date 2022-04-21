@@ -113,7 +113,7 @@ t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end)
 	best = NULL;
 	while (vars->map.walls[i].type != W_NONE)
 	{
-		if (ft_pyta(vars->map.walls[i].p1.y - vars->player.pos.y, vars->map.walls[i].p1.x - vars->player.pos.x) < RENDER_DIST)
+		if (vars->map.walls[i].type > 0 && ft_pyta(vars->map.walls[i].p1.y - vars->player.pos.y, vars->map.walls[i].p1.x - vars->player.pos.x) < RENDER_DIST)
 		{
 			res = ray(vars->map.walls[i], vars->player.pos, ray_end);
 
@@ -144,19 +144,19 @@ static void	ft_draw_column(t_vars *vars, t_ray *cast, int col, int mult)
 	float disto = MAGIC_NBR / 2.0 / tan(vars->player.fov / 2.0);
 	h = (MAGIC_NBR / cast->dist) * disto;
 
+	side = NULL;
 	if (vars->map.walls[cast->wall].type == W_UPWALL)
 		side = &vars->map.north;
 	else if (vars->map.walls[cast->wall].type == W_LEFTWALL)
 		side = &vars->map.west;
 	else if (vars->map.walls[cast->wall].type == W_RIGHTWALL)
 		side = &vars->map.east;
-	else if (vars->map.walls[cast->wall].type == W_RIGHTWALL)
+	else if (vars->map.walls[cast->wall].type == W_DOWNWALL)
 		side = &vars->map.south;
 	else if (vars->map.walls[cast->wall].type == W_DOOR)
-		side = &vars->map.door;		
-	else
-		side = &vars->map.north;
-	while (mult-- > 0)
+		side = &vars->map.door;
+
+	while (mult-- > 0 && side != NULL)
 		ft_put_col(vars, side, (t_point){.x = col - mult, .y = h}, cast->t);
 	ft_tfree(cast);
 }
