@@ -83,10 +83,12 @@ void	mimap_draw(t_vars *vars, t_imgptr *minimap)
 		{
 			c = ft_get_case(vars,
 					vars->player.pos.x + j, vars->player.pos.y + i);
-			if (ft_strchr("\e1 ", c))
+			if (ft_strchr("\e1 ", c) != NULL)
 				mm_case(minimap, j, i, ft_color(0, 0, 0, 0));
-			else if (ft_strchr("0", c))
+			else if (ft_strchr("0", c) != NULL)
 				mm_case(minimap, j, i, ft_color(0, 255, 255, 255));
+			else if (ft_strchr("D", c) != NULL)
+				mm_case(minimap, j, i, ft_color(0, 0, 255, 0));
 			j++;
 		}
 		i++;

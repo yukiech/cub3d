@@ -52,9 +52,15 @@ typedef struct s_color {
 # define W_LEFTWALL 2
 # define W_RIGHTWALL 3
 # define W_DOWNWALL 4
+# define W_DOOR 5
+# define W_DOOR_OPEN 6
+
+#define SEE_THROUGH "0H"
+#define SEE_NOT	"1D"
 
 typedef struct s_wall {
 	int			type;
+	t_point		pos;
 	int			dist;
 	t_point		p1;
 	t_point		p2;
@@ -75,6 +81,7 @@ typedef struct s_map {
 	t_imgptr	west;
 	t_imgptr	east;
 	t_imgptr	south;
+	t_imgptr	door;
 
 	t_wall		*walls;
 	t_item		*items;
@@ -83,14 +90,20 @@ typedef struct s_map {
 }	t_map;
 
 typedef struct s_loading {
-	t_imgptr	loading;
-	t_imgptr	loading2;
+	t_imgptr	menu_1;
+	t_imgptr	menu_2;
+	t_imgptr	menu_3;
+	t_imgptr	menu_4;
 	t_imgptr	ghost;
 	t_imgptr	ninja;
 	t_imgptr	pirate;
 	t_imgptr	franken;
+	t_imgptr	sound_on;
+	t_imgptr	sound_off;
 	int			i;
 	int			pos;
+	int			sound;
+	char		*music_title;
 } t_loading;
 
 typedef struct s_vars {

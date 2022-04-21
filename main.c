@@ -64,6 +64,8 @@ int	main(int argc, char **argv)
 	vars.game_state = 2;
 	vars.loading.pos = 1;
 	menu_load_image(&vars);
+	vars.loading.music_title = malloc(sizeof(char) * ft_strlen("imperial"));
+	vars.loading.music_title = "imperial";
 
 	if (argc == 2)
 		ft_load_map(&vars, argv[1]);
@@ -73,6 +75,8 @@ int	main(int argc, char **argv)
 	ft_draw_background(&vars);
 	ft_load_player(&vars);
 
+
+	printf("walls : %d\n", ft_count_walls(&vars));
 	vars.map.walls = ft_calloc(ft_count_walls(&vars) + 1, sizeof(t_wall));
 	ft_register_walls(&vars);
 
@@ -92,11 +96,7 @@ int	main(int argc, char **argv)
 
 //	printf("color %d\n", ft_color(0, 0, 0, 255));
 
-	mlx_mouse_hide();
-	mlx_mouse_move(vars.win, vars.screen.w / 2, vars.screen.h / 2);
-
 	ft_time();
-	//sound_music("brittney");
 	mlx_loop_hook(vars.mlx, ft_loop_hook, &vars);
 	mlx_hook(vars.win, 2, 1L << 1, ft_key_hook, &vars);
 	mlx_hook(vars.win, 4, 0, ft_click_hook, &vars);
