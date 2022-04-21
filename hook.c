@@ -54,16 +54,14 @@ void	menu_hook(t_vars *vars, int keycode)
 
 int	ft_key_hook(int keycode, t_vars *vars)
 {
+	if (keycode == K_ESCAPE)
+		ft_free(vars);
+
 	if (vars->player.mspeed == 0)
 		vars->player.mspeed = 0.05;
 
 	if (vars->game_state == 0)
-	{
-		if (keycode == K_ESCAPE)
-			ft_free(vars);
-		else
-			vars->game_state = 1;
-	}
+		vars->game_state = 1;
 	else if (vars->game_state == 1)
 	{
 		menu_hook(vars, keycode);
@@ -71,10 +69,7 @@ int	ft_key_hook(int keycode, t_vars *vars)
 	if (vars->game_state == 2)
 	{
 		printf("KEY %d\n", keycode);
-		if (keycode == K_ESCAPE)
-			ft_free(vars);
-		else
-			ft_move(vars, keycode, vars->player.mspeed);
+		ft_move(vars, keycode, vars->player.mspeed);
 	}
 	return (0);
 }
