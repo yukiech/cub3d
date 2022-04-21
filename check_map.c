@@ -42,12 +42,12 @@ static void	ft_check_case(t_vars *vars, int x, int y, int *n_walls)
 
 static void	ft_check_case_sides(t_vars *vars, int x, int y)
 {
-	if (y <= 0 || vars->map.raw[y - 1][x] == ' ')
+	if (ft_strchr(" \e", ft_get_case(vars, x, y - 1)) != NULL)
 		ft_exit(vars, "Error map borders");
-	else if (vars->map.raw[y + 1] == NULL || vars->map.raw[y + 1][x] == ' ')
+	else if (ft_strchr(" \e", ft_get_case(vars, x, y + 1)) != NULL)
 		ft_exit(vars, "Error map borders");
-	else if (x <= 0 || vars->map.raw[y][x - 1] == ' ')
+	else if (ft_strchr(" \e", ft_get_case(vars, x - 1, y)) != NULL)
 		ft_exit(vars, "Error map borders");
-	else if (vars->map.raw[y][x + 1] == '\0' || vars->map.raw[y][x + 1] == ' ')
+	else if (ft_strchr(" \e", ft_get_case(vars, x + 1, y)) != NULL)
 		ft_exit(vars, "Error map borders");
 }

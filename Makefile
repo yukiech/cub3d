@@ -1,6 +1,6 @@
 SRCS_DIR	= ./
 SRCS_FILES	=  main.c
-SRCS_FILES	+= check_map.c draw.c end.c genmap.c genmap_utils.c hook.c hp.c images.c loading_menu.c math.c read_file.c tabs.c rays.c screen.c sound.c text.c walls.c minimap.c wall_block_player.c
+SRCS_FILES	+= check_map.c draw.c end.c genmap.c genmap_utils.c hook.c hp.c images.c items.c loading_menu.c math.c read_file.c tabs.c rays.c screen.c screenitems.c sound.c text.c walls.c minimap.c wall_block_player.c
 
 SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 
@@ -54,7 +54,6 @@ CP			= cp -f
 RM			= rm -f
 
 CFLAGS		= -Wall -Wextra -Werror -O3# -march=native
-
 
 
 all:		${NAME}
