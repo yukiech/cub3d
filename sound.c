@@ -22,13 +22,25 @@ void	sound_nyancat(void)
 	}
 }
 
+void	sound_imperial(void)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		execlp("afplay", "afplay", "-v", "0.2", "sound/imperial.mp3", NULL);
+	}
+}
+
 void	sound_music(char *title)
 {
-	printf("%d\n", ft_strcmp(title, "brittney"));
 	if (ft_strcmp(title, "brittney") == 0)
 		sound_brittney();
 	else if (ft_strcmp(title, "nyancat") == 0)
 		sound_nyancat();
+	else if (ft_strcmp(title, "imperial") == 0)
+		sound_imperial();
 }
 
 void	sound_kill(void)

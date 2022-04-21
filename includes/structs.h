@@ -84,14 +84,20 @@ typedef struct s_map {
 }	t_map;
 
 typedef struct s_loading {
-	t_imgptr	loading;
-	t_imgptr	loading2;
+	t_imgptr	menu_1;
+	t_imgptr	menu_2;
+	t_imgptr	menu_3;
+	t_imgptr	menu_4;
 	t_imgptr	ghost;
 	t_imgptr	ninja;
 	t_imgptr	pirate;
 	t_imgptr	franken;
+	t_imgptr	sound_on;
+	t_imgptr	sound_off;
 	int			i;
 	int			pos;
+	int			sound;
+	char		*music_title;
 } t_loading;
 
 typedef struct s_vars {

@@ -43,7 +43,11 @@ void	menu_hook(t_vars *vars, int keycode)
 	{
 		set_char_stats(vars);
 		vars->game_state = 2;
-	}
+		if (vars->loading.sound == 1)
+			sound_music(vars->loading.music_title);
+		mlx_mouse_hide();
+		mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
+}
 	else if (keycode == K_ESCAPE)
 		ft_free(vars);
 }
@@ -77,55 +81,56 @@ int	ft_key_hook(int keycode, t_vars *vars)
 
 int	ft_click_hook(int button, int x, int y, t_vars *vars)
 {
-	(void)x;
-	(void)y;
-	(void)button;
-
-
 //	printf("CLICK %d %d %d\n", x, y, button);
-	(void)vars;
 
 
-	t_ray *cast = ft_cast_rays(vars, (t_point){.x = vars->player.pos.x + cos(vars->player.angle), .y = vars->player.pos.y + sin(vars->player.angle)});
+  if (vars->game_state == 1 && button == M_CLK_L)
+  {
+    if (x >= 720 && x <= 770 && y >= 30 && y <= 80)
+    {
+      if (vars->loading.sound == 0)
+        vars->loading.sound = 1;
+      else if (vars->loading.sound == 1)
+        vars->loading.sound = 0;
+    }
+  }
+  else if (vars->game_state == 2 && button == M_CLK_L)
+  {
+    t_ray *cast = ft_cast_rays(vars, (t_point){.x = vars->player.pos.x + cos(vars->player.angle), .y = vars->player.pos.y + sin(vars->player.angle)});
 
 
-	printf("%p\n", cast);
+    printf("%p\n", cast);
 
-	if (cast != NULL)
-	{
-		t_wall w = vars->map.walls[cast->wall];
+    if (cast != NULL)
+    {
+      t_wall w = vars->map.walls[cast->wall];
 
-		if (ft_pyta(0.5 + w.pos.y - vars->player.pos.y, 0.5 + w.pos.x - vars->player.pos.x) < 2.5)
-		{
+      if (ft_pyta(0.5 + w.pos.y - vars->player.pos.y, 0.5 + w.pos.x - vars->player.pos.x) < 2.5)
+      {
 
-			printf("%f   %f\n", w.pos.y, w.pos.x);
+        printf("%f   %f\n", w.pos.y, w.pos.x);
 
-			if (w.type == W_DOOR)
-			{
-				vars->map.walls[cast->wall].type = -1;
-				vars->map.raw[(int)w.pos.y][(int)w.pos.x] = '0';
-			}
-		}
-		free(cast);
-	}
-
-
-
-
-
-
+        if (w.type == W_DOOR)
+        {
+          vars->map.walls[cast->wall].type = -1;
+          vars->map.raw[(int)w.pos.y][(int)w.pos.x] = '0';
+        }
+      }
+      free(cast);
+    }
+  }
+  
 	return (0);
 }
 
 int	ft_mouse_hook(int x, int y, t_vars *vars)
 {
-	vars->player.angle += radians(x - vars->screen.w / 2) / 2;
-	vars->player.hori += (vars->screen.h / 2 - y) / 2;
-	vars->player.hori = fmax(0, fmin(vars->screen.h, vars->player.hori));
-	mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
-
-
-
-
+	if (vars->game_state == 2)
+	{
+		vars->player.angle += radians(x - vars->screen.w / 2) / 8;
+		vars->player.hori += (vars->screen.h / 2 - y) / 1;
+		vars->player.hori = fmax(0, fmin(vars->screen.h, vars->player.hori));
+		mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
+	}
 	return (0);
 }
