@@ -58,3 +58,17 @@ void	loading_screen(t_vars *vars, int i)
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.sound_on.img, 720, 30);
 	return;
 }
+
+void	load_music_title(t_vars *vars, char *map)
+{
+	if (ft_strcmp(map, "maps/bocal.cub") == 0)
+	{
+		vars->loading.music_title = malloc(sizeof(char) * ft_strlen("imperial"));
+		vars->loading.music_title = "imperial";
+	}
+	else
+	{
+		vars->loading.music_title = malloc(sizeof(char) * ft_strlen("nyancat"));
+		vars->loading.music_title = "nyancat";
+	}
+}

@@ -43,6 +43,54 @@ void	sound_music(char *title)
 		sound_imperial();
 }
 
+void	sound_clic(void)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		execlp("afplay", "afplay", "-v", "0.2", "sound/clic.mp3", NULL);
+	}
+
+}
+
+void	sound_wilheim(void)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		execlp("afplay", "afplay", "-v", "0.2", "sound/wilheim.mp3", NULL);
+	}
+
+}
+
+void	sound_door(void)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		execlp("afplay", "afplay", "-v", "0.2", "sound/door.mp3", NULL);
+	}
+
+}
+
+void	sound_choice(void)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		execlp("afplay", "afplay", "-v", "0.2", "sound/choice.mp3", NULL);
+	}
+
+}
+
 void	sound_kill(void)
 {
 	const char	*command;

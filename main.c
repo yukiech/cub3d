@@ -60,12 +60,11 @@ int	main(int argc, char **argv)
 	vars.background.w = vars.screen.w;
 	vars.background.h = vars.screen.h * 2;
 	ft_load_image(&vars, NULL, &vars.background);
+	load_music_title(&vars, argv[1]);
 
 	vars.game_state = 2;
 	vars.loading.pos = 1;
 	menu_load_image(&vars);
-	vars.loading.music_title = malloc(sizeof(char) * ft_strlen("imperial"));
-	vars.loading.music_title = "imperial";
 
 	if (argc == 2)
 		ft_load_map(&vars, argv[1]);

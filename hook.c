@@ -30,6 +30,8 @@ int	ft_loop_hook(t_vars *vars)
 
 void	menu_hook(t_vars *vars, int keycode)
 {
+	if (keycode == K_AR_L || keycode == K_AR_R || keycode == K_AR_U || keycode == K_AR_D)
+		sound_choice();
 	if (keycode == K_AR_L && vars->loading.pos % 2 == 0)
 		vars->loading.pos -= 1;
 	else if (keycode == K_AR_R && vars->loading.pos % 2 == 1)
@@ -44,6 +46,7 @@ void	menu_hook(t_vars *vars, int keycode)
 		vars->game_state = 2;
 		if (vars->loading.sound == 1)
 			sound_music(vars->loading.music_title);
+		sound_choice();
 		mlx_mouse_hide();
 		mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
 }
@@ -118,6 +121,7 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 			free(cast);
 		}
 	}
+
 	return (0);
 }
 
