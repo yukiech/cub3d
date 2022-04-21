@@ -105,6 +105,10 @@ int		dont_move(t_vars *vars);
 //sound.c
 void	sound_music(char *title);
 void	sound_kill(void);
+void	sound_clic(void);
+void	sound_wilheim(void);
+void	sound_door(void);
+void	sound_choice(void);
 
 //-----------------
 //wall_block_player.c
@@ -119,5 +123,6 @@ void	ft_hp_draw(t_vars *vars);
 void    loading_screen(t_vars *vars, int i);
 void	menu_load_image(t_vars *vars);
 void	set_char_stats(t_vars *vars);
+void	load_music_title(t_vars *vars, char *map);
 
 #endif //CUB3D_H
