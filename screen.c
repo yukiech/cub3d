@@ -6,7 +6,36 @@ static void		ft_draw_column(t_vars *vars, t_ray *cast, int col, int mult);
 void	ft_draw_background(t_vars *vars)
 {
 	int	i;
+/*
+	printf("   In back 1 \t\t"); ft_time();
 
+	i = 0;
+	while(i < vars->player.hori)
+	{
+		ft_set_px(&vars->imgbuff, 0, i, vars->map.ceil.color);
+		i++;
+	}
+	while(i < vars->screen.h)
+	{
+		ft_set_px(&vars->imgbuff, 0, i, vars->map.floor.color);
+		i++;
+	}
+
+	printf("   In back 2 \t\t"); ft_time();
+
+
+	i = 0;
+	while (i < vars->screen.w)
+	{
+	//	mlx_put_image_to_window(vars->mlx, vars->win, vars->background.img, 0, vars->player.hori - vars->screen.h);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->imgbuff.img, i, 0);
+		i++;
+	}
+
+	printf("   In back 3 \t\t"); ft_time();
+*/
+
+/*
 	i = 0;
 	while(i < vars->screen.h)
 	{
@@ -18,6 +47,22 @@ void	ft_draw_background(t_vars *vars)
 		ft_draw_hline(&vars->background, (t_point){.x = 0, .y = i}, vars->background.w, vars->map.floor.color);
 		i++;
 	}
+*/
+
+
+
+	i = 0;
+	while(i < vars->player.hori)
+	{
+		ft_draw_hline(&vars->screen, (t_point){.x = 0, .y = i}, vars->screen.w, vars->map.ceil.color);
+		i++;
+	}
+	while(i < vars->screen.h)
+	{
+		ft_draw_hline(&vars->screen, (t_point){.x = 0, .y = i}, vars->screen.w, vars->map.floor.color);
+		i++;
+	}
+
 }
 
 void	ft_clear_walls(t_vars *vars)
@@ -48,7 +93,7 @@ void	ft_draw_walls(t_vars *vars)
 	col = 0;
 	while (col < vars->screen.w)
 	{
-		ray_angle = map(col, n_vect(0, vars->screen.w), n_vect(vars->player.fov / -2, vars->player.fov / 2));
+		ray_angle = map(col, (t_vect){0, vars->screen.w}, (t_vect){.v1 = vars->player.fov / -2, .v2 = vars->player.fov / 2});
 		ray_end.x = vars->player.pos.x + cos(vars->player.angle + ray_angle) * 10;
 		ray_end.y = vars->player.pos.y + sin(vars->player.angle + ray_angle) * 10;
 		cast = ft_cast_rays(vars, ray_end);
@@ -71,6 +116,7 @@ static t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end)
 		if (ft_pyta(vars->map.walls[i].p1.y - vars->player.pos.y, vars->map.walls[i].p1.x - vars->player.pos.x) < RENDER_DIST)
 		{
 			res = ray(vars->map.walls[i], vars->player.pos, ray_end);
+
 			if (res != NULL)
 			{
 	//			res->dist = ft_pyta(res->p.y - vars->player.pos.y, res->p.x - vars->player.pos.x);
@@ -94,18 +140,7 @@ static void	ft_draw_column(t_vars *vars, t_ray *cast, int col, int mult)
 
 	cast->dist = ft_pyta(cast->p.y - vars->player.pos.y, cast->p.x - vars->player.pos.x);
 	cast->dist *= cos(atan2(cast->p.y - vars->player.pos.y, cast->p.x - vars->player.pos.x) - vars->player.angle);
-
-
-//	h = vars->screen.w / cast->dist;
-
-
-
-
 	float disto = MAGIC_NBR / 2.0 / tan(vars->player.fov / 2.0);
-
-
-//	h = map(cast->dist, n_vect(0, MAGIC_NBR), n_vect(vars->screen.h, 0));
-
 	h = (MAGIC_NBR / cast->dist) * disto;
 
 	if (vars->map.walls[cast->wall].type == W_UPWALL)

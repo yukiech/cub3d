@@ -25,7 +25,7 @@ NAME			= libft.a
 CC			= gcc
 RM			= rm -f
 
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -O3 -march=native
 
 .c.o:
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o} ${HEADS}

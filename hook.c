@@ -5,30 +5,25 @@ void	ft_clear_walls(t_vars *vars);
 
 int	ft_loop_hook(t_vars *vars)
 {
+
+
+
 	if (vars->game_state == 0)
 		loading_screen(vars, 0);
 	else if (vars->game_state == 1)
 		loading_screen(vars, vars->loading.pos);
 	else if (vars->game_state == 2)
 	{
-//	ft_draw_background(vars);
 
-	ft_clear_walls(vars);
-	ft_draw_walls(vars);
+		mlx_clear_window(vars->mlx, vars->win);
+		ft_draw_background(vars);
+		ft_draw_walls(vars);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
 
 
-//	char	*time = ft_itoa(ft_time());
 
-//	ft_write_text(vars, time, (t_point){.x = 50, .y = 100}, n_vect(10, ft_color(0, 255, 0, 0)));
-//	free(time);
-
-	mlx_clear_window(vars->mlx, vars->win);
-
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->background.img, 0, vars->player.hori - vars->screen.h);
-
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
-	minimap(vars);
-	ft_hp_draw(vars);	
+		minimap(vars);
+		ft_hp_draw(vars);	
 	}
 	return (0);
 }

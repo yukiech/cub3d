@@ -26,7 +26,7 @@ void	ft_load_player(t_vars *vars)
 	int	i;
 	int	j;
 
-	vars->player.fov = radians(90);
+	vars->player.fov = radians(60);
 	vars->player.hori = 400;
 	vars->player.pos.x = -1;
 	vars->player.hp = 1000;
