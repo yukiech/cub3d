@@ -47,7 +47,11 @@ void	menu_hook(t_vars *vars, int keycode)
 	{
 		set_char_stats(vars);
 		vars->game_state = 2;
-	}
+		if (vars->loading.sound == 1)
+			sound_music(vars->loading.music_title);
+		mlx_mouse_hide();
+		mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
+}
 	else if (keycode == K_ESCAPE)
 		ft_free(vars);
 }
@@ -82,15 +86,24 @@ int	ft_key_hook(int keycode, t_vars *vars)
 int	ft_click_hook(int button, int x, int y, t_vars *vars)
 {
 	printf("CLICK %d %d %d\n", x, y, button);
-	(void)vars;
+	if (x >= 720 && x <= 770 && y >= 30 && y <= 80)
+	{
+		if (vars->game_state == 1 && vars->loading.sound == 0)
+			vars->loading.sound = 1;
+		else if (vars->game_state == 1 && vars->loading.sound == 1)
+			vars->loading.sound = 0;
+	}
 	return (0);
 }
 
 int	ft_mouse_hook(int x, int y, t_vars *vars)
 {
-	vars->player.angle += radians(x - vars->screen.w / 2) / 2;
-	vars->player.hori += (vars->screen.h / 2 - y) / 2;
-	vars->player.hori = fmax(0, fmin(vars->screen.h, vars->player.hori));
-	mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
+	if (vars->game_state == 2)
+	{
+		vars->player.angle += radians(x - vars->screen.w / 2) / 2;
+		vars->player.hori += (vars->screen.h / 2 - y) / 2;
+		vars->player.hori = fmax(0, fmin(vars->screen.h, vars->player.hori));
+		mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
+	}
 	return (0);
 }
