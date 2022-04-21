@@ -56,7 +56,6 @@ RM			= rm -f
 CFLAGS		= -Wall -Wextra -Werror -O3# -march=native
 
 
-
 all:		${NAME}
 
 #Compile normal executable

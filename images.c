@@ -24,26 +24,31 @@ int	ft_get_px(t_imgptr *img, int x, int y)
 	return (img->pxs[y * img->line + x]);
 }
 
-int	ft_put_image(t_vars *vars, t_imgptr *img, t_point o1, t_point o2, int hori)
+int	ft_put_image(t_vars *vars, t_imgptr *img, t_point o1, t_point o2)
 {
 	int	i;
 	int	j;
-	int	off_y;
-	int	off_len;
+//	int	off_y;
+//	int	off_len;
 
 //	if (o2.x < o1.x)
 //		return (ft_put_image(vars, img, o2, o1, hori));
-	i = o1.x - 1;
-	while (++i < o2.x)
+	i = o1.x;
+	while (i < o2.x)
 	{
-		off_y = map(i, (t_vect){.v1 = o1.x, .v2 = o2.x}, (t_vect){.v1 = o1.y, .v2 = o2.y});
-		off_len = map(i, (t_vect){.v1 = o1.x, .v2 = o2.x},
-				(t_vect){.v1 = (hori - o1.y) * 2, .v2 = (hori - o2.y) * 2});
-		j = off_y - 1;
-		while (++j < off_y + off_len)
+//		off_y = map(i, (t_vect){.v1 = o1.x, .v2 = o2.x}, (t_vect){.v1 = o1.y, .v2 = o2.y});
+//		off_len = map(i, (t_vect){.v1 = o1.x, .v2 = o2.x},
+//				(t_vect){.v1 = (hori - o1.y) * 2, .v2 = (hori - o2.y) * 2});
+
+
+		j = o1.y;
+		while (j < o2.y)
 		{
-			ft_set_px(&vars->screen, i, j, ft_get_px(img, map(i, (t_vect){.v1 = o1.x, .v2 = o2.x}, (t_vect){.v1 = 0, .v2 = img->w}), map(j, (t_vect){.v1 = off_y, .v2 = off_y + off_len}, (t_vect){.v1 = 0, .v2 = img->h})));
+			ft_set_px(&vars->screen, i, j, ft_get_px(img, map(i, (t_vect){.v1 = o1.x, .v2 = o2.x}, (t_vect){.v1 = 0, .v2 = img->w}), map(j, (t_vect){.v1 = o1.y, .v2 = o2.y}, (t_vect){.v1 = 0, .v2 = img->h})));
+			j++;
 		}
+
+		i++;
 	}
 	return (0);
 }
