@@ -1,6 +1,6 @@
 #include <cub3d.h>
 
-static t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end);
+t_ray			*ft_cast_rays(t_vars *vars, t_point ray_end);
 static void		ft_draw_column(t_vars *vars, t_ray *cast, int col, int mult);
 
 void	ft_draw_background(t_vars *vars)
@@ -103,7 +103,7 @@ void	ft_draw_walls(t_vars *vars)
 	}
 }
 
-static t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end)
+t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end)
 {
 	t_ray	*best;
 	t_ray	*res;
@@ -113,7 +113,7 @@ static t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end)
 	best = NULL;
 	while (vars->map.walls[i].type != W_NONE)
 	{
-		if (ft_pyta(vars->map.walls[i].p1.y - vars->player.pos.y, vars->map.walls[i].p1.x - vars->player.pos.x) < RENDER_DIST)
+		if (vars->map.walls[i].type > 0 && ft_pyta(vars->map.walls[i].p1.y - vars->player.pos.y, vars->map.walls[i].p1.x - vars->player.pos.x) < RENDER_DIST)
 		{
 			res = ray(vars->map.walls[i], vars->player.pos, ray_end);
 
@@ -140,18 +140,23 @@ static void	ft_draw_column(t_vars *vars, t_ray *cast, int col, int mult)
 
 	cast->dist = ft_pyta(cast->p.y - vars->player.pos.y, cast->p.x - vars->player.pos.x);
 	cast->dist *= cos(atan2(cast->p.y - vars->player.pos.y, cast->p.x - vars->player.pos.x) - vars->player.angle);
+
 	float disto = MAGIC_NBR / 2.0 / tan(vars->player.fov / 2.0);
 	h = (MAGIC_NBR / cast->dist) * disto;
 
+	side = NULL;
 	if (vars->map.walls[cast->wall].type == W_UPWALL)
 		side = &vars->map.north;
 	else if (vars->map.walls[cast->wall].type == W_LEFTWALL)
 		side = &vars->map.west;
 	else if (vars->map.walls[cast->wall].type == W_RIGHTWALL)
 		side = &vars->map.east;
-	else
+	else if (vars->map.walls[cast->wall].type == W_DOWNWALL)
 		side = &vars->map.south;
-	while (mult-- > 0)
+	else if (vars->map.walls[cast->wall].type == W_DOOR)
+		side = &vars->map.door;
+
+	while (mult-- > 0 && side != NULL)
 		ft_put_col(vars, side, (t_point){.x = col - mult, .y = h}, cast->t);
 	ft_tfree(cast);
 }

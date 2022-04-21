@@ -26,16 +26,16 @@ int	ft_count_walls(t_vars *vars)
 
 static void	ft_check_case(t_vars *vars, int x, int y, int *n_walls)
 {
-	if (vars->map.raw[y][x] == '0')
+	if (ft_strchr("0D", vars->map.raw[y][x]) != NULL)
 	{
 		ft_check_case_sides(vars, x, y);
-		if (ft_strchr("1", ft_get_case(vars, x, y - 1)) != NULL)
+		if (ft_strchr(SEE_NOT, ft_get_case(vars, x, y - 1)) != NULL)
 			(*n_walls)++;
-		if (ft_strchr("1", ft_get_case(vars, x, y + 1)) != NULL)
+		if (ft_strchr(SEE_NOT, ft_get_case(vars, x, y + 1)) != NULL)
 			(*n_walls)++;
-		if (ft_strchr("1", ft_get_case(vars, x - 1, y)) != NULL)
+		if (ft_strchr(SEE_NOT, ft_get_case(vars, x - 1, y)) != NULL)
 			(*n_walls)++;
-		if (ft_strchr("1", ft_get_case(vars, x + 1, y)) != NULL)
+		if (ft_strchr(SEE_NOT, ft_get_case(vars, x + 1, y)) != NULL)
 			(*n_walls)++;
 	}
 }
