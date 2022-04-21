@@ -91,6 +91,7 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
   {
     if (x >= 720 && x <= 770 && y >= 30 && y <= 80)
     {
+		sound_clic();
 		if (vars->game_state == 1 && vars->loading.sound == 0)
 			vars->loading.sound = 1;
 		else if (vars->game_state == 1 && vars->loading.sound == 1)
