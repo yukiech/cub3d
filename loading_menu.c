@@ -27,58 +27,49 @@ void	menu_load_image(t_vars *vars)
 void	set_char_stats(t_vars *vars)
 {
 	if (vars->loading.pos == 1)
-		vars->player.ghost = 1;
+		vars->player.has_collisions = 0;
 	else if (vars->loading.pos == 2)
-		vars->player.mspeed = 0.5;
+		vars->player.speed *= 2;
 	else if (vars->loading.pos == 3)
 		vars->player.fov = radians(170);
 	else if (vars->loading.pos == 4)
 		vars->player.hp = 2000;
 }
 
-void	loading_screen(t_vars *vars, int i)
+#define LOADING_LEN 100
+void	loading_screen(t_vars *vars)
 {
-	if (i == 0)
-	{
-		if (vars->loading.i % 100 < 18)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.menu_1.img, 0, 0);
-		else if (vars->loading.i % 100 > 17 && vars->loading.i % 100 < 35)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.menu_2.img, 0, 0);
-		else if (vars->loading.i % 100 > 34 && vars->loading.i % 100 < 52)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.menu_3.img, 0, 0);
-		else if (vars->loading.i % 100 > 51 && vars->loading.i % 100 < 69)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.menu_4.img, 0, 0);
-		else if (vars->loading.i % 100 > 68 && vars->loading.i % 100 < 86)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.menu_3.img, 0, 0);
-		else if (vars->loading.i % 100 > 85)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.menu_2.img, 0, 0);
-	vars->loading.i += 1;
-	}
-	else if (i == 1)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.ghost.img, 0, 0);
-	else if (i == 2)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.ninja.img, 0, 0);
-	else if (i == 3)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.pirate.img, 0, 0);
-	else if (i == 4)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.franken.img, 0, 0);
-	if (vars->loading.sound == 0 && vars->game_state == 1)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.sound_off.img, 720, 30);
-	else if (vars->loading.sound == 1 && vars->game_state == 1)
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.sound_on.img, 720, 30);
-	return;
+	if (vars->frame % LOADING_LEN < ((LOADING_LEN / 6) * 1))
+		ft_put_image_full(vars, &vars->loading.menu_1);
+	else if (vars->frame % LOADING_LEN < ((LOADING_LEN / 6) * 2))
+		ft_put_image_full(vars, &vars->loading.menu_2);
+	else if (vars->frame % LOADING_LEN < ((LOADING_LEN / 6) * 3))
+		ft_put_image_full(vars, &vars->loading.menu_3);
+	else if (vars->frame % LOADING_LEN < ((LOADING_LEN / 6) * 4))
+		ft_put_image_full(vars, &vars->loading.menu_4);
+	else if (vars->frame % LOADING_LEN < ((LOADING_LEN / 6) * 5))
+		ft_put_image_full(vars, &vars->loading.menu_3);
+	else
+		ft_put_image_full(vars, &vars->loading.menu_2);
 }
 
-void	load_music_title(t_vars *vars, char *map)
+
+void	menu_screen(t_vars *vars)
 {
-	if (ft_strcmp(map, "maps/bocal.cub") == 0)
-	{
-		vars->loading.music_title = malloc(sizeof(char) * ft_strlen("imperial"));
-		vars->loading.music_title = "imperial";
-	}
-	else
-	{
-		vars->loading.music_title = malloc(sizeof(char) * ft_strlen("nyancat"));
-		vars->loading.music_title = "nyancat";
-	}
+	if (vars->loading.pos == 1)
+		ft_put_image_full(vars, &vars->loading.ghost);
+	else if (vars->loading.pos == 2)
+		ft_put_image_full(vars, &vars->loading.ninja);
+	else if (vars->loading.pos == 3)
+		ft_put_image_full(vars, &vars->loading.pirate);
+	else if (vars->loading.pos == 4)
+		ft_put_image_full(vars, &vars->loading.franken);
+
+	if (vars->player.has_sound == 0 && vars->game_state == 1)
+		ft_put_image(vars, &vars->loading.sound_off,
+		(t_point){720, 30}, (t_point){770, 80});
+	else if (vars->player.has_sound == 1 && vars->game_state == 1)
+		ft_put_image(vars, &vars->loading.sound_on,
+		(t_point){720, 30}, (t_point){770, 80});
 }
+

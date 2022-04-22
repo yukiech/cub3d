@@ -1,4 +1,7 @@
 #include <cub3d.h>
+#include <generate.h>
+
+static int	ft_gen_check2(t_vars *vars);
 
 int	ft_gen_count(t_vars *vars)
 {
@@ -49,32 +52,6 @@ void	ft_gen_expend(t_vars *vars, int x, int y, int dir)
 		ft_gen_expend(vars, x, y + 1, 4);
 }
 
-int	ft_gen_check2(t_vars *vars)
-{
-	int	i;
-	int	j;
-	int	nb;
-
-	nb = 0;
-	i = GEN_WIDTH * GEN_BORDERS;
-	j = GEN_HEIGHT * GEN_BORDERS;
-	while (i < GEN_WIDTH * (1 - GEN_BORDERS))
-	{
-		if (vars->map.raw[j][i] == '0' && nb <= 0)
-			nb++;
-		i++;
-	}
-	i = GEN_WIDTH * GEN_BORDERS;
-	j = GEN_HEIGHT * (1 - GEN_BORDERS);
-	while (i < GEN_WIDTH * (1 - GEN_BORDERS))
-	{
-		if (vars->map.raw[j][i] == '0' && nb <= 1)
-			nb++;
-		i++;
-	}
-	return (nb);
-}
-
 int	ft_gen_check(t_vars *vars)
 {
 	int	i;
@@ -99,4 +76,30 @@ int	ft_gen_check(t_vars *vars)
 		i++;
 	}
 	return (nb + ft_gen_check2(vars) >= 3);
+}
+
+static int	ft_gen_check2(t_vars *vars)
+{
+	int	i;
+	int	j;
+	int	nb;
+
+	nb = 0;
+	i = GEN_WIDTH * GEN_BORDERS;
+	j = GEN_HEIGHT * GEN_BORDERS;
+	while (i < GEN_WIDTH * (1 - GEN_BORDERS))
+	{
+		if (vars->map.raw[j][i] == '0' && nb <= 0)
+			nb++;
+		i++;
+	}
+	i = GEN_WIDTH * GEN_BORDERS;
+	j = GEN_HEIGHT * (1 - GEN_BORDERS);
+	while (i < GEN_WIDTH * (1 - GEN_BORDERS))
+	{
+		if (vars->map.raw[j][i] == '0' && nb <= 1)
+			nb++;
+		i++;
+	}
+	return (nb);
 }

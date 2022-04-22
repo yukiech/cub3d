@@ -1,107 +1,68 @@
 #include <cub3d.h>
 
-void	ft_init_player(t_vars *vars, int x, int y)
+void	ft_init_vars(t_vars *vars)
 {
-	if (ft_strchr("NWES", vars->map.raw[y][x]))
-	{
-		if (vars->player.pos.x != -1)
-			ft_exit(vars, "2 players found, multiplayer to be defined");
-		vars->player.pos.x = x + 0.5;
-		vars->player.pos.y = y + 0.5;
-
-		if (vars->map.raw[y][x] == 'N')
-			vars->player.angle = radians(-90);
-		else if (vars->map.raw[y][x] == 'W')
-			vars->player.angle = radians(180);
-		else if (vars->map.raw[y][x] == 'E')
-			vars->player.angle = radians(0);
-		else if (vars->map.raw[y][x] == 'S')
-			vars->player.angle = radians(90);
-		vars->map.raw[y][x] = '0';
-	}
-}
-
-void	ft_load_player(t_vars *vars)
-{
-	int	i;
-	int	j;
+	ft_bzero(vars, sizeof(t_vars));
 
 	vars->player.fov = radians(60);
 	vars->player.hori = 400;
-	vars->player.pos.x = -1;
 	vars->player.hp = 1000;
-	i = 0;
-	while (vars->map.raw[i] != NULL)
-	{
-		j = 0;
-		while (vars->map.raw[i][j] != '\0')
-		{
-			ft_init_player(vars, j, i);
-			j++;
-		}
-		i++;
-	}
+	vars->player.speed = 0.02;
+	vars->player.speed_mod = 0;
+	vars->player.has_collisions = 1;
+	vars->player.has_sound = 1;
+
+	vars->game_state = 0;
+	vars->loading.pos = 1;
+	vars->frame = 0;
+	vars->pistol.frame = 100;
+
+	vars->mlx = mlx_init();
+
+	vars->screen.w = WINDOW_WIDTH;
+	vars->screen.h = WINDOW_HEIGHT;
+	vars->win = mlx_new_window(vars->mlx, vars->screen.w, vars->screen.h, "Cub3d");
+	ft_load_image(vars, NULL, &vars->screen);
 }
+
+
+
+void	load_pistol(t_vars *vars);
+void	menu_load_image(t_vars *vars);
+
+void	set_char_stats(t_vars *vars);
+void	loading_screen(t_vars *vars, int i);
+
+
 
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
-	ft_bzero(&vars, sizeof(t_vars));
-	vars.mlx = mlx_init();
-
-	vars.screen.w = 800;
-	vars.screen.h = 800;
-//	vars.win = mlx_new_window(vars.mlx, 600, 400, vars.screen.w, vars.screen.h, "mlx 42");
-	vars.win = mlx_new_window(vars.mlx, vars.screen.w, vars.screen.h, "mlx 42");
-
-	ft_load_image(&vars, NULL, &vars.screen);
-
-	vars.background.w = vars.screen.w;
-	vars.background.h = vars.screen.h * 2;
-	ft_load_image(&vars, NULL, &vars.background);
-	load_music_title(&vars, argv[1]);
-
-	vars.game_state = 2;
-	vars.loading.pos = 1;
-	menu_load_image(&vars);
+	ft_init_vars(&vars);
 
 	if (argc == 2)
-		ft_load_map(&vars, argv[1]);
+		ft_open_map(&vars, argv[1]);
 	else
-		ft_load_map(&vars, "maps/small.cub");
+		ft_open_map(&vars, "maps/small.cub");
 
-	ft_draw_background(&vars);
-	ft_load_player(&vars);
-
-
-	printf("walls : %d\n", ft_count_walls(&vars));
-	vars.map.walls = ft_calloc(ft_count_walls(&vars) + 1, sizeof(t_wall));
-	ft_register_walls(&vars);
-
-//	ft_register_items(&vars);
 
 	ft_load_texter(&vars);
 
-/*
-	int	i;
-	i = 0;
-	while (vars.map.raw[i] != NULL)
-	{
-		printf("%s\n", vars.map.raw[i]);
-		i++;
-	}
-*/
+	ft_process_map(&vars);
+	ft_printf("%d\n", vars.map.n_walls);
+	ft_register_walls(&vars);
 
-//	printf("color %d\n", ft_color(0, 0, 0, 255));
+	
+	menu_load_image(&vars);
 
-	ft_time();
+
 	mlx_loop_hook(vars.mlx, ft_loop_hook, &vars);
 	mlx_hook(vars.win, 2, 1L << 1, ft_key_hook, &vars);
+	mlx_hook(vars.win, 3, 1L << 1, ft_release_hook, &vars);
 	mlx_hook(vars.win, 4, 0, ft_click_hook, &vars);
 	mlx_hook(vars.win, 6, 1L << 4, ft_mouse_hook, &vars);
-
-	mlx_hook(vars.win, 17, 0L, ft_free, &vars);
+	mlx_hook(vars.win, 17, 0L, ft_free_all, &vars);
 	mlx_loop(vars.mlx);
-	ft_free(&vars);
+	ft_free_all(&vars);
 }

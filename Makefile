@@ -1,6 +1,9 @@
 SRCS_DIR	= ./
 SRCS_FILES	=  main.c
-SRCS_FILES	+= check_map.c draw.c end.c genmap.c genmap_utils.c hook.c hp.c images.c loading_menu.c math.c pistol.c read_file.c tabs.c rays.c screen.c sound.c text.c walls.c minimap.c wall_block_player.c
+SRCS_FILES	+= draw.c free.c genmap_utils.c genmap.c hook.c
+SRCS_FILES	+= hp.c images.c loading_menu.c math_game.c math.c
+SRCS_FILES	+= minimap.c movements.c open_map.c pistol.c process_map.c
+SRCS_FILES	+= rays.c read_args.c screen.c sound.c tabs.c text.c walls_create.c walls_register.c
 
 SRCS		:= ${patsubst %, ${SRCS_DIR}%, ${SRCS_FILES}}
 

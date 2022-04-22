@@ -1,49 +1,62 @@
 #include <cub3d.h>
 
-void	ft_clear_walls(t_vars *vars);
-void	ft_draw_items(t_vars *vars);
-t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end);
+
+void	load_pistol(t_vars *vars);
+void	menu_load_image(t_vars *vars);
+
+void	set_char_stats(t_vars *vars);
+void	menu_screen(t_vars *vars);
+void	loading_screen(t_vars *vars);
+void	load_music_title(t_vars *vars, char *map);
+
 
 int	ft_loop_hook(t_vars *vars)
 {
+	mlx_clear_window(vars->mlx, vars->win);
 
 	if (vars->game_state == 0)
-		loading_screen(vars, 0);
+		loading_screen(vars);
 	else if (vars->game_state == 1)
-		loading_screen(vars, vars->loading.pos);
+		menu_screen(vars);
 	else if (vars->game_state == 2)
 	{
-
-		mlx_clear_window(vars->mlx, vars->win);
+		
 		ft_draw_background(vars);
-		ft_draw_walls(vars);
-//		ft_draw_items(vars);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
 
-		minimap(vars);
-		ft_hp_draw(vars);
-		vars->loading.i += 1;
-		//if (vars->loading.i % 40 < 10)
-		if (vars->pistol.state == 0)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->pistol.pistol1.img, 300, 300);
-		//if (vars->loading.i % 40 < 20 && vars->loading.i % 40 >= 10)
-		if (vars->pistol.state == 1)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->pistol.pistol2.img, 300, 300);
-		//if (vars->loading.i % 40 < 30 && vars->loading.i % 40 >= 20)
-		if (vars->pistol.state == 2)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->pistol.pistol3.img, 300, 300);
-		//if (vars->loading.i % 40 < 40 && vars->loading.i % 40 >= 30)
-		if (vars->pistol.state == 3)
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->pistol.pistol4.img, 300, 300);
-		vars->loading.i++;
+		ft_draw_walls(vars);
+
+
+		minimap_draw(vars);
+
+
+		//ft_hp_draw(vars);
+
+		if (vars->pistol.frame < 10)
+			ft_put_image(vars, &vars->pistol.pistol1,
+			(t_point){300, 300}, (t_point){800, 800});
+		else if (vars->pistol.frame < 20)
+			ft_put_image(vars, &vars->pistol.pistol2,
+			(t_point){300, 300}, (t_point){800, 800});
+		else if (vars->pistol.frame < 30)
+			ft_put_image(vars, &vars->pistol.pistol3,
+			(t_point){300, 300}, (t_point){800, 800});
+		else if (vars->pistol.frame < 40)
+			ft_put_image(vars, &vars->pistol.pistol4,
+			(t_point){300, 300}, (t_point){800, 800});
+		else
+			ft_put_image(vars, &vars->pistol.pistol1,
+			(t_point){300, 300}, (t_point){800, 800});
+		vars->pistol.frame++;
 	}
+
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
+	vars->frame = (vars->frame + 1) % 1000000000;
 	return (0);
 }
 
-void	menu_hook(t_vars *vars, int keycode)
+void	move_menu(t_vars *vars, int keycode)
 {
-	if (keycode == K_AR_L || keycode == K_AR_R || keycode == K_AR_U || keycode == K_AR_D)
-		sound_choice();
+	sound_music(vars, "choice");
 	if (keycode == K_AR_L && vars->loading.pos % 2 == 0)
 		vars->loading.pos -= 1;
 	else if (keycode == K_AR_R && vars->loading.pos % 2 == 1)
@@ -52,40 +65,50 @@ void	menu_hook(t_vars *vars, int keycode)
 		vars->loading.pos -= 2;
 	else if (keycode == K_AR_D && vars->loading.pos < 3)
 		vars->loading.pos += 2;
+}
+
+void	menu_hook(t_vars *vars, int keycode)
+{
+	if (keycode == K_AR_L || keycode == K_AR_R || keycode == K_AR_U || keycode == K_AR_D)
+		move_menu(vars, keycode);
 	else if (keycode == K_ENTER)
 	{
 		set_char_stats(vars);
-		vars->game_state = 2;
-		if (vars->loading.sound == 1)
-			sound_music(vars->loading.music_title);
-		sound_choice();
+		if (vars->map.music == NULL)
+			vars->map.music = ft_strdup("./sound/nyancat.mp3");
+		play_sound(vars, vars->map.music);
+		sound_music(vars, "choice");
 		mlx_mouse_hide();
 		mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);
-}
-	else if (keycode == K_ESCAPE)
-		ft_free(vars);
+		vars->game_state = 2;
+	}
 }
 
 int	ft_key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == K_ESCAPE)
-		ft_free(vars);
-
-	if (vars->player.mspeed == 0)
-		vars->player.mspeed = 0.05;
+		ft_free_all(vars);
 
 	if (vars->game_state == 0)
+	{
 		vars->game_state = 1;
+	}
 	else if (vars->game_state == 1)
 	{
 		menu_hook(vars, keycode);
 	}
+	else if (vars->game_state == 2)
+	{
+		ft_move(vars, keycode);
+	}
+	return (0);
+}
+
+int	ft_release_hook(int keycode, t_vars *vars)
+{
 	if (vars->game_state == 2)
 	{
-		if (keycode == K_ESCAPE)
-			ft_free(vars);
-		else
-			ft_move(vars, keycode, vars->player.mspeed);
+		ft_move(vars, -keycode);
 	}
 	return (0);
 }
@@ -99,10 +122,7 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 	{
 		if (x >= 720 && x <= 770 && y >= 30 && y <= 80)
 		{
-			if (vars->loading.sound == 0)
-				vars->loading.sound = 1;
-			else if (vars->loading.sound == 1)
-				vars->loading.sound = 0;
+			vars->player.has_sound = !vars->player.has_sound ;
 		}
 	}
 	else if (vars->game_state == 2 && button == M_CLK_L)
@@ -110,17 +130,12 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 	    t_ray *cast = ft_cast_rays(vars, (t_point){.x = vars->player.pos.x + cos(vars->player.angle), .y = vars->player.pos.y + sin(vars->player.angle)});
 
 
-		printf("%p\n", cast);
-
 		if (cast != NULL)
 		{
 			t_wall w = vars->map.walls[cast->wall];
 
 			if (ft_pyta(0.5 + w.pos.y - vars->player.pos.y, 0.5 + w.pos.x - vars->player.pos.x) < 2.5)
 			{
-
-				printf("%f   %f\n", w.pos.y, w.pos.x);
-
 				if (w.type == W_DOOR)
 				{
 					vars->map.walls[cast->wall].type = -1;
@@ -129,6 +144,7 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 			}
 			free(cast);
 		}
+		vars->pistol.frame = 0;
 	}
 	return (0);
 }
@@ -142,7 +158,6 @@ int	ft_mouse_hook(int x, int y, t_vars *vars)
 			vars->player.angle -= 2*M_PI;
 		if (vars->player.angle < -M_PI)
 			vars->player.angle += 2*M_PI;
-
 
 		vars->player.hori += (vars->screen.h / 2 - y) / 1;
 		vars->player.hori = fmax(0, fmin(vars->screen.h, vars->player.hori));

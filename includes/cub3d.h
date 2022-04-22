@@ -9,7 +9,7 @@
 # include <sys/time.h>
 # include <time.h>
 
-#include <math.h>
+# include <math.h>
 
 # include <mylibft.h>
 # include <mlx.h>
@@ -17,26 +17,18 @@
 # define IS_SPACE " \t\n\r\v\f"
 # define UCHAR unsigned char
 
-#define RENDER_DIST 16
-#define MAGIC_NBR 30
+# ifndef WINDOW_WIDTH
+#  define WINDOW_WIDTH 800
+# endif
+# ifndef WINDOW_HEIGHT
+#  define WINDOW_HEIGHT 800
+# endif
 
-# define GEN_WIDTH 80
-# define GEN_HEIGHT 60
-
-# define GEN_PROPAG 25
-# define GEN_CONTINUE 70
-# define GEN_TRESH 0.08
-# define GEN_BORDERS 0.2
-
-# define GEN_NORTH "./assets/normal_north.xpm"
-# define GEN_SOUTH "./assets/normal_south.xpm"
-# define GEN_WEST "./assets/normal_west.xpm"
-# define GEN_EAST "./assets/normal_east.xpm"
-# define GEN_CEIL "220,100,0"
-# define GEN_FLOOR "225,30,0"
+# define RENDER_DIST 16
+# define MAGIC_NBR 30
 
 # include <structs.h>
 # include <headers.h>
-# include <define.h>
+# include <key_macos.h>
 
 #endif

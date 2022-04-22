@@ -1,11 +1,8 @@
 #ifndef HEADERS_H
 # define HEADERS_H
 
-//-----------------
-//check_map.c
-int		ft_count_walls(t_vars *vars);
-//void	ft_check_case(t_vars *vars, int x, int y, int *n_walls);
-//void	ft_check_case_sides(t_vars *vars, int x, int y);
+
+
 
 //-----------------
 //draw.c
@@ -13,76 +10,94 @@ void	ft_draw_hline(t_imgptr *ptr, t_point o, int len, int color);
 void	ft_draw_vline(t_imgptr *ptr, t_point o, int len, int color);
 
 //-----------------
-//end.c
-void	ft_exit(t_vars *vars, char *error);
+//free.c
 void	ft_tfree(void **ptr);
-int		ft_free(t_vars *vars);
+int	    ft_free_all(t_vars *vars);
+//static static void	ft_free_map(t_vars *vars);
+void	ft_exit(t_vars *vars, char *error);
+
 
 //-----------------
-//genmap.c
+//generate.c
 void	ft_generate_map(t_vars *vars, unsigned int seed);
-void	ft_gen_start(t_vars *vars);
-void	ft_gen_add_spaces(t_vars *vars);
-
-//-----------------
-//genmap_utils.c
-int		ft_gen_count(t_vars *vars);
-void	ft_gen_expend(t_vars *vars, int x, int y, int dir);
-int		ft_gen_check2(t_vars *vars);
-int		ft_gen_check(t_vars *vars);
 
 //-----------------
 //hook.c
 int		ft_loop_hook(t_vars *vars);
+void	menu_hook(t_vars *vars, int keycode);
 int		ft_key_hook(int keycode, t_vars *vars);
+int		ft_release_hook(int keycode, t_vars *vars);
 int		ft_click_hook(int button, int x, int y, t_vars *vars);
 int		ft_mouse_hook(int x, int y, t_vars *vars);
 
 //-----------------
-//images.c
-void	ft_load_image(t_vars *vars, char *filename, t_imgptr *ptr);
-void	ft_set_px(t_imgptr *img, int x, int y, int color);
-int		ft_get_px(t_imgptr *img, int x, int y);
-int		ft_put_image(t_vars *vars, t_imgptr *img, t_point o1, t_point o2);
-int		ft_put_col(t_vars *vars, t_imgptr *img, t_point o1, float ratio);
+//hp.c
+
 
 //-----------------
-//items.c
-void	ft_register_items(t_vars *vars);
+//images.c
+void	ft_load_image(t_vars *vars, char *filename, t_imgptr *ptr);
+void	ft_put_image_full(t_vars *vars, t_imgptr *img);
+void	ft_put_image(t_vars *vars, t_imgptr *img, t_point o1, t_point o2);
+void	ft_put_col(t_vars *vars, t_imgptr *img, t_point o1, float ratio);
+
+//-----------------
+//loading_menu.c
+
+//-----------------
+//math_game.c
+void	ft_set_px(t_imgptr *img, int x, int y, int color);
+int	    ft_get_px(t_imgptr *img, int x, int y);
+int	    ft_color(UCHAR a, UCHAR r, UCHAR g, UCHAR b);
+char	ft_get_case(t_vars *vars, int x, int y);
 
 //-----------------
 //math.c
-int		ft_time(void);
+int	    bsp(t_point p, t_point l1, t_point l2);
 float	map(float x, t_vect in, t_vect out);
-int		ft_color(UCHAR a, UCHAR r, UCHAR g, UCHAR b);
-char	ft_get_case(t_vars *vars, int x, int y);
 float	ft_pyta(float a, float b);
 float	radians(float deg);
 float	degrees(float rad);
 
 //-----------------
+//minimap.c
+void	minimap_draw(t_vars *vars);
+
+//-----------------
+//movements.c
+void	ft_move(t_vars *vars, int keycode);
+
+//-----------------
+//open_map.c
+void	ft_open_map(t_vars *vars, char *filename);
+
+
+//-----------------
 //pistol.c
-void	pistol_fire(t_vars *vars);
+
+
+//-----------------
+//process_map.c
+void	ft_process_map(t_vars *vars);
 
 //-----------------
 //rays.c
-t_ray	*ray(t_wall w, t_point player, t_point r);
+t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end);
 
 //-----------------
-//read_file.c
-void	ft_load_map(t_vars *vars, char *filename);
-//int	ft_select_arg(t_vars *vars, cahr **sp);
-//void	ft_read_args(t_vars *vars, int fd);
-//void	ft_read_map(t_vars *vars, int fd);
-
+//read_args.c
+void	ft_read_args(t_vars *vars, int fd);
 
 //-----------------
 //screen.c
 void	ft_draw_background(t_vars *vars);
 void	ft_draw_walls(t_vars *vars);
-t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end);
-//void	ft_draw_column(t_vars *vars, t_ray *cast, int col);
 
+//-----------------
+//sound.c
+void	sound_music(t_vars *vars, char *title);
+void	play_sound(t_vars *vars, char *path);
+void	sound_kill(void);
 
 //-----------------
 //tabs.c
@@ -93,44 +108,14 @@ void	ft_free_2d(char **tab);
 //-----------------
 //text.c
 void	ft_load_texter(t_vars *vars);
-void	ft_write_text(t_vars *vars, char *str, t_point pos, t_vect *si_col);
+void	ft_write_text(t_vars *vars, char *str, t_point pos, t_vect si_col);
 
 //-----------------
-//walls.c
-int		ft_register_walls(t_vars *vars);
-//void	ft_to_register(t_vars *vars, int x, int y);
-//void	ft_add_wall(t_wall *walls, int x, int y, int side);
+//walls_create.c
+void	ft_create_wall(t_wall *walls, t_point p, int side, int type);
 
 //-----------------
-//minimap.c
-void	minimap(t_vars *vars);
-
-//-----------------
-//dont_move.c
-int		dont_move(t_vars *vars);
-
-//-----------------
-//sound.c
-void	sound_music(char *title);
-void	sound_kill(void);
-void	sound_clic(void);
-void	sound_wilheim(void);
-void	sound_door(void);
-void	sound_choice(void);
-
-//-----------------
-//wall_block_player.c
-void	ft_move(t_vars *vars, int keycode, float step);
-
-//-----------------
-//hp.c
-void	ft_hp_draw(t_vars *vars);
-
-//-----------------
-//loading_menu.c
-void    loading_screen(t_vars *vars, int i);
-void	menu_load_image(t_vars *vars);
-void	set_char_stats(t_vars *vars);
-void	load_music_title(t_vars *vars, char *map);
+//walls_register.c
+void	ft_register_walls(t_vars *vars);
 
 #endif //CUB3D_H

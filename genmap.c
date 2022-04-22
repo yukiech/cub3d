@@ -1,4 +1,8 @@
 #include <cub3d.h>
+#include <generate.h>
+
+static void	ft_gen_start(t_vars *vars);
+static void	ft_gen_add_spaces(t_vars *vars);
 
 void	ft_generate_map(t_vars *vars, unsigned int seed)
 {
@@ -26,7 +30,7 @@ void	ft_generate_map(t_vars *vars, unsigned int seed)
 	ft_gen_add_spaces(vars);
 }
 
-void	ft_gen_start(t_vars *vars)
+static void	ft_gen_start(t_vars *vars)
 {
 	int	i;
 	int	x;
@@ -48,7 +52,7 @@ void	ft_gen_start(t_vars *vars)
 	vars->map.raw[y][x] = 'N';
 }
 
-void	ft_gen_add_spaces(t_vars *vars)
+static void	ft_gen_add_spaces(t_vars *vars)
 {
 	int	i;
 	int	j;

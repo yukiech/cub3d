@@ -1,94 +1,38 @@
 #include <cub3d.h>
 
-void	sound_brittney(void)
+
+void	sound_music(t_vars *vars, char *title)
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		execlp("afplay", "afplay", "-v", "0.2", "sound/brittney.mp3", NULL);
-	}
-}
-
-void	sound_nyancat(void)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		execlp("afplay", "afplay", "-v", "0.2", "sound/nyancat.mp3", NULL);
-	}
-}
-
-void	sound_imperial(void)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		execlp("afplay", "afplay", "-v", "0.2", "sound/imperial.mp3", NULL);
-	}
-}
-
-void	sound_music(char *title)
-{
+	
 	if (ft_strcmp(title, "brittney") == 0)
-		sound_brittney();
+		play_sound(vars, "sound/brittney.mp3");
 	else if (ft_strcmp(title, "nyancat") == 0)
-		sound_nyancat();
+		play_sound(vars, "sound/nyancat.mp3");
 	else if (ft_strcmp(title, "imperial") == 0)
-		sound_imperial();
+		play_sound(vars, "sound/imperial.mp3");
+	else if (ft_strcmp(title, "clic") == 0)
+		play_sound(vars, "sound/clic.mp3");
+	else if (ft_strcmp(title, "wilheim") == 0)
+		play_sound(vars, "sound/wilheim.mp3");
+	else if (ft_strcmp(title, "door") == 0)
+		play_sound(vars, "sound/door.mp3");
+	else if (ft_strcmp(title, "choice") == 0)
+		play_sound(vars, "sound/choice.mp3");
 }
 
-void	sound_clic(void)
+void	play_sound(t_vars *vars, char *path)
 {
 	pid_t	pid;
 
+	
+	if (vars->player.has_sound == 0)
+		return ;
+	printf("fapfasf %s\n", path);
 	pid = fork();
 	if (pid == 0)
 	{
-		execlp("afplay", "afplay", "-v", "0.2", "sound/clic.mp3", NULL);
+		execlp("afplay", "afplay", "-v", "0.2", path, NULL);
 	}
-
-}
-
-void	sound_wilheim(void)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		execlp("afplay", "afplay", "-v", "0.2", "sound/wilheim.mp3", NULL);
-	}
-
-}
-
-void	sound_door(void)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		execlp("afplay", "afplay", "-v", "0.2", "sound/door.mp3", NULL);
-	}
-
-}
-
-void	sound_choice(void)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		execlp("afplay", "afplay", "-v", "0.2", "sound/choice.mp3", NULL);
-	}
-
 }
 
 void	sound_kill(void)

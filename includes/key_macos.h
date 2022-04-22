@@ -67,6 +67,10 @@
 # define K_ESCAPE 53
 # define K_TAB 48
 # define K_ENTER 36
+# define K_SHIFT_L 257
+# define K_ALT_L 261
+# define K_CMD_L 259
+# define K_CTRL_L 256
 
 /*
 ** Mouse

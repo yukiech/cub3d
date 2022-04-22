@@ -1,5 +1,6 @@
 #include <cub3d.h>
 
+/*
 int	ft_time(void)
 {
 	struct timeval	time;
@@ -21,17 +22,19 @@ int	ft_time(void)
 	printf("tu %zu %d     %zu\n", time.tv_sec % 1000, time.tv_usec, res);
 	return (res);
 }
+*/
 
-/*
-t_vect	*n_vect(float v1, float v2)
+int	bsp(t_point p, t_point l1, t_point l2)
 {
-	t_vect	*vect;
+	float	res;
 
-	vect = malloc(sizeof(vect));
-	vect->v1 = v1;
-	vect->v2 = v2;
-	return (vect);
-}*/
+	res = (p.x - l2.x) * (l1.y - l2.y) - (p.y - l2.y) * (l1.x - l2.x);
+	if (res < 0)
+		return (-1);
+	else if (res > 0)
+		return (1);
+	return (0);
+}
 
 float	map(float x, t_vect in, t_vect out)
 {
@@ -39,32 +42,6 @@ float	map(float x, t_vect in, t_vect out)
 
 	res = ((x - in.v1) * (out.v2 - out.v1) / (in.v2 - in.v1) + out.v1);
 	return (res);
-}
-
-int	ft_color(unsigned char a, unsigned char r, unsigned char g, unsigned char b)
-{
-	int	res;
-
-	res = a;
-	res = (res << 8) | r;
-	res = (res << 8) | g;
-	res = (res << 8) | b;
-	return (res);
-}
-
-char	ft_get_case(t_vars *vars, int x, int y)
-{
-	if (y < 0)
-		return ('\e');
-	if (y > vars->map.height)
-		return ('\e');
-	if (x < 0)
-		return ('\e');
-	if (x > (int)ft_strlen(vars->map.raw[y]))
-		return ('\e');
-	if (vars->map.raw[y][x] == '\0')
-		return ('\e');
-	return (vars->map.raw[y][x]);
 }
 
 float	ft_pyta(float a, float b)
