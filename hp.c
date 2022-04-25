@@ -20,7 +20,7 @@ void	ft_hp_draw(t_vars *vars)
 		(t_vect){.v1 = 2, .v2 = 0x000000});
 	ft_tfree((void **)&text);
 
-	if (vars->player.hp > 0)
+/*	if (vars->player.hp > 0)
 	{
 		if (vars->player.hp * 100 / vars->player.hp_start > 0 )
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.heart_half.img, 600, 30);
@@ -41,4 +41,5 @@ void	ft_hp_draw(t_vars *vars)
 //		mlx_string_put(vars->mlx, vars->win, 600, 30, 0x000000, "HP : ");
 //		mlx_string_put(vars->mlx, vars->win, 650, 30, 0x000000, ft_itoa(vars->player.hp));
 	}
+*/
 }
