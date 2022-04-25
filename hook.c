@@ -189,10 +189,11 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 					vars->map.walls[cast->wall].type = W_DOOR;
 					vars->map.raw[(int)w.pos.y][(int)w.pos.x] = 'D';
 				}
+				else
+					vars->pistol.frame = 0;
 			}
 			free(cast);
 		}
-		vars->pistol.frame = 0;
 	}
 	return (0);
 }
