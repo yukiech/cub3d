@@ -27,10 +27,11 @@ void	play_sound(t_vars *vars, char *path)
 	
 	if (vars->player.has_sound == 0)
 		return ;
-	printf("fapfasf %s\n", path);
 	pid = fork();
 	if (pid == 0)
 	{
+		close(1);
+		close(2);
 		execlp("afplay", "afplay", "-v", "0.2", path, NULL);
 	}
 }

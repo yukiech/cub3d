@@ -177,7 +177,7 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 		{
 			t_wall w = vars->map.walls[cast->wall];
 
-			if (ft_pyta(0.5 + w.pos.y - vars->player.pos.y, 0.5 + w.pos.x - vars->player.pos.x) < 2.5)
+			if (ft_pyta(w.pos.y - vars->player.pos.y, w.pos.x - vars->player.pos.x) < 2.5)
 			{
 				if (w.type == W_DOOR)
 				{
@@ -192,6 +192,8 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 				else
 					vars->pistol.frame = 0;
 			}
+			else
+				vars->pistol.frame = 0;
 			free(cast);
 		}
 		else
@@ -206,9 +208,9 @@ int	ft_mouse_hook(int x, int y, t_vars *vars)
 	{
 		vars->player.angle += radians(x - vars->screen.w / 2) / 8;
 		if (vars->player.angle > M_PI)
-			vars->player.angle -= 2*M_PI;
+			vars->player.angle -= 2 * M_PI;
 		if (vars->player.angle < -M_PI)
-			vars->player.angle += 2*M_PI;
+			vars->player.angle += 2 * M_PI;
 
 		vars->player.hori += (vars->screen.h / 2 - y) / 1;
 		vars->player.hori = fmax(0, fmin(vars->screen.h, vars->player.hori));
