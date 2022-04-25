@@ -83,6 +83,7 @@ void	ft_process_map(t_vars *vars);
 //-----------------
 //rays.c
 t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end);
+t_ray	*ft_cast_rays_inv(t_vars *vars, t_point ray_end);
 
 //-----------------
 //read_args.c

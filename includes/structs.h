@@ -49,7 +49,8 @@ typedef struct s_imgptr {
 	int		end;
 }	t_imgptr;
 
-# define W_INVISI -1
+# define W_FIRE -2
+# define W_DOOR_OPEN -1
 # define W_NONE 0
 # define W_UPWALL 1
 # define W_LEFTWALL 2
@@ -92,6 +93,20 @@ typedef struct s_pistol {
 	int			frame;
 }	t_pistol;
 
+typedef struct s_fire {
+	t_imgptr	fire0;
+	t_imgptr	fire1;
+	t_imgptr	fire2;
+	t_imgptr	fire3;
+	t_imgptr	fire4;
+	t_imgptr	fire5;
+	t_imgptr	fire6;
+	t_imgptr	fire7;
+	t_imgptr	fire8;
+	t_imgptr	fire9;
+	int			frame;
+}	t_fire;
+
 typedef struct s_loading { 
 	t_imgptr	menu_1;
 	t_imgptr	menu_2;
@@ -119,6 +134,7 @@ typedef struct s_vars {
 
 	t_player	player;
 	t_pistol	pistol;
+	t_imgptr	fire[10];
 
 	t_imgptr	screen;
 	t_imgptr	texter;

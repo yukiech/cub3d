@@ -61,7 +61,8 @@ void	ft_put_col(t_vars *vars, t_imgptr *img, t_point o1, float ratio)
 	{
 		color = ft_get_px(img, ratio * img->w,
 				fmin(img->h, fmax(0, (j - off_y) * (img->h) / (off_len))));
-		ft_set_px(&vars->screen, o1.x, j, color);
+		if ((int)color >> 24 == 0)
+			ft_set_px(&vars->screen, o1.x, j, color);
 		j++;
 	}
 }
