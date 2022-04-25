@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 		ft_open_map(&vars, ft_strdup(argv[1]));
 	else
-		ft_open_map(&vars, "maps/small.cub");
+		ft_open_map(&vars, ft_strdup("maps/small.cub"));
 	ft_process_map(&vars);
 	ft_register_walls(&vars);
 
