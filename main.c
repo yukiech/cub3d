@@ -11,6 +11,8 @@ void	ft_init_vars(t_vars *vars)
 	vars->player.speed_mod = 0;
 	vars->player.has_collisions = 1;
 	vars->player.has_sound = 1;
+	vars->player.hp_start = 1000;
+	vars->player.hp = vars->player.hp_start;
 
 	vars->game_state = 0;
 	vars->loading.pos = 1;

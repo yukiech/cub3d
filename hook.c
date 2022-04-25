@@ -73,8 +73,7 @@ int	ft_loop_hook(t_vars *vars)
 		vars->pistol.frame++;
 
 		ft_draw_cross(vars);
-
-
+		ft_damage(vars);
 //		ft_write_text(vars, "+", (t_point){vars->screen.w / 2, vars->screen.h / 2}, (t_vect){3, 0xFFFFFF});
 
 
@@ -84,6 +83,8 @@ int	ft_loop_hook(t_vars *vars)
 	}
 
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
+	if (vars->game_state == 2)
+		ft_hp_draw(vars);
 	vars->frame = (vars->frame + 1) % 1000000000;
 	return (0);
 }
@@ -194,8 +195,6 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 			}
 			free(cast);
 		}
-		else
-			vars->pistol.frame = 0;
 	}
 	return (0);
 }
