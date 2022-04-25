@@ -3,24 +3,16 @@
 void	ft_damage(t_vars *vars)
 {
 	if (ft_get_case(vars, vars->player.pos.x, vars->player.pos.y) == '^')
-		vars->player.hp -= 1;
+	{
+		vars->player.hp -= 0.5;
+		ft_put_image_full(vars, &vars->loading.damage);
+	}
 }
 
 void	ft_hp_draw(t_vars *vars)
 {
-	char	*text;
-	char	*number;
-
 	ft_damage(vars);
-	text = "HP : ";
-	number = ft_itoa(vars->player.hp);
-	text = ft_strjoin(text, number);
-	ft_tfree((void **)&number);
-	ft_write_text(vars, text, (t_point){.x = 600, .y = 30},
-		(t_vect){.v1 = 2, .v2 = 0x000000});
-	ft_tfree((void **)&text);
-
-/*	if (vars->player.hp > 0)
+	if (vars->player.hp > 0)
 	{
 		if (vars->player.hp * 100 / vars->player.hp_start > 0 )
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.heart_half.img, 600, 30);
@@ -38,8 +30,5 @@ void	ft_hp_draw(t_vars *vars)
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.heart_half.img, 720, 30);
 		if (vars->player.hp * 100 / vars->player.hp_start > 87)
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.heart.img, 720, 30);
-//		mlx_string_put(vars->mlx, vars->win, 600, 30, 0x000000, "HP : ");
-//		mlx_string_put(vars->mlx, vars->win, 650, 30, 0x000000, ft_itoa(vars->player.hp));
 	}
-*/
 }
