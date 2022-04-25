@@ -76,6 +76,7 @@ int	ft_loop_hook(t_vars *vars)
 		ft_damage(vars);
 //		ft_write_text(vars, "+", (t_point){vars->screen.w / 2, vars->screen.h / 2}, (t_vect){3, 0xFFFFFF});
 
+		ft_hp_draw(vars);
 
 
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
@@ -83,8 +84,8 @@ int	ft_loop_hook(t_vars *vars)
 	}
 
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
-	if (vars->game_state == 2)
-		ft_hp_draw(vars);
+//	if (vars->game_state == 2)
+//		ft_hp_draw(vars);
 	vars->frame = (vars->frame + 1) % 1000000000;
 	return (0);
 }

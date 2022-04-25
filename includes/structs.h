@@ -36,6 +36,7 @@ typedef struct s_player {
 	int		speed_mod;
 	int		has_collisions;
 	int		has_sound;
+	int		on_fire;
 }	t_player;
 
 typedef struct s_imgptr {
