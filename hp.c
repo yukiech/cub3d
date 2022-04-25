@@ -31,4 +31,9 @@ void	ft_hp_draw(t_vars *vars)
 		if (vars->player.hp * 100 / vars->player.hp_start > 87)
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->loading.heart.img, 720, 30);
 	}
+	else if (vars->player.hp == 0)
+	{
+		sound_music(vars, "wilheim");
+		vars->player.hp = -1;
+	}
 }
