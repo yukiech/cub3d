@@ -15,7 +15,7 @@ void	ft_init_vars(t_vars *vars)
 	vars->player.hp = vars->player.hp_start;
 
 	vars->game_state = 0;
-	vars->loading.pos = 1;
+	vars->loading.pos = 2;
 	vars->frame = 0;
 	vars->pistol.frame = 100;
 
@@ -44,22 +44,15 @@ int	main(int argc, char **argv)
 	ft_init_vars(&vars);
 
 	if (argc == 2)
-		ft_open_map(&vars, argv[1]);
+		ft_open_map(&vars, ft_strdup(argv[1]));
 	else
 		ft_open_map(&vars, "maps/small.cub");
-
-//	int	i = -1;
-//	while (vars.map.raw[++i] != NULL)
-//		printf("%s\n", vars.map.raw[i]);
-
-	ft_load_texter(&vars);
-
 	ft_process_map(&vars);
-	ft_printf("%d\n", vars.map.n_walls);
 	ft_register_walls(&vars);
 
 	
 	menu_load_image(&vars);
+	ft_load_texter(&vars);
 
 
 	mlx_loop_hook(vars.mlx, ft_loop_hook, &vars);

@@ -24,7 +24,7 @@ void	ft_register_walls(t_vars *vars)
 
 static void	ft_check_wall(t_vars *vars, t_point p)
 {
-	if (ft_strchr("0NSEWD^", vars->map.raw[(int)p.y][(int)p.x]) != NULL)
+	if (ft_strchr("0NSEWD^F", vars->map.raw[(int)p.y][(int)p.x]) != NULL)
 	{
 		if (ft_get_case(vars, p.x, p.y - 1) == '1')
 		{
@@ -44,6 +44,7 @@ static void	ft_check_wall(t_vars *vars, t_point p)
 		}
 		ft_search_wall_type(vars, p, 'D', W_DOOR);
 		ft_search_wall_type(vars, p, '^', W_FIRE);
+		ft_search_wall_type(vars, p, 'F', W_FINISH);
 	}
 }
 

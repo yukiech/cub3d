@@ -49,6 +49,26 @@ void	ft_draw_walls(t_vars *vars)
 	}
 }
 
+static t_imgptr *ft_switch_texture(t_vars *vars, int wall)
+{
+	if (vars->map.walls[wall].type == W_UPWALL)
+		return (&vars->map.north);
+	else if (vars->map.walls[wall].type == W_LEFTWALL)
+		return (&vars->map.west);
+	else if (vars->map.walls[wall].type == W_RIGHTWALL)
+		return (&vars->map.east);
+	else if (vars->map.walls[wall].type == W_DOWNWALL)
+		return (&vars->map.south);
+	else if (vars->map.walls[wall].type == W_DOOR)
+		return (&vars->door);
+	else if (vars->map.walls[wall].type == W_FINISH)
+		return (&vars->portal);
+	else if (vars->map.walls[wall].type == W_FIRE)
+		return (&vars->fire[(int)(vars->frame / 6) % 10]);
+	else
+		return (NULL);
+}
+
 static void	ft_draw_column(t_vars *vars, t_ray *cast, int col)
 {
 	t_imgptr	*side;
@@ -62,17 +82,7 @@ static void	ft_draw_column(t_vars *vars, t_ray *cast, int col)
 			- play.angle);
 	disto = MAGIC_NBR / 2.0 / tan(play.fov / 2.0);
 	h = (MAGIC_NBR / cast->dist) * disto;
-	side = NULL;
-	if (vars->map.walls[cast->wall].type == W_UPWALL)
-		side = &vars->map.north;
-	else if (vars->map.walls[cast->wall].type == W_LEFTWALL)
-		side = &vars->map.west;
-	else if (vars->map.walls[cast->wall].type == W_RIGHTWALL)
-		side = &vars->map.east;
-	else if (vars->map.walls[cast->wall].type == W_DOWNWALL)
-		side = &vars->map.south;
-	else if (vars->map.walls[cast->wall].type == W_DOOR)
-		side = &vars->map.door;
+	side = ft_switch_texture(vars, cast->wall);
 	if (side != NULL)
 		ft_put_col(vars, side, (t_point){.x = col, .y = h}, cast->t);
 	ft_tfree((void **)&cast);
@@ -91,9 +101,7 @@ static void	ft_draw_column_inv(t_vars *vars, t_ray *cast, int col)
 			- play.angle);
 	disto = MAGIC_NBR / 2.0 / tan(play.fov / 2.0);
 	h = (MAGIC_NBR / cast->dist) * disto;
-	side = NULL;
-	if (vars->map.walls[cast->wall].type == W_FIRE)
-		side = &vars->fire[(int)(vars->frame / 6) % 10];
+	side = ft_switch_texture(vars, cast->wall);
 	if (side != NULL)
 		ft_put_col(vars, side, (t_point){.x = col, .y = h}, cast->t);
 	ft_tfree((void **)&cast);

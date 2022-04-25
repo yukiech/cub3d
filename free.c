@@ -1,7 +1,5 @@
 #include <cub3d.h>
 
-static void	ft_free_map(t_vars *vars);
-
 void	ft_tfree(void **ptr)
 {
 	if (*ptr != NULL)
@@ -12,7 +10,7 @@ void	ft_tfree(void **ptr)
 int	ft_free_all(t_vars *vars)
 {
 	ft_free_map(vars);
-	sound_kill();
+	ft_tfree((void **)&vars->map.next);
 	if (vars->screen.img != NULL)
 		mlx_destroy_image(vars->mlx, vars->screen.img);
 	if (vars->win != NULL)
@@ -22,14 +20,16 @@ int	ft_free_all(t_vars *vars)
 	exit(0);
 }
 
-static void	ft_free_map(t_vars *vars)
+void	ft_free_map(t_vars *vars)
 {
+	sound_kill();
 	ft_tfree((void **)&vars->map.north.path);
 	ft_tfree((void **)&vars->map.south.path);
 	ft_tfree((void **)&vars->map.west.path);
 	ft_tfree((void **)&vars->map.east.path);
 	ft_tfree((void **)&vars->map.floor.raw);
 	ft_tfree((void **)&vars->map.ceil.raw);
+	ft_tfree((void **)&vars->map.music);
 	ft_free_2d(vars->map.raw);
 	ft_tfree((void **)&vars->map.walls);
 }

@@ -10,11 +10,11 @@ void	ft_open_map(t_vars *vars, char *filename)
 		ft_read_file(vars, filename);
 	else
 		ft_generate_map(vars, (unsigned int)ft_atoi(filename));
+	ft_tfree((void **)&filename);
 	ft_load_image(vars, vars->map.north.path, &vars->map.north);
 	ft_load_image(vars, vars->map.south.path, &vars->map.south);
 	ft_load_image(vars, vars->map.west.path, &vars->map.west);
 	ft_load_image(vars, vars->map.east.path, &vars->map.east);
-	ft_load_image(vars, "./assets/newdoor.xpm", &vars->map.door);
 	ft_load_color(vars, &vars->map.ceil);
 	ft_load_color(vars, &vars->map.floor);
 }

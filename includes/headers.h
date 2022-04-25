@@ -13,7 +13,7 @@ void	ft_draw_vline(t_imgptr *ptr, t_point o, int len, int color);
 //free.c
 void	ft_tfree(void **ptr);
 int	    ft_free_all(t_vars *vars);
-//static static void	ft_free_map(t_vars *vars);
+void	ft_free_map(t_vars *vars);
 void	ft_exit(t_vars *vars, char *error);
 
 
