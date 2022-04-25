@@ -24,6 +24,8 @@ void	ft_process_map(t_vars *vars)
 		}
 		i++;
 	}
+	if (vars->player.pos.x == 0)
+		ft_exit(vars, "Player not found, omnicient mode not yet implemented");
 }
 
 static void	ft_is_player(t_vars *vars, int x, int y)
@@ -56,7 +58,7 @@ static void	ft_is_valid_case(t_vars *vars, int x, int y)
 
 static void	ft_inside_touch_outside(t_vars *vars, int x, int y)
 {
-	if (ft_strchr("0D", ft_get_case(vars, x, y)) != NULL)
+	if (ft_strchr("0D^F", ft_get_case(vars, x, y)) != NULL)
 	{
 		if (ft_strchr(" \e", ft_get_case(vars, x, y - 1)) != NULL)
 			ft_exit(vars, "Error map borders");
@@ -73,13 +75,13 @@ static void	ft_count_walls_around(t_vars *vars, int x, int y)
 {
 	if (ft_strchr("0D^", ft_get_case(vars, x, y)) != NULL)
 	{
-		if (ft_strchr("1D^", ft_get_case(vars, x, y - 1)) != NULL)
+		if (ft_strchr("1D^F", ft_get_case(vars, x, y - 1)) != NULL)
 			vars->map.n_walls++;
-		if (ft_strchr("1D^", ft_get_case(vars, x, y + 1)) != NULL)
+		if (ft_strchr("1D^F", ft_get_case(vars, x, y + 1)) != NULL)
 			vars->map.n_walls++;
-		if (ft_strchr("1D^", ft_get_case(vars, x - 1, y)) != NULL)
+		if (ft_strchr("1D^F", ft_get_case(vars, x - 1, y)) != NULL)
 			vars->map.n_walls++;
-		if (ft_strchr("1D^", ft_get_case(vars, x + 1, y)) != NULL)
+		if (ft_strchr("1D^F", ft_get_case(vars, x + 1, y)) != NULL)
 			vars->map.n_walls++;
 	}
 }

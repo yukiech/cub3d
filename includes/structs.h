@@ -57,6 +57,7 @@ typedef struct s_imgptr {
 # define W_RIGHTWALL 3
 # define W_DOWNWALL 4
 # define W_DOOR 5
+# define W_FINISH 6
 
 typedef struct s_wall {
 	int			type;
@@ -73,7 +74,6 @@ typedef struct s_map {
 	t_imgptr	west;
 	t_imgptr	east;
 	t_imgptr	south;
-	t_imgptr	door;
 
 	char		*music;
 	char		*next;
@@ -134,6 +134,8 @@ typedef struct s_vars {
 
 	t_player	player;
 	t_pistol	pistol;
+	t_imgptr	door;
+	t_imgptr	portal;
 	t_imgptr	fire[10];
 
 	t_imgptr	screen;

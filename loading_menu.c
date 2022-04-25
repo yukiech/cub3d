@@ -7,6 +7,8 @@ void	load_pistol(t_vars *vars)
 	ft_load_image(vars, "./assets/gun_3.xpm", &vars->pistol.pistol3);
 	ft_load_image(vars, "./assets/gun_4.xpm", &vars->pistol.pistol4);
 	ft_load_image(vars, "./assets/gun_5.xpm", &vars->pistol.pistol5);
+	ft_load_image(vars, "./assets/newdoor.xpm", &vars->door);
+	ft_load_image(vars, "./assets/portal.xpm", &vars->portal);
 	ft_load_image(vars, "./assets/fire_0.xpm", &vars->fire[0]);
 	ft_load_image(vars, "./assets/fire_1.xpm", &vars->fire[1]);
 	ft_load_image(vars, "./assets/fire_2.xpm", &vars->fire[2]);
@@ -44,7 +46,7 @@ void	set_char_stats(t_vars *vars)
 	else if (vars->loading.pos == 3)
 		vars->player.fov = radians(170);
 	else if (vars->loading.pos == 4)
-		vars->player.hp = 2000;
+		vars->player.hp *= 2;
 }
 
 #define LOADING_LEN 100

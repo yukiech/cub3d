@@ -42,11 +42,11 @@ static void	ft_walk_collisions(t_vars *vars, int keycode)
 		futur.y = vars->player.pos.y;
 		ft_walk(vars, keycode, &futur);
 		if (vars->player.has_collisions == 0
-			|| ft_strchr("1D \e",
+			|| ft_strchr("1DF \e",
 				ft_get_case(vars, futur.x, vars->player.pos.y)) == NULL)
 			vars->player.pos.x = futur.x;
 		if (vars->player.has_collisions == 0
-			|| ft_strchr("1D \e",
+			|| ft_strchr("1DF \e",
 				ft_get_case(vars, vars->player.pos.x, futur.y)) == NULL)
 			vars->player.pos.y = futur.y;
 	}
