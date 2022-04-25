@@ -181,7 +181,7 @@ void	ft_click_interact(t_vars *vars, t_ray *cast)
 			ft_open_map(vars, vars->map.next);
 		else
 			ft_open_map(vars, ft_itoa(rand()));
-		ft_tfree((void **)&vars->map.next);
+		vars->map.next = NULL;
 		ft_process_map(vars);
 		ft_register_walls(vars);
 	}

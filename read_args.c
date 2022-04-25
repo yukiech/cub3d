@@ -44,7 +44,7 @@ static int	ft_select_arg(t_vars *vars, char **sp)
 		return (ft_set_arg(vars, &vars->map.ceil.raw, sp[1]) + 1);
 	else if (ft_strcmp(sp[0], "M") == 0)
 		return (ft_set_arg(vars, &vars->map.music, sp[1]) + 0);
-	else if (ft_strcmp(sp[0], "F") == 0)
+	else if (ft_strcmp(sp[0], "N") == 0)
 		return (ft_set_arg(vars, &vars->map.next, sp[1]) + 0);
 	else
 		return (0);

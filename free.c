@@ -22,6 +22,8 @@ int	ft_free_all(t_vars *vars)
 
 void	ft_free_map(t_vars *vars)
 {
+	int	i;
+
 	sound_kill();
 	ft_tfree((void **)&vars->map.north.path);
 	ft_tfree((void **)&vars->map.south.path);
@@ -30,7 +32,14 @@ void	ft_free_map(t_vars *vars)
 	ft_tfree((void **)&vars->map.floor.raw);
 	ft_tfree((void **)&vars->map.ceil.raw);
 	ft_tfree((void **)&vars->map.music);
-	ft_free_2d(vars->map.raw);
+	i = 0;
+	while (vars->map.raw != NULL && vars->map.raw[i] != NULL)
+	{
+		ft_tfree((void **)&vars->map.raw[i]);
+		i++;
+	}
+	ft_tfree((void **)&vars->map.raw);
+//	ft_free_2d(vars->map.raw);
 	ft_tfree((void **)&vars->map.walls);
 }
 
