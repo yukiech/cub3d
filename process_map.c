@@ -48,7 +48,7 @@ static void	ft_is_player(t_vars *vars, int x, int y)
 
 static void	ft_is_valid_case(t_vars *vars, int x, int y)
 {
-	if (ft_strchr("01 D^", ft_get_case(vars, x, y)) == NULL)
+	if (ft_strchr("01 D^F", ft_get_case(vars, x, y)) == NULL)
 	{
 		ft_exit(vars, "Not valid case found");
 	}

@@ -18,6 +18,8 @@ void	ft_create_wall(t_wall *walls, t_point p, int side, int type)
 static void	ft_set_wall_pos(t_wall *walls, int i, t_point p, int side)
 {
 	walls[i].pos = p;
+	walls[i].pos.x += 0.5;
+	walls[i].pos.y += 0.5;
 	if (side == W_UPWALL)
 		walls[i].pos.y -= 1;
 	else if (side == W_LEFTWALL)

@@ -48,6 +48,9 @@ int	main(int argc, char **argv)
 	else
 		ft_open_map(&vars, "maps/small.cub");
 
+//	int	i = -1;
+//	while (vars.map.raw[++i] != NULL)
+//		printf("%s\n", vars.map.raw[i]);
 
 	ft_load_texter(&vars);
 

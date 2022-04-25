@@ -27,9 +27,11 @@ void	minimap_draw(t_vars *vars)
 			else if (ft_strchr("0", c) != NULL)
 				mm_case(&vars->screen, j, i, ft_color(0, 255, 255, 255));
 			else if (ft_strchr("D", c) != NULL)
-				mm_case(&vars->screen, j, i, ft_color(0, 0, 255, 0));
+				mm_case(&vars->screen, j, i, ft_color(0, 0, 0, 255));
 			else if (ft_strchr("^", c) != NULL)
 				mm_case(&vars->screen, j, i, ft_color(0, 255, 128, 0));
+			else if (ft_strchr("F", c) != NULL)
+				mm_case(&vars->screen, j, i, ft_color(0, 0, 255, 0));
 			j++;
 		}
 		i++;
