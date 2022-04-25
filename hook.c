@@ -57,19 +57,19 @@ int	ft_loop_hook(t_vars *vars)
 
 		if (vars->pistol.frame < PISTOL_SPEED * 1)
 			ft_put_image(vars, &vars->pistol.pistol1,
-			(t_point){300, 300}, (t_point){800, 800});
+			(t_point){240, 450}, (t_point){600, 800});
 		else if (vars->pistol.frame < PISTOL_SPEED * 2)
 			ft_put_image(vars, &vars->pistol.pistol2,
-			(t_point){300, 300}, (t_point){800, 800});
+			(t_point){240, 450}, (t_point){600, 800});
 		else if (vars->pistol.frame < PISTOL_SPEED * 3)
 			ft_put_image(vars, &vars->pistol.pistol3,
-			(t_point){300, 300}, (t_point){800, 800});
+			(t_point){240, 450}, (t_point){600, 800});
 		else if (vars->pistol.frame < PISTOL_SPEED * 4)
 			ft_put_image(vars, &vars->pistol.pistol4,
-			(t_point){300, 300}, (t_point){800, 800});
+			(t_point){240, 450}, (t_point){600, 800});
 		else
 			ft_put_image(vars, &vars->pistol.pistol1,
-			(t_point){300, 300}, (t_point){800, 800});
+			(t_point){240, 450}, (t_point){600, 800});
 		vars->pistol.frame++;
 
 		ft_draw_cross(vars);
