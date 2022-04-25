@@ -25,9 +25,7 @@ int	ft_loop_hook(t_vars *vars)
 
 		ft_draw_walls(vars);
 
-
 		minimap_draw(vars);
-
 
 		//ft_hp_draw(vars);
 
@@ -47,6 +45,9 @@ int	ft_loop_hook(t_vars *vars)
 			ft_put_image(vars, &vars->pistol.pistol1,
 			(t_point){300, 300}, (t_point){800, 800});
 		vars->pistol.frame++;
+
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
+
 	}
 
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
