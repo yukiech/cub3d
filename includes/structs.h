@@ -31,6 +31,7 @@ typedef struct s_player {
 	float	angle;
 	float	fov;
 	int		hp;
+	int		hp_start;
 	float	speed;
 	int		speed_mod;
 	int		has_collisions;
@@ -103,6 +104,8 @@ typedef struct s_loading {
 	t_imgptr	franken;
 	t_imgptr	sound_on;
 	t_imgptr	sound_off;
+	t_imgptr	heart;
+	t_imgptr	heart_half;
 	int			pos;
 	char		*music_title;
 }	t_loading;

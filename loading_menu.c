@@ -7,6 +7,8 @@ void	load_pistol(t_vars *vars)
 	ft_load_image(vars, "./assets/gun_3.xpm", &vars->pistol.pistol3);
 	ft_load_image(vars, "./assets/gun_4.xpm", &vars->pistol.pistol4);
 	ft_load_image(vars, "./assets/gun_5.xpm", &vars->pistol.pistol5);
+	ft_load_image(vars, "./assets/heart_full.xpm", &vars->loading.heart);
+	ft_load_image(vars, "./assets/heart_left.xpm", &vars->loading.heart_half);
 }
 
 void	menu_load_image(t_vars *vars)
