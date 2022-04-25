@@ -170,7 +170,7 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 	}
 	else if (vars->game_state == 2 && button == M_CLK_L)
 	{
-	    t_ray *cast = ft_cast_rays(vars, (t_point){.x = vars->player.pos.x + cos(vars->player.angle), .y = vars->player.pos.y + sin(vars->player.angle)});
+	    t_ray *cast = ft_cast_rays_inv(vars, (t_point){.x = vars->player.pos.x + cos(vars->player.angle), .y = vars->player.pos.y + sin(vars->player.angle)});
 
 
 		if (cast != NULL)
@@ -181,8 +181,13 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 			{
 				if (w.type == W_DOOR)
 				{
-					vars->map.walls[cast->wall].type = -1;
+					vars->map.walls[cast->wall].type = W_DOOR_OPEN;
 					vars->map.raw[(int)w.pos.y][(int)w.pos.x] = '0';
+				}
+				else if (w.type == W_DOOR_OPEN && ((int)vars->player.pos.x != (int)w.pos.x || (int)vars->player.pos.y != (int)w.pos.y))
+				{
+					vars->map.walls[cast->wall].type = W_DOOR;
+					vars->map.raw[(int)w.pos.y][(int)w.pos.x] = 'D';
 				}
 			}
 			free(cast);

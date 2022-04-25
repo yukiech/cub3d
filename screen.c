@@ -1,6 +1,7 @@
 #include <cub3d.h>
 
 static void	ft_draw_column(t_vars *vars, t_ray *cast, int col);
+static void	ft_draw_column_inv(t_vars *vars, t_ray *cast, int col);
 
 void	ft_draw_background(t_vars *vars)
 {
@@ -35,11 +36,15 @@ void	ft_draw_walls(t_vars *vars)
 				(t_vect){vars->player.fov / -2, vars->player.fov / 2});
 		ray_end.x = vars->player.pos.x;
 		ray_end.x += cos(vars->player.angle + ray_angle) * 10;
-		ray_end.y = vars->player.pos.y ;
+		ray_end.y = vars->player.pos.y;
 		ray_end.y += sin(vars->player.angle + ray_angle) * 10;
 		cast = ft_cast_rays(vars, ray_end);
 		if (cast != NULL)
 			ft_draw_column(vars, cast, col);
+		cast = NULL;
+		cast = ft_cast_rays_inv(vars, ray_end);
+		if (cast != NULL)
+			ft_draw_column_inv(vars, cast, col);
 		col += 1;
 	}
 }
@@ -68,6 +73,28 @@ static void	ft_draw_column(t_vars *vars, t_ray *cast, int col)
 		side = &vars->map.south;
 	else if (vars->map.walls[cast->wall].type == W_DOOR)
 		side = &vars->map.door;
-	ft_put_col(vars, side, (t_point){.x = col, .y = h}, cast->t);
+	if (side != NULL)
+		ft_put_col(vars, side, (t_point){.x = col, .y = h}, cast->t);
+	ft_tfree((void **)&cast);
+}
+
+static void	ft_draw_column_inv(t_vars *vars, t_ray *cast, int col)
+{
+	t_imgptr	*side;
+	float		h;
+	float		disto;
+	t_player	play;
+
+	play = vars->player;
+	cast->dist = ft_pyta(cast->p.y - play.pos.y, cast->p.x - play.pos.x);
+	cast->dist *= cos(atan2(cast->p.y - play.pos.y, cast->p.x - play.pos.x)
+			- play.angle);
+	disto = MAGIC_NBR / 2.0 / tan(play.fov / 2.0);
+	h = (MAGIC_NBR / cast->dist) * disto;
+	side = NULL;
+	if (vars->map.walls[cast->wall].type == W_FIRE)
+		side = &vars->fire[(int)(vars->frame / 6) % 10];
+	if (side != NULL)
+		ft_put_col(vars, side, (t_point){.x = col, .y = h}, cast->t);
 	ft_tfree((void **)&cast);
 }
