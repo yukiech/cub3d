@@ -12,30 +12,6 @@
 
 #include <cub3d.h>
 
-/*
-int	ft_time(void)
-{
-	struct timeval	time;
-	static int		last;
-	size_t			micro;
-	size_t			res;
-
-	gettimeofday(&time, NULL);
-	micro = time.tv_usec;
-//	printf("t %zu\n", micro);
-//	printf("tu %zu %d\n", time.tv_sec, time.tv_usec);
-
-
-
-//	printf("tu %d\n", time.tv_usec);
-	res = micro - last;
-	last = micro;
-
-	printf("tu %zu %d     %zu\n", time.tv_sec % 1000, time.tv_usec, res);
-	return (res);
-}
-*/
-
 int	bsp(t_point p, t_point l1, t_point l2)
 {
 	float	res;

@@ -32,8 +32,6 @@ void	ft_damage(t_vars *vars)
 	}
 }
 
-//#define NB_HEARTS 20
-
 void	ft_hp_draw(t_vars *vars)
 {
 	int		i;
@@ -50,11 +48,11 @@ void	ft_hp_draw(t_vars *vars)
 		{
 			if (vars->player.hp / vars->player.hp_start
 				> (1.0 / (nb_hearts * 2.0)) * (i * 2.0 + 1))
-				ft_put_image(vars, &vars->loading.heart, start,
+				ft_put_image(vars, &vars->heart, start,
 					(t_point){start.x + 40, start.y + 37});
 			else if (vars->player.hp / vars->player.hp_start
 				> (1.0 / (nb_hearts * 2.0)) * (i * 2.0))
-				ft_put_image(vars, &vars->loading.heart_half, start,
+				ft_put_image(vars, &vars->heart_half, start,
 					(t_point){start.x + 20, start.y + 37});
 			start.x += 40;
 			i++;

@@ -17,6 +17,7 @@
 //draw.c
 void	ft_draw_hline(t_imgptr *ptr, t_point o, int len, int color);
 void	ft_draw_vline(t_imgptr *ptr, t_point o, int len, int color);
+void	ft_draw_cross(t_vars *vars);
 
 //-----------------
 //free.c
@@ -30,11 +31,16 @@ void	ft_exit(t_vars *vars, char *error);
 void	ft_generate_map(t_vars *vars, unsigned int seed);
 
 //-----------------
-//hook.c
+//hook_loop.c
 int		ft_loop_hook(t_vars *vars);
-void	menu_hook(t_vars *vars, int keycode);
+
+//-----------------
+//hook_keys.c
 int		ft_key_hook(int keycode, t_vars *vars);
 int		ft_release_hook(int keycode, t_vars *vars);
+
+//-----------------
+//hook_mouse.c
 int		ft_click_hook(int button, int x, int y, t_vars *vars);
 int		ft_mouse_hook(int x, int y, t_vars *vars);
 
@@ -52,13 +58,7 @@ void	ft_put_col(t_vars *vars, t_imgptr *img, t_point o1, float ratio);
 
 //-----------------
 //loading_menu.c
-void	load_pistol(t_vars *vars);
-void	menu_load_image(t_vars *vars);
-void	set_char_stats(t_vars *vars);
-void	menu_screen(t_vars *vars);
-void	loading_screen(t_vars *vars);
-void	load_music_title(t_vars *vars, char *map);
-void	ft_draw_cross(t_vars *vars);
+void	load_assets(t_vars *vars);
 
 //-----------------
 //math_game.c
@@ -89,6 +89,7 @@ void	ft_open_map(t_vars *vars, char **filename);
 
 //-----------------
 //pistol.c
+void	pistol_fire(t_vars *vars);
 
 //-----------------
 //process_map.c

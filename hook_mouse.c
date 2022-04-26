@@ -12,56 +12,8 @@
 
 #include <cub3d.h>
 
-int	ft_release_hook(int keycode, t_vars *vars)
-{
-	if (vars->game_state == 2)
-	{
-		ft_move(vars, -keycode);
-	}
-	return (0);
-}
-
-void	ft_next_level(t_vars *vars)
-{
-	char	*filename;
-
-	ft_free_map(vars);
-	vars->player.pos.x = 0;
-	vars->level++;
-	if (vars->map.next != NULL)
-		filename = vars->map.next;
-	else
-		filename = ft_itoa(rand());
-	ft_open_map(vars, &filename);
-	ft_process_map(vars);
-	ft_register_walls(vars);
-}
-
-void	ft_click_interact(t_vars *vars, t_ray *cast)
-{
-	t_wall	w;
-
-	w = vars->map.walls[cast->wall];
-	if (w.type == W_DOOR)
-	{
-		vars->map.walls[cast->wall].type = W_DOOR_OPEN;
-		vars->map.raw[(int)w.pos.y][(int)w.pos.x] = '0';
-		play_sound(vars, "./sound/door.mp3");
-	}
-	else if (w.type == W_DOOR_OPEN && ((int)vars->player.pos.x != (int)w.pos.x
-			|| (int)vars->player.pos.y != (int)w.pos.y))
-	{
-		vars->map.walls[cast->wall].type = W_DOOR;
-		vars->map.raw[(int)w.pos.y][(int)w.pos.x] = 'D';
-		play_sound(vars, "./sound/door.mp3");
-	}
-	else if (w.type == W_FINISH)
-	{
-		ft_next_level(vars);
-	}
-	else
-		vars->pistol.frame = 0;
-}
+static void	ft_click_interact(t_vars *vars, t_ray *cast);
+static void	ft_next_level(t_vars *vars);
 
 int	ft_click_hook(int button, int x, int y, t_vars *vars)
 {
@@ -90,6 +42,48 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 		}
 	}
 	return (0);
+}
+
+static void	ft_click_interact(t_vars *vars, t_ray *cast)
+{
+	t_wall	w;
+
+	w = vars->map.walls[cast->wall];
+	if (w.type == W_DOOR)
+	{
+		vars->map.walls[cast->wall].type = W_DOOR_OPEN;
+		vars->map.raw[(int)w.pos.y][(int)w.pos.x] = '0';
+		play_sound(vars, "./sound/door.mp3");
+	}
+	else if (w.type == W_DOOR_OPEN && ((int)vars->player.pos.x != (int)w.pos.x
+			|| (int)vars->player.pos.y != (int)w.pos.y))
+	{
+		vars->map.walls[cast->wall].type = W_DOOR;
+		vars->map.raw[(int)w.pos.y][(int)w.pos.x] = 'D';
+		play_sound(vars, "./sound/door.mp3");
+	}
+	else if (w.type == W_FINISH)
+	{
+		ft_next_level(vars);
+	}
+	else
+		vars->pistol.frame = 0;
+}
+
+static void	ft_next_level(t_vars *vars)
+{
+	char	*filename;
+
+	ft_free_map(vars);
+	vars->player.pos.x = 0;
+	vars->level++;
+	if (vars->map.next != NULL)
+		filename = vars->map.next;
+	else
+		filename = ft_itoa(rand());
+	ft_open_map(vars, &filename);
+	ft_process_map(vars);
+	ft_register_walls(vars);
 }
 
 int	ft_mouse_hook(int x, int y, t_vars *vars)
