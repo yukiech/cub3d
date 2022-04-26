@@ -85,14 +85,7 @@ static void	ft_populate_map(t_vars *vars)
 		}
 		i++;
 	}
-	while (1)
-	{
-		i = rand() % GEN_WIDTH;
-		j = rand() % GEN_HEIGHT;
-		if (ft_get_case(vars, i, j) == '0')
-			break ;
-	}
-	vars->map.raw[j][i] = 'F';
+	ft_generate_finish(vars);
 }
 
 static void	ft_gen_add_spaces(t_vars *vars, int x, int y)

@@ -27,7 +27,7 @@ int	ft_free_all(t_vars *vars)
 		mlx_destroy_image(vars->mlx, vars->screen.img);
 	if (vars->win != NULL)
 		mlx_destroy_window(vars->mlx, vars->win);
-	while (0)
+	while (1)
 		;
 	exit(0);
 }

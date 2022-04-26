@@ -15,6 +15,24 @@
 
 static int	ft_gen_check2(t_vars *vars);
 
+void	ft_generate_finish(t_vars *vars)
+{
+	int	i;
+	int	j;
+	while (1)
+	{
+		i = rand() % GEN_WIDTH;
+		j = rand() % GEN_HEIGHT;
+		if (ft_get_case(vars, i, j) == '0'
+			&& ft_get_case(vars, i - 1, j) == '0'
+			&& ft_get_case(vars, i + 1, j) == '0'
+			&& ft_get_case(vars, i, j - 1) == '0'
+			&& ft_get_case(vars, i, j + 1) == '0')
+			break ;
+	}
+	vars->map.raw[j][i] = 'F';
+}
+
 int	ft_gen_count(t_vars *vars)
 {
 	int	nb;

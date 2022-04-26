@@ -33,4 +33,6 @@ int		ft_gen_count(t_vars *vars);
 void	ft_gen_expend(t_vars *vars, int x, int y, int dir);
 int		ft_gen_check(t_vars *vars);
 
+void	ft_generate_finish(t_vars *vars);
+
 #endif //GENERATE_H
