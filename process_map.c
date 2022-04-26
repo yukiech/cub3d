@@ -85,7 +85,7 @@ static void	ft_inside_touch_outside(t_vars *vars, int x, int y)
 
 static void	ft_count_walls_around(t_vars *vars, int x, int y)
 {
-	if (ft_strchr("0D^", ft_get_case(vars, x, y)) != NULL)
+	if (ft_strchr("0D^F", ft_get_case(vars, x, y)) != NULL)
 	{
 		if (ft_strchr("1D^F", ft_get_case(vars, x, y - 1)) != NULL)
 			vars->map.n_walls++;
