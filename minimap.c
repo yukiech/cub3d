@@ -16,6 +16,7 @@
 #define MAP_HALF 10.5
 #define MAP_PX 6.0
 
+static void	mm_colors(t_vars *vars, float x, float y, char c);
 static void	mm_case(t_imgptr *minimap, float x, float y, int color);
 static void	mm_player(t_vars *vars, t_imgptr *minimap);
 
@@ -24,7 +25,6 @@ void	minimap_draw(t_vars *vars)
 	t_point		playerpos;
 	float		i;
 	float		j;
-	char		c;
 
 	playerpos = vars->player.pos;
 	i = -MAP_HALF - fmod(playerpos.y, 1);
@@ -33,22 +33,31 @@ void	minimap_draw(t_vars *vars)
 		j = -MAP_HALF - fmod(playerpos.x, 1);
 		while (j <= MAP_HALF + 1)
 		{
-			c = ft_get_case(vars, playerpos.x + j, playerpos.y + i);
-			if (ft_strchr("\e1 ", c) != NULL)
-				mm_case(&vars->screen, j, i, ft_color(0, 0, 0, 0));
-			else if (ft_strchr("0", c) != NULL)
-				mm_case(&vars->screen, j, i, ft_color(0, 255, 255, 255));
-			else if (ft_strchr("D", c) != NULL)
-				mm_case(&vars->screen, j, i, ft_color(0, 0, 0, 255));
-			else if (ft_strchr("^", c) != NULL)
-				mm_case(&vars->screen, j, i, ft_color(0, 255, 128, 0));
-			else if (ft_strchr("F", c) != NULL)
-				mm_case(&vars->screen, j, i, ft_color(0, 0, 255, 0));
+			mm_colors(vars, j, i, ft_get_case(vars,
+					playerpos.x + j, playerpos.y + i));
 			j++;
 		}
 		i++;
 	}
 	mm_player(vars, &vars->screen);
+}
+
+static void	mm_colors(t_vars *vars, float x, float y, char c)
+{
+	if (ft_strchr("\e1 ", c) != NULL)
+		mm_case(&vars->screen, x, y, ft_color(0, 0, 0, 0));
+
+	else if (ft_strchr("0", c) != NULL)
+		mm_case(&vars->screen, x, y, ft_color(0, 255, 255, 255));
+
+	else if (ft_strchr("D", c) != NULL)
+		mm_case(&vars->screen, x, y, ft_color(0, 0, 0, 255));
+
+	else if (ft_strchr("^", c) != NULL)
+		mm_case(&vars->screen, x, y, ft_color(0, 255, 128, 0));
+
+	else if (ft_strchr("F", c) != NULL)
+		mm_case(&vars->screen, x, y, ft_color(0, 0, 255, 0));
 }
 
 static void	mm_case(t_imgptr *minimap, float x, float y, int color)
@@ -68,9 +77,6 @@ static void	mm_case(t_imgptr *minimap, float x, float y, int color)
 			else if (ft_pyta(x + j / MAP_PX, y + i / MAP_PX) < 9)
 				ft_set_px(minimap, (x + MAP_HALF - 0.5) * MAP_PX + j,
 					(y + MAP_HALF - 0.5) * MAP_PX + i, ft_color(0, 105, 75, 0));
-			//else
-			//	ft_set_px(minimap, (x + MAP_HALF - 0.5) * MAP_PX + j,
-			//		(y + MAP_HALF - 0.5) * MAP_PX + i, ft_color(255, 0, 0, 0));
 			j++;
 		}
 		i++;
