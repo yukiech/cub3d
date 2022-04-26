@@ -19,21 +19,25 @@ void	ft_damage(t_vars *vars)
 	if (vars->player.on_fire > 0)
 	{
 		vars->player.hp = fmax(vars->player.hp - 1, -1);
+		if ((int)vars->player.hp % 100 == 0)
+			play_sound(vars, "hurt");
 		if (ft_get_case(vars, vars->player.pos.x, vars->player.pos.y) != '^')
 			vars->player.on_fire = fmax(vars->player.on_fire - 2, 0);
-		ft_put_image(vars, &vars->fire[(int)(vars->frame / 6) % 10],
-			(t_point){0, vars->screen.h * 0.5},
-			(t_point){vars->screen.w, vars->screen.h * 1.2});
-	}
-	if (vars->player.hp != vars->player.hp_start)
-	{
-		if ((int)vars->player.hp % 100 == 0)
-			play_sound(vars, "./sound/hurt.mp3");
 	}
 	if (vars->player.hp == 0)
 	{
 		sound_music(vars, "wilheim");
 		vars->player.hp = -1;
+	}
+}
+
+void	ft_fire(t_vars *vars)
+{
+	if (vars->player.on_fire > 0)
+	{
+		ft_put_image(vars, &vars->fire[(int)(vars->frame / 6) % 10],
+			(t_point){0, vars->screen.h * 0.5},
+			(t_point){vars->screen.w, vars->screen.h * 1.2});
 	}
 }
 

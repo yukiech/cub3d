@@ -47,6 +47,7 @@ int		ft_mouse_hook(int x, int y, t_vars *vars);
 //-----------------
 //hp.c
 void	ft_damage(t_vars *vars);
+void	ft_fire(t_vars *vars);
 void	ft_hp_draw(t_vars *vars);
 
 //-----------------

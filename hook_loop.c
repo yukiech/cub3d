@@ -28,9 +28,9 @@ int	ft_loop_hook(t_vars *vars)
 		ft_loop_game_hook(vars);
 	else if (vars->game_state == 3)
 		ft_win_screen(vars);
-	//ft_damage(vars);
-	//if (vars->game_state == 2)
-	//	ft_hp_draw(vars);
+	ft_fire(vars);
+	if (vars->game_state == 2)
+		ft_hp_draw(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
 	vars->frame = (vars->frame + 1) % 1000000000;
 	return (0);
@@ -81,6 +81,7 @@ static void	ft_loop_game_hook(t_vars *vars)
 	minimap_draw(vars);
 	pistol_fire(vars);
 	ft_draw_cross(vars);
+	ft_damage(vars);
 	ft_put_image(vars, &vars->score, (t_point){vars->screen.w - 140, 10},
 		(t_point){vars->screen.w - 10, 50});
 	ft_write_text(vars, "Niveau: ", (t_point){vars->screen.w - 125, 20},
@@ -94,7 +95,7 @@ static void	ft_loop_game_hook(t_vars *vars)
 static void	ft_win_screen(t_vars *vars)
 {
 	if (vars->player.hp > 0)
-		ft_put_image_full(vars, &vars->loading.gameover);
+		ft_put_image_full(vars, &vars->gameover);
 	else
-		ft_put_image_full(vars, &vars->loading.gameover);
+		ft_put_image_full(vars, &vars->gameover);
 }

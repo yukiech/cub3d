@@ -14,7 +14,7 @@
 
 void	sound_music(t_vars *vars, char *title)
 {
-	 if (ft_strcmp(title, "clic") == 0)
+	if (ft_strcmp(title, "clic") == 0)
 		play_sound(vars, "sound/clic.mp3");
 	else if (ft_strcmp(title, "wilheim") == 0)
 		play_sound(vars, "sound/wilheim.mp3");
