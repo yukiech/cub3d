@@ -78,7 +78,8 @@ void	ft_next_level(t_vars *vars)
 	sound_kill();
 	if (vars->level > 2 || vars->level < 0)
 	{
-		sound_music(vars, "victory");
+		if (vars->level > 0)
+			sound_music(vars, "victory");
 		vars->game_state = 3;
 		ft_tfree((void **)&vars->map.next);
 	}

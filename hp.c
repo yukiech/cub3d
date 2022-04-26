@@ -24,9 +24,11 @@ void	ft_damage(t_vars *vars)
 		vars->player.hp = fmax(vars->player.hp - 1, -1);
 		if ((int)vars->player.hp % 40 == 0)
 			sound_music(vars, "hurt");
-		if (vars->map.raw == NULL
-			|| ft_get_case(vars, vars->player.pos.x, vars->player.pos.y) != '^')
+		if (vars->map.raw != NULL
+			&& ft_get_case(vars, vars->player.pos.x, vars->player.pos.y) != '^')
 			vars->player.on_fire = fmax(vars->player.on_fire - 2, 0);
+		else if (vars->map.raw == NULL)
+			vars->player.on_fire = fmax(vars->player.on_fire - 0.5, 0);
 	}
 	if (vars->player.hp == 0)
 	{
