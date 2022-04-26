@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:17 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 17:50:55 by ahuber           ###   ########.fr       */
+/*   Updated: 2022/04/26 18:24:50 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	play_sound(t_vars *vars, char *path)
 	char	*volume;
 
 	volume = "0.2";
-	if (ft_strcmp(path, "./sound/pistol.mp3") == 0)
+	if (ft_strcmp(path, "sound/pistol.mp3") == 0)
 		volume = "0.8";
 	if (vars->player.has_sound == 0)
 		return ;
