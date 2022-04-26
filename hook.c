@@ -8,37 +8,12 @@ void	menu_screen(t_vars *vars);
 void	loading_screen(t_vars *vars);
 void	load_music_title(t_vars *vars, char *map);
 
-#define CROSS_LEN 20
-#define CROSS_WIDTH 3
-
-void	ft_draw_cross(t_vars *vars)
-{
-	int	i;
-	int	mid_h;
-	int	mid_w;
-
-	mid_h = vars->screen.h / 2;
-	mid_w = vars->screen.w / 2;
-	i = mid_h - (CROSS_WIDTH / 2);
-	while (i < mid_h + (CROSS_WIDTH / 2))
-	{
-		ft_draw_hline(&vars->screen, (t_point){mid_w - (CROSS_LEN / 2), i},
-			CROSS_LEN, 0xFFFFFF);
-		i++;
-	}
-	i = mid_w - (CROSS_WIDTH / 2);
-	while (i < mid_w + (CROSS_WIDTH / 2))
-	{
-		ft_draw_vline(&vars->screen, (t_point){i, mid_h - (CROSS_LEN / 2)},
-			CROSS_LEN, 0xFFFFFF);
-		i++;
-	}
-}
+void	ft_draw_cross(t_vars *vars);
 
 #define PISTOL_SPEED 6
 int	ft_loop_hook(t_vars *vars)
 {
-	mlx_clear_window(vars->mlx, vars->win);
+//	mlx_clear_window(vars->mlx, vars->win);
 
 	if (vars->game_state == 0)
 		loading_screen(vars);
@@ -74,16 +49,14 @@ int	ft_loop_hook(t_vars *vars)
 
 		ft_draw_cross(vars);
 		ft_damage(vars);
-//		ft_write_text(vars, "+", (t_point){vars->screen.w / 2, vars->screen.h / 2}, (t_vect){3, 0xFFFFFF});
-
 		ft_hp_draw(vars);
 
 
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
-
 	}
 
+
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
+
 //	if (vars->game_state == 2)
 //		ft_hp_draw(vars);
 	vars->frame = (vars->frame + 1) % 1000000000;
@@ -220,7 +193,7 @@ int	ft_mouse_hook(int x, int y, t_vars *vars)
 {
 	if (vars->game_state == 2)
 	{
-		vars->player.angle += radians(x - vars->screen.w / 2) / 8;
+		vars->player.angle += radians(x - vars->screen.w / 2) / 10;
 		if (vars->player.angle > M_PI)
 			vars->player.angle -= 2 * M_PI;
 		if (vars->player.angle < -M_PI)

@@ -49,6 +49,7 @@ void	set_char_stats(t_vars *vars)
 		vars->player.fov = radians(170);
 	else if (vars->loading.pos == 4)
 		vars->player.hp *= 2;
+	vars->player.hp_start = vars->player.hp;	
 }
 
 #define LOADING_LEN 100
