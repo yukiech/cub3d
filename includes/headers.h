@@ -90,7 +90,7 @@ void	ft_move(t_vars *vars, int keycode);
 
 //-----------------
 //open_map.c
-void	ft_open_map(t_vars *vars, char *filename);
+void	ft_open_map(t_vars *vars, char **filename);
 
 
 //-----------------

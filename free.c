@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:15 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 13:49:15 by jjaqueme         ###   ########.fr       */
+/*   Updated: 2022/04/26 13:54:11 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	ft_free_map(t_vars *vars)
 		i++;
 	}
 	ft_tfree((void **)&vars->map.raw);
-//	ft_free_2d(vars->map.raw);
 	ft_tfree((void **)&vars->map.walls);
 }
 
