@@ -6,15 +6,12 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:18 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 14:34:09 by ahuber           ###   ########.fr       */
+/*   Updated: 2022/04/26 15:08:52 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADERS_H
 # define HEADERS_H
-
-
-
 
 //-----------------
 //draw.c
@@ -24,10 +21,9 @@ void	ft_draw_vline(t_imgptr *ptr, t_point o, int len, int color);
 //-----------------
 //free.c
 void	ft_tfree(void **ptr);
-int	    ft_free_all(t_vars *vars);
+int		ft_free_all(t_vars *vars);
 void	ft_free_map(t_vars *vars);
 void	ft_exit(t_vars *vars, char *error);
-
 
 //-----------------
 //generate.c
@@ -46,7 +42,6 @@ int		ft_mouse_hook(int x, int y, t_vars *vars);
 //hp.c
 void	ft_damage(t_vars *vars);
 void	ft_hp_draw(t_vars *vars);
-
 
 //-----------------
 //images.c
@@ -68,13 +63,13 @@ void	ft_draw_cross(t_vars *vars);
 //-----------------
 //math_game.c
 void	ft_set_px(t_imgptr *img, int x, int y, int color);
-int	    ft_get_px(t_imgptr *img, int x, int y);
-int	    ft_color(UCHAR a, UCHAR r, UCHAR g, UCHAR b);
+int		ft_get_px(t_imgptr *img, int x, int y);
+int		ft_color(UCHAR a, UCHAR r, UCHAR g, UCHAR b);
 char	ft_get_case(t_vars *vars, int x, int y);
 
 //-----------------
 //math.c
-int	    bsp(t_point p, t_point l1, t_point l2);
+int		bsp(t_point p, t_point l1, t_point l2);
 float	map(float x, t_vect in, t_vect out);
 float	ft_pyta(float a, float b);
 float	radians(float deg);
@@ -92,10 +87,8 @@ void	ft_move(t_vars *vars, int keycode);
 //open_map.c
 void	ft_open_map(t_vars *vars, char **filename);
 
-
 //-----------------
 //pistol.c
-
 
 //-----------------
 //process_map.c

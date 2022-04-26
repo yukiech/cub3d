@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:19 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 13:49:19 by jjaqueme         ###   ########.fr       */
+/*   Updated: 2022/04/26 15:08:26 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct s_player {
 	float	hori;
 	float	angle;
 	float	fov;
-	float		hp;
-	float		hp_start;
+	float	hp;
+	float	hp_start;
 	float	speed;
 	int		speed_mod;
 	int		has_collisions;
@@ -121,7 +121,7 @@ typedef struct s_fire {
 	int			frame;
 }	t_fire;
 
-typedef struct s_loading { 
+typedef struct s_loading {
 	t_imgptr	menu_1;
 	t_imgptr	menu_2;
 	t_imgptr	menu_3;
