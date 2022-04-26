@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:18 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 13:49:18 by jjaqueme         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:10:47 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,13 @@ void	ft_put_col(t_vars *vars, t_imgptr *img, t_point o1, float ratio);
 
 //-----------------
 //loading_menu.c
+void	load_pistol(t_vars *vars);
+void	menu_load_image(t_vars *vars);
+void	set_char_stats(t_vars *vars);
+void	menu_screen(t_vars *vars);
+void	loading_screen(t_vars *vars);
+void	load_music_title(t_vars *vars, char *map);
+void	ft_draw_cross(t_vars *vars);
 
 //-----------------
 //math_game.c

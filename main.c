@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:16 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 13:49:16 by jjaqueme         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:10:37 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,6 @@ void	ft_init_vars(t_vars *vars)
 	vars->win = mlx_new_window(vars->mlx, vars->screen.w, vars->screen.h, "Cub3d");
 	ft_load_image(vars, NULL, &vars->screen);
 }
-
-
-
-void	load_pistol(t_vars *vars);
-void	menu_load_image(t_vars *vars);
-
-void	set_char_stats(t_vars *vars);
-void	loading_screen(t_vars *vars, int i);
-
-
 
 int	main(int argc, char **argv)
 {
