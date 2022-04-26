@@ -79,8 +79,8 @@ static void	ft_populate_map(t_vars *vars)
 		j = 0;
 		while (j < GEN_WIDTH)
 		{
-			ft_gen_add_spaces(vars, j, i);
 			ft_gen_add_doors(vars, j, i);
+			ft_gen_add_spaces(vars, j, i);
 			j++;
 		}
 		i++;
@@ -104,11 +104,11 @@ static void	ft_gen_add_spaces(t_vars *vars, int x, int y)
 		&& ft_strchr("\e 1", ft_get_case(vars, x, y + 1)) != NULL)
 		vars->map.raw[y][x] = ' ';
 	if (ft_strchr("0", ft_get_case(vars, x, y)) != NULL
-		&& ft_strchr("0", ft_get_case(vars, x - 1, y)) != NULL
-		&& ft_strchr("0", ft_get_case(vars, x, y - 1)) != NULL
-		&& ft_strchr("0", ft_get_case(vars, x + 1, y)) != NULL
-		&& ft_strchr("0", ft_get_case(vars, x, y + 1)) != NULL
-		&& rand() % 100 < 15)
+		&& ft_strchr("D^", ft_get_case(vars, x - 1, y)) == NULL
+		&& ft_strchr("D^", ft_get_case(vars, x, y - 1)) == NULL
+		&& ft_strchr("D^", ft_get_case(vars, x + 1, y)) == NULL
+		&& ft_strchr("D^", ft_get_case(vars, x, y + 1)) == NULL
+		&& rand() % 100 < 12)
 		vars->map.raw[y][x] = '^';
 }
 
@@ -117,14 +117,14 @@ static void	ft_gen_add_doors(t_vars *vars, int x, int y)
 	if (ft_get_case(vars, x, y) == '0'
 		&& ft_get_case(vars, x - 1, y) == '1'
 		&& ft_get_case(vars, x + 1, y) == '1'
-		&& ft_get_case(vars, x, y - 1) != 'D'
-		&& ft_get_case(vars, x, y + 1) != 'D')
+		&& ft_strchr("D^", ft_get_case(vars, x, y - 1)) == NULL
+		&& ft_strchr("D^", ft_get_case(vars, x, y + 1)) == NULL)
 		vars->map.raw[y][x] = 'D';
 	else if (ft_get_case(vars, x, y) == '0'
 		&& ft_get_case(vars, x, y - 1) == '1'
 		&& ft_get_case(vars, x, y + 1) == '1'
-		&& ft_get_case(vars, x - 1, y) != 'D'
-		&& ft_get_case(vars, x + 1, y) != 'D'
+		&& ft_strchr("D^", ft_get_case(vars, x - 1, y)) == NULL
+		&& ft_strchr("D^", ft_get_case(vars, x + 1, y)) == NULL
 		&& rand() % 100 < 42)
 		vars->map.raw[y][x] = 'D';
 }
