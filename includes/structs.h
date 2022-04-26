@@ -118,6 +118,7 @@ typedef struct s_loading {
 	t_imgptr	franken;
 	t_imgptr	sound_on;
 	t_imgptr	sound_off;
+	t_imgptr	gameover;
 	int			pos;
 	char		*music_title;
 }	t_loading;
@@ -135,6 +136,7 @@ typedef struct s_vars {
 	t_player	player;
 	t_imgptr	door;
 	t_imgptr	portal;
+	t_imgptr	score;
 	t_imgptr	heart;
 	t_imgptr	heart_half;
 	t_imgptr	fire[10];

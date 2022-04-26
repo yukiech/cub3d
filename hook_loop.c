@@ -68,6 +68,8 @@ static void	menu_screen(t_vars *vars)
 
 static void	ft_loop_game_hook(t_vars *vars)
 {	
+	char	*tmp;
+
 	ft_draw_background(vars);
 	ft_draw_walls(vars);
 	minimap_draw(vars);
@@ -75,4 +77,12 @@ static void	ft_loop_game_hook(t_vars *vars)
 	ft_draw_cross(vars);
 	ft_damage(vars);
 	ft_hp_draw(vars);
+	ft_put_image(vars, &vars->score, (t_point){vars->screen.w - 140, 10},
+		(t_point){vars->screen.w - 10, 50});
+	ft_write_text(vars, "Niveau: ", (t_point){vars->screen.w - 125, 20},
+		(t_vect){1, 0x00FF00});
+	tmp = ft_itoa(vars->level);
+	ft_write_text(vars, tmp, (t_point){vars->screen.w - 50, 20},
+		(t_vect){1, 0x00FF00});
+	free(tmp);
 }

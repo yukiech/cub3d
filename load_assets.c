@@ -26,6 +26,7 @@ void	load_assets(t_vars *vars)
 	ft_load_image(vars, "./assets/char_franken.xpm", &vars->loading.franken);
 	ft_load_image(vars, "./assets/sound_on.xpm", &vars->loading.sound_on);
 	ft_load_image(vars, "./assets/sound_off.xpm", &vars->loading.sound_off);
+	ft_load_image(vars, "./assets/gameover.xpm", &vars->loading.gameover);
 	load_assets_2(vars);
 }
 
@@ -40,6 +41,7 @@ static void	load_assets_2(t_vars *vars)
 	ft_load_image(vars, "./assets/heart_left.xpm", &vars->heart_half);
 	ft_load_image(vars, "./assets/newdoor.xpm", &vars->door);
 	ft_load_image(vars, "./assets/portal.xpm", &vars->portal);
+	ft_load_image(vars, "./assets/case.xpm", &vars->score);
 	ft_load_image(vars, "./assets/fire_0.xpm", &vars->fire[0]);
 	ft_load_image(vars, "./assets/fire_1.xpm", &vars->fire[1]);
 	ft_load_image(vars, "./assets/fire_2.xpm", &vars->fire[2]);
