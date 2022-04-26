@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:16 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 17:45:30 by ahuber           ###   ########.fr       */
+/*   Updated: 2022/04/26 18:22:59 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_damage(t_vars *vars)
 	{
 		vars->player.hp = fmax(vars->player.hp - 1, -1);
 		if ((int)vars->player.hp % 100 == 0)
-			play_sound(vars, "hurt");
+			sound_music(vars, "hurt");
 		if (ft_get_case(vars, vars->player.pos.x, vars->player.pos.y) != '^')
 			vars->player.on_fire = fmax(vars->player.on_fire - 2, 0);
 	}
