@@ -75,15 +75,23 @@ static void	ft_next_level(t_vars *vars)
 	char	*filename;
 
 	ft_free_map(vars);
-	vars->player.pos.x = 0;
 	vars->level++;
-	if (vars->map.next != NULL)
-		filename = vars->map.next;
+	if (vars->level > 2)
+	{
+		vars->game_state = 3;
+		ft_tfree((void **)&vars->map.next);
+	}
 	else
-		filename = ft_itoa(rand());
-	ft_open_map(vars, &filename);
-	ft_process_map(vars);
-	ft_register_walls(vars);
+	{
+		vars->player.pos.x = 0;
+		if (vars->map.next != NULL)
+			filename = vars->map.next;
+		else
+			filename = ft_itoa(rand());
+		ft_open_map(vars, &filename);
+		ft_process_map(vars);
+		ft_register_walls(vars);
+	}
 }
 
 int	ft_mouse_hook(int x, int y, t_vars *vars)

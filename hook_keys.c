@@ -52,8 +52,6 @@ static void	menu_hook(t_vars *vars, int keycode)
 	else if (keycode == K_ENTER)
 	{
 		set_char_stats(vars);
-		if (vars->map.music == NULL)
-			vars->map.music = ft_strdup("./sound/nyancat.mp3");
 		play_sound(vars, vars->map.music);
 		sound_music(vars, "choice");
 		mlx_mouse_hide();

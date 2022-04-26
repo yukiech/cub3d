@@ -125,6 +125,6 @@ static void	ft_gen_add_doors(t_vars *vars, int x, int y)
 		&& ft_get_case(vars, x, y + 1) == '1'
 		&& ft_strchr("D^", ft_get_case(vars, x - 1, y)) == NULL
 		&& ft_strchr("D^", ft_get_case(vars, x + 1, y)) == NULL
-		&& rand() % 100 < 42)
+		&& rand() % 100 < 30)
 		vars->map.raw[y][x] = 'D';
 }

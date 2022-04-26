@@ -29,6 +29,8 @@ void	ft_open_map(t_vars *vars, char **filename)
 	ft_load_image(vars, vars->map.east.path, &vars->map.east);
 	ft_load_color(vars, &vars->map.ceil);
 	ft_load_color(vars, &vars->map.floor);
+	if (vars->map.music == NULL)
+		vars->map.music = ft_strdup("./sound/nyancat.mp3");
 }
 
 static void	ft_read_file(t_vars *vars, char *filename)
