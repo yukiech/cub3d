@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:16 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 15:46:26 by ahuber           ###   ########.fr       */
+/*   Updated: 2022/04/26 17:32:54 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	ft_click_interact(t_vars *vars, t_ray *cast)
 	}
 	else if (w.type == W_FINISH)
 	{
+		play_sound(vars, "./sound/map_victory.mp3");
 		ft_next_level(vars);
 	}
 	else
