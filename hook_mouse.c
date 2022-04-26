@@ -19,11 +19,9 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 	t_ray		*cast;
 	t_wall		w;
 
-	if (vars->game_state == 1 && button == M_CLK_L)
-	{
-		if (x >= 720 && x <= 770 && y >= 30 && y <= 80)
-			vars->player.has_sound = !vars->player.has_sound;
-	}
+	if (vars->game_state == 1 && button == M_CLK_L
+		&& x >= 720 && x <= 770 && y >= 30 && y <= 80)
+		vars->player.has_sound = !vars->player.has_sound;
 	else if (vars->game_state == 2 && button == M_CLK_L)
 	{
 		cast = ft_cast_rays_inv(vars, (t_point){.x = vars->player.pos.x
@@ -39,6 +37,8 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 				vars->pistol.frame = 0;
 			free(cast);
 		}
+		else
+			vars->pistol.frame = 0;
 	}
 	return (0);
 }

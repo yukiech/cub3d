@@ -42,10 +42,10 @@ int	main(int argc, char **argv)
 	char	*filename;
 
 	ft_init_vars(&vars);
-	if (argc == 2)
+	if (argc == 2 && ft_strcmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub") == 0)
 		filename = ft_strdup(argv[1]);
 	else
-		filename = ft_strdup("maps/small.cub");
+		ft_exit(&vars, "Map invalid");
 	ft_open_map(&vars, &filename);
 	ft_process_map(&vars);
 	ft_register_walls(&vars);

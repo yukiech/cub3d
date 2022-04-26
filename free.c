@@ -56,6 +56,7 @@ void	ft_free_map(t_vars *vars)
 
 void	ft_exit(t_vars *vars, char *error)
 {
+	ft_putendl_fd("Error\n", 2);
 	ft_putendl_fd(error, 2);
 	ft_free_all(vars);
 }
