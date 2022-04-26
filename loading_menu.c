@@ -52,6 +52,7 @@ void	set_char_stats(t_vars *vars)
 }
 
 #define LOADING_LEN 100
+
 void	loading_screen(t_vars *vars)
 {
 	if (vars->frame % LOADING_LEN < ((LOADING_LEN / 6) * 1))
@@ -68,7 +69,6 @@ void	loading_screen(t_vars *vars)
 		ft_put_image_full(vars, &vars->loading.menu_2);
 }
 
-
 void	menu_screen(t_vars *vars)
 {
 	if (vars->loading.pos == 1)
@@ -79,12 +79,10 @@ void	menu_screen(t_vars *vars)
 		ft_put_image_full(vars, &vars->loading.pirate);
 	else if (vars->loading.pos == 4)
 		ft_put_image_full(vars, &vars->loading.franken);
-
 	if (vars->player.has_sound == 0 && vars->game_state == 1)
 		ft_put_image(vars, &vars->loading.sound_off,
-		(t_point){720, 30}, (t_point){770, 80});
+			(t_point){720, 30}, (t_point){770, 80});
 	else if (vars->player.has_sound == 1 && vars->game_state == 1)
 		ft_put_image(vars, &vars->loading.sound_on,
-		(t_point){720, 30}, (t_point){770, 80});
+			(t_point){720, 30}, (t_point){770, 80});
 }
-

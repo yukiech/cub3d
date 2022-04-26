@@ -11,7 +11,6 @@ void	ft_damage(t_vars *vars)
 	{
 		if (ft_get_case(vars, vars->player.pos.x, vars->player.pos.y) != '^')
 			vars->player.on_fire -= 4;
-
 		ft_put_image(vars, &vars->fire[(int)(vars->frame / 6) % 10],
 			(t_point){0, vars->screen.h * 0.5}, (t_point){vars->screen.w, vars->screen.h * 1.2});
 	}

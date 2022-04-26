@@ -49,7 +49,7 @@ void	ft_draw_walls(t_vars *vars)
 	}
 }
 
-static t_imgptr *ft_switch_texture(t_vars *vars, int wall)
+static t_imgptr	*ft_switch_texture(t_vars *vars, int wall)
 {
 	if (vars->map.walls[wall].type == W_UPWALL)
 		return (&vars->map.north);
