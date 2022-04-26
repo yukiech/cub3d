@@ -13,7 +13,6 @@
 #include <cub3d.h>
 
 static void	ft_click_interact(t_vars *vars, t_ray *cast);
-static void	ft_next_level(t_vars *vars);
 
 int	ft_click_hook(int button, int x, int y, t_vars *vars)
 {
@@ -70,15 +69,17 @@ static void	ft_click_interact(t_vars *vars, t_ray *cast)
 		vars->pistol.frame = 0;
 }
 
-static void	ft_next_level(t_vars *vars)
+void	ft_next_level(t_vars *vars)
 {
 	char	*filename;
 
 	ft_free_map(vars);
 	vars->level++;
-	if (vars->level > 2)
+	sound_kill();
+	if (vars->level > 2 || vars->level < 0)
 	{
-		sound_music(vars, "victory");
+		if (vars->level > 0)
+			sound_music(vars, "victory");
 		vars->game_state = 3;
 		ft_tfree((void **)&vars->map.next);
 	}
@@ -93,6 +94,7 @@ static void	ft_next_level(t_vars *vars)
 		ft_open_map(vars, &filename);
 		ft_process_map(vars);
 		ft_register_walls(vars);
+		play_sound(vars, vars->map.music);
 	}
 }
 

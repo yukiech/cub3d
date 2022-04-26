@@ -25,8 +25,8 @@
 # define GEN_SOUTH "./assets/normal_south.xpm"
 # define GEN_WEST "./assets/normal_west.xpm"
 # define GEN_EAST "./assets/normal_east.xpm"
-# define GEN_CEIL "220,100,0"
-# define GEN_FLOOR "225,30,0"
+# define GEN_CEIL "150,220,220"
+# define GEN_FLOOR "160,160,160"
 
 void	ft_generate_map(t_vars *vars, unsigned int seed);
 int		ft_gen_count(t_vars *vars);

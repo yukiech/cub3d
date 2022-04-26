@@ -28,7 +28,7 @@ int	ft_loop_hook(t_vars *vars)
 		ft_loop_game_hook(vars);
 	else if (vars->game_state == 3)
 		ft_win_screen(vars);
-	ft_fire(vars);
+	ft_damage(vars);
 	if (vars->game_state == 2)
 		ft_hp_draw(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
@@ -95,7 +95,7 @@ static void	ft_loop_game_hook(t_vars *vars)
 static void	ft_win_screen(t_vars *vars)
 {
 	if (vars->player.hp > 0)
-		ft_put_image_full(vars, &vars->gameover);
+		ft_put_image_full(vars, &vars->victory);
 	else
 		ft_put_image_full(vars, &vars->gameover);
 }
