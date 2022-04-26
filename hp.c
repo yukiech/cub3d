@@ -16,8 +16,8 @@ static void	ft_fire(t_vars *vars);
 
 void	ft_damage(t_vars *vars)
 {
-	if (vars->map.raw == NULL
-		|| ft_get_case(vars, vars->player.pos.x, vars->player.pos.y) == '^')
+	if (vars->map.raw != NULL
+		&& ft_get_case(vars, vars->player.pos.x, vars->player.pos.y) == '^')
 		vars->player.on_fire++;
 	if (vars->player.on_fire > 0)
 	{
