@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:16 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 14:35:49 by ahuber           ###   ########.fr       */
+/*   Updated: 2022/04/26 15:04:46 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,12 @@ static void	mm_colors(t_vars *vars, float x, float y, char c)
 {
 	if (ft_strchr("\e1 ", c) != NULL)
 		mm_case(&vars->screen, x, y, ft_color(0, 0, 0, 0));
-
 	else if (ft_strchr("0", c) != NULL)
 		mm_case(&vars->screen, x, y, ft_color(0, 255, 255, 255));
-
 	else if (ft_strchr("D", c) != NULL)
 		mm_case(&vars->screen, x, y, ft_color(0, 0, 0, 255));
-
 	else if (ft_strchr("^", c) != NULL)
 		mm_case(&vars->screen, x, y, ft_color(0, 255, 128, 0));
-
 	else if (ft_strchr("F", c) != NULL)
 		mm_case(&vars->screen, x, y, ft_color(0, 0, 255, 0));
 }
