@@ -51,13 +51,16 @@ void	loading_screen(t_vars *vars, int i);
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
+	char	*filename;
 
 	ft_init_vars(&vars);
 
 	if (argc == 2)
-		ft_open_map(&vars, ft_strdup(argv[1]));
+		filename = ft_strdup(argv[1]);
 	else
-		ft_open_map(&vars, ft_strdup("maps/small.cub"));
+		filename = ft_strdup("maps/small.cub");
+
+	ft_open_map(&vars, &filename);
 	ft_process_map(&vars);
 	ft_register_walls(&vars);
 

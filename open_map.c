@@ -16,13 +16,13 @@ static void	ft_read_file(t_vars *vars, char *filename);
 static void	ft_read_map(t_vars *vars, int fd);
 static void	ft_load_color(t_vars *vars, t_color *color);
 
-void	ft_open_map(t_vars *vars, char *filename)
+void	ft_open_map(t_vars *vars, char **filename)
 {
-	if (ft_atoi(filename) == 0)
-		ft_read_file(vars, filename);
+	if (ft_atoi(*filename) == 0)
+		ft_read_file(vars, *filename);
 	else
-		ft_generate_map(vars, (unsigned int)ft_atoi(filename));
-	ft_tfree((void **)&filename);
+		ft_generate_map(vars, (unsigned int)ft_atoi(*filename));
+	ft_tfree((void **)filename);
 	ft_load_image(vars, vars->map.north.path, &vars->map.north);
 	ft_load_image(vars, vars->map.south.path, &vars->map.south);
 	ft_load_image(vars, vars->map.west.path, &vars->map.west);

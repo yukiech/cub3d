@@ -129,6 +129,22 @@ int	ft_release_hook(int keycode, t_vars *vars)
 	return (0);
 }
 
+void	ft_next_level(t_vars *vars)
+{
+	char	*filename;
+
+	ft_free_map(vars);
+	vars->player.pos.x = 0;
+	vars->level++;
+	if (vars->map.next != NULL)
+		filename = vars->map.next;
+	else
+		filename = ft_itoa(rand());
+	ft_open_map(vars, &filename);
+	ft_process_map(vars);
+	ft_register_walls(vars);
+}
+
 void	ft_click_interact(t_vars *vars, t_ray *cast)
 {
 	t_wall	w;
@@ -147,16 +163,7 @@ void	ft_click_interact(t_vars *vars, t_ray *cast)
 	}
 	else if (w.type == W_FINISH)
 	{
-		ft_free_map(vars);
-		vars->player.pos.x = 0;
-		vars->level++;
-		if (vars->map.next != NULL)
-			ft_open_map(vars, vars->map.next);
-		else
-			ft_open_map(vars, ft_itoa(rand()));
-		vars->map.next = NULL;
-		ft_process_map(vars);
-		ft_register_walls(vars);
+		ft_next_level(vars);
 	}
 	else
 		vars->pistol.frame = 0;
