@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:15 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 13:49:15 by jjaqueme         ###   ########.fr       */
+/*   Updated: 2022/04/26 19:06:40 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_generate_finish(t_vars *vars)
 {
 	int	i;
 	int	j;
+
 	while (1)
 	{
 		i = rand() % GEN_WIDTH;
