@@ -42,6 +42,7 @@ static void	load_assets_2(t_vars *vars)
 	ft_load_image(vars, "./assets/portal.xpm", &vars->portal);
 	ft_load_image(vars, "./assets/case.xpm", &vars->score);
 	ft_load_image(vars, "./assets/gameover.xpm", &vars->gameover);
+	ft_load_image(vars, "./assets/victory.xpm", &vars->victory);
 	ft_load_image(vars, "./assets/fire_0.xpm", &vars->fire[0]);
 	ft_load_image(vars, "./assets/fire_1.xpm", &vars->fire[1]);
 	ft_load_image(vars, "./assets/fire_2.xpm", &vars->fire[2]);

@@ -140,6 +140,7 @@ typedef struct s_vars {
 	t_imgptr	heart;
 	t_imgptr	heart_half;
 	t_imgptr	fire[10];
+	t_imgptr	victory;
 	t_imgptr	gameover;
 	t_pistol	pistol;
 

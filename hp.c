@@ -12,26 +12,34 @@
 
 #include <cub3d.h>
 
+static void	ft_fire(t_vars *vars);
+
 void	ft_damage(t_vars *vars)
 {
-	if (ft_get_case(vars, vars->player.pos.x, vars->player.pos.y) == '^')
+	if (vars->map.raw == NULL
+		|| ft_get_case(vars, vars->player.pos.x, vars->player.pos.y) == '^')
 		vars->player.on_fire++;
 	if (vars->player.on_fire > 0)
 	{
 		vars->player.hp = fmax(vars->player.hp - 1, -1);
-		if ((int)vars->player.hp % 100 == 0)
+		if ((int)vars->player.hp % 40 == 0)
 			sound_music(vars, "hurt");
-		if (ft_get_case(vars, vars->player.pos.x, vars->player.pos.y) != '^')
+		if (vars->map.raw == NULL
+			|| ft_get_case(vars, vars->player.pos.x, vars->player.pos.y) != '^')
 			vars->player.on_fire = fmax(vars->player.on_fire - 2, 0);
 	}
 	if (vars->player.hp == 0)
 	{
 		sound_music(vars, "wilheim");
 		vars->player.hp = -1;
+		vars->level = -5;
+		vars->game_state = 3;
+		ft_next_level(vars);
 	}
+	ft_fire(vars);
 }
 
-void	ft_fire(t_vars *vars)
+static void	ft_fire(t_vars *vars)
 {
 	if (vars->player.on_fire > 0)
 	{

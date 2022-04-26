@@ -43,11 +43,11 @@ int		ft_release_hook(int keycode, t_vars *vars);
 //hook_mouse.c
 int		ft_click_hook(int button, int x, int y, t_vars *vars);
 int		ft_mouse_hook(int x, int y, t_vars *vars);
+void	ft_next_level(t_vars *vars);
 
 //-----------------
 //hp.c
 void	ft_damage(t_vars *vars);
-void	ft_fire(t_vars *vars);
 void	ft_hp_draw(t_vars *vars);
 
 //-----------------
