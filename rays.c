@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rays.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/26 13:49:17 by jjaqueme          #+#    #+#             */
+/*   Updated: 2022/04/26 13:49:17 by jjaqueme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3d.h>
 
-static t_ray *ft_cast_walls(t_vars *vars, t_point end, t_ray *res, int min_id);
-static void	ft_copy_ray(t_ray **best, t_ray *copy);
-static int	ray(t_wall w, t_point player, t_point r, t_ray *ray);
+static t_ray	*ft_cast_walls(t_vars *vars, t_point end, t_ray *res, int min_id);
+static void		ft_copy_ray(t_ray **best, t_ray *copy);
+static int		ray(t_wall w, t_point player, t_point r, t_ray *ray);
 
 t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end)
 {
@@ -33,6 +45,7 @@ t_ray	*ft_cast_rays_inv(t_vars *vars, t_point ray_end)
 	free(res);
 	return (best);
 }
+
 static t_ray	*ft_cast_walls(t_vars *vars, t_point end, t_ray *res, int min_id)
 {
 	int		i;

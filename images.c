@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   images.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/26 13:49:16 by jjaqueme          #+#    #+#             */
+/*   Updated: 2022/04/26 13:49:16 by jjaqueme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3d.h>
 
 void	ft_load_image(t_vars *vars, char *filename, t_imgptr *ptr)
@@ -15,7 +27,8 @@ void	ft_load_image(t_vars *vars, char *filename, t_imgptr *ptr)
 
 void	ft_put_image_full(t_vars *vars, t_imgptr *img)
 {
-	ft_put_image(vars, img, (t_point){0, 0}, (t_point){vars->screen.w, vars->screen.h});
+	ft_put_image(vars, img, (t_point){0, 0},
+		(t_point){vars->screen.w, vars->screen.h});
 }
 
 void	ft_put_image(t_vars *vars, t_imgptr *img, t_point o1, t_point o2)

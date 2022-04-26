@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   genmap.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/26 13:49:15 by jjaqueme          #+#    #+#             */
+/*   Updated: 2022/04/26 13:49:15 by jjaqueme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3d.h>
 #include <generate.h>
 
@@ -112,6 +124,7 @@ static void	ft_gen_add_doors(t_vars *vars, int x, int y)
 		&& ft_get_case(vars, x, y - 1) == '1'
 		&& ft_get_case(vars, x, y + 1) == '1'
 		&& ft_get_case(vars, x - 1, y) != 'D'
-		&& ft_get_case(vars, x + 1, y) != 'D')
+		&& ft_get_case(vars, x + 1, y) != 'D'
+		&& rand() % 100 < 42)
 		vars->map.raw[y][x] = 'D';
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   open_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/26 13:49:17 by jjaqueme          #+#    #+#             */
+/*   Updated: 2022/04/26 13:49:17 by jjaqueme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3d.h>
 
 static void	ft_read_file(t_vars *vars, char *filename);
@@ -65,4 +77,8 @@ static void	ft_load_color(t_vars *vars, t_color *color)
 		ft_exit(vars, "Color arguments error");
 	}
 	color->color = ft_atoi(sp[0]) << 16 | ft_atoi(sp[1]) << 8 | ft_atoi(sp[2]);
+	free(sp[0]);
+	free(sp[1]);
+	free(sp[2]);
+	free(sp);
 }

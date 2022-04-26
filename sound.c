@@ -1,9 +1,19 @@
-#include <cub3d.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sound.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/26 13:49:17 by jjaqueme          #+#    #+#             */
+/*   Updated: 2022/04/26 13:49:17 by jjaqueme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include <cub3d.h>
 
 void	sound_music(t_vars *vars, char *title)
 {
-	
 	if (ft_strcmp(title, "brittney") == 0)
 		play_sound(vars, "sound/brittney.mp3");
 	else if (ft_strcmp(title, "nyancat") == 0)
@@ -24,7 +34,6 @@ void	play_sound(t_vars *vars, char *path)
 {
 	pid_t	pid;
 
-	
 	if (vars->player.has_sound == 0)
 		return ;
 	pid = fork();

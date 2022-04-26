@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hook.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/26 13:49:16 by jjaqueme          #+#    #+#             */
+/*   Updated: 2022/04/26 13:49:16 by jjaqueme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3d.h>
 
 void	load_pistol(t_vars *vars);
@@ -11,54 +23,40 @@ void	load_music_title(t_vars *vars, char *map);
 void	ft_draw_cross(t_vars *vars);
 
 #define PISTOL_SPEED 6
+
 int	ft_loop_hook(t_vars *vars)
 {
-//	mlx_clear_window(vars->mlx, vars->win);
-
+	mlx_clear_window(vars->mlx, vars->win);
 	if (vars->game_state == 0)
 		loading_screen(vars);
 	else if (vars->game_state == 1)
 		menu_screen(vars);
 	else if (vars->game_state == 2)
 	{
-		
 		ft_draw_background(vars);
-
 		ft_draw_walls(vars);
-
 		minimap_draw(vars);
-
-		//ft_hp_draw(vars);
-
 		if (vars->pistol.frame < PISTOL_SPEED * 1)
 			ft_put_image(vars, &vars->pistol.pistol1,
-			(t_point){240, 450}, (t_point){600, 800});
+				(t_point){240, 450}, (t_point){600, 800});
 		else if (vars->pistol.frame < PISTOL_SPEED * 2)
 			ft_put_image(vars, &vars->pistol.pistol2,
-			(t_point){240, 450}, (t_point){600, 800});
+				(t_point){240, 450}, (t_point){600, 800});
 		else if (vars->pistol.frame < PISTOL_SPEED * 3)
 			ft_put_image(vars, &vars->pistol.pistol3,
-			(t_point){240, 450}, (t_point){600, 800});
+				(t_point){240, 450}, (t_point){600, 800});
 		else if (vars->pistol.frame < PISTOL_SPEED * 4)
 			ft_put_image(vars, &vars->pistol.pistol4,
-			(t_point){240, 450}, (t_point){600, 800});
+				(t_point){240, 450}, (t_point){600, 800});
 		else
 			ft_put_image(vars, &vars->pistol.pistol1,
-			(t_point){240, 450}, (t_point){600, 800});
+				(t_point){240, 450}, (t_point){600, 800});
 		vars->pistol.frame++;
-
 		ft_draw_cross(vars);
 		ft_damage(vars);
 		ft_hp_draw(vars);
-
-
 	}
-
-
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->screen.img, 0, 0);
-
-//	if (vars->game_state == 2)
-//		ft_hp_draw(vars);
 	vars->frame = (vars->frame + 1) % 1000000000;
 	return (0);
 }
@@ -78,7 +76,8 @@ void	move_menu(t_vars *vars, int keycode)
 
 void	menu_hook(t_vars *vars, int keycode)
 {
-	if (keycode == K_AR_L || keycode == K_AR_R || keycode == K_AR_U || keycode == K_AR_D)
+	if (keycode == K_AR_L || keycode == K_AR_R
+		|| keycode == K_AR_U || keycode == K_AR_D)
 		move_menu(vars, keycode);
 	else if (keycode == K_ENTER)
 	{
@@ -97,7 +96,6 @@ int	ft_key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == K_ESCAPE)
 		ft_free_all(vars);
-
 	if (vars->game_state > 0 && keycode == K_M)
 	{
 		vars->player.has_sound = !vars->player.has_sound;
@@ -141,7 +139,8 @@ void	ft_click_interact(t_vars *vars, t_ray *cast)
 		vars->map.walls[cast->wall].type = W_DOOR_OPEN;
 		vars->map.raw[(int)w.pos.y][(int)w.pos.x] = '0';
 	}
-	else if (w.type == W_DOOR_OPEN && ((int)vars->player.pos.x != (int)w.pos.x || (int)vars->player.pos.y != (int)w.pos.y))
+	else if (w.type == W_DOOR_OPEN && ((int)vars->player.pos.x != (int)w.pos.x
+			|| (int)vars->player.pos.y != (int)w.pos.y))
 	{
 		vars->map.walls[cast->wall].type = W_DOOR;
 		vars->map.raw[(int)w.pos.y][(int)w.pos.x] = 'D';
@@ -165,8 +164,8 @@ void	ft_click_interact(t_vars *vars, t_ray *cast)
 
 int	ft_click_hook(int button, int x, int y, t_vars *vars)
 {
-    t_ray	*cast;
-	t_wall	w;
+	t_ray		*cast;
+	t_wall		w;
 
 	if (vars->game_state == 1 && button == M_CLK_L)
 	{
@@ -175,11 +174,14 @@ int	ft_click_hook(int button, int x, int y, t_vars *vars)
 	}
 	else if (vars->game_state == 2 && button == M_CLK_L)
 	{
-		cast = ft_cast_rays_inv(vars, (t_point){.x = vars->player.pos.x + cos(vars->player.angle), .y = vars->player.pos.y + sin(vars->player.angle)});
+		cast = ft_cast_rays_inv(vars, (t_point){.x = vars->player.pos.x
+				+ cos(vars->player.angle), .y = vars->player.pos.y
+				+ sin(vars->player.angle)});
 		if (cast != NULL)
 		{
 			w = vars->map.walls[cast->wall];
-			if (ft_pyta(w.pos.y - vars->player.pos.y, w.pos.x - vars->player.pos.x) < 2.2)
+			if (ft_pyta(w.pos.y - vars->player.pos.y,
+					w.pos.x - vars->player.pos.x) < 2.2)
 				ft_click_interact(vars, cast);
 			else
 				vars->pistol.frame = 0;
@@ -198,7 +200,6 @@ int	ft_mouse_hook(int x, int y, t_vars *vars)
 			vars->player.angle -= 2 * M_PI;
 		if (vars->player.angle < -M_PI)
 			vars->player.angle += 2 * M_PI;
-
 		vars->player.hori += (vars->screen.h / 2 - y) / 1;
 		vars->player.hori = fmax(0, fmin(vars->screen.h, vars->player.hori));
 		mlx_mouse_move(vars->win, vars->screen.w / 2, vars->screen.h / 2);

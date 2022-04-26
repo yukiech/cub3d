@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/26 13:49:16 by jjaqueme          #+#    #+#             */
+/*   Updated: 2022/04/26 13:49:16 by jjaqueme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3d.h>
 
 void	ft_init_vars(t_vars *vars)
@@ -11,8 +23,6 @@ void	ft_init_vars(t_vars *vars)
 	vars->player.speed_mod = 0;
 	vars->player.has_collisions = 1;
 	vars->player.has_sound = 1;
-	vars->player.hp_start = 1000;
-	vars->player.hp = vars->player.hp_start;
 	vars->player.on_fire = 0;
 
 	vars->game_state = 0;

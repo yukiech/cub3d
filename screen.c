@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   screen.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/26 13:49:17 by jjaqueme          #+#    #+#             */
+/*   Updated: 2022/04/26 13:49:17 by jjaqueme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3d.h>
 
 static void	ft_draw_column(t_vars *vars, t_ray *cast, int col);
@@ -49,7 +61,7 @@ void	ft_draw_walls(t_vars *vars)
 	}
 }
 
-static t_imgptr *ft_switch_texture(t_vars *vars, int wall)
+static t_imgptr	*ft_switch_texture(t_vars *vars, int wall)
 {
 	if (vars->map.walls[wall].type == W_UPWALL)
 		return (&vars->map.north);

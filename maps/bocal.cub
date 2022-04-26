@@ -3,6 +3,7 @@ SO ./assets/bocal_south.xpm
 WE ./assets/bocal_west.xpm
 EA ./assets/bocal_east.xpm
 
+M ./sound/imperial.mp3
 F 88,88,88
 C 0,0,0
 
