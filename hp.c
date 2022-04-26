@@ -18,8 +18,7 @@ void	ft_damage(t_vars *vars)
 		vars->player.on_fire++;
 	if (vars->player.on_fire > 0)
 	{
-		vars->player.hp -= 1;
-		vars->player.on_fire = fmax(vars->player.hp - 1, -1);
+		vars->player.hp = fmax(vars->player.hp - 1, -1);
 		vars->player.on_fire = fmax(vars->player.on_fire - 4, 0);
 		ft_put_image(vars, &vars->fire[(int)(vars->frame / 6) % 10],
 			(t_point){0, vars->screen.h * 0.5},
