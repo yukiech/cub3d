@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:17 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 14:05:10 by ahuber           ###   ########.fr       */
+/*   Updated: 2022/04/26 17:52:57 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 void	pistol_fire(t_vars *vars)
 {
+	if (vars->pistol.frame == 0)
+		sound_music(vars, "pistol");
 	if (vars->pistol.frame < PISTOL_SPEED * 1)
 		ft_put_image(vars, &vars->pistol.pistol2,
 			(t_point){240, 450}, (t_point){600, 800});
