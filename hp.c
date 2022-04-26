@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:16 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 14:06:57 by ahuber           ###   ########.fr       */
+/*   Updated: 2022/04/26 17:45:30 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	ft_damage(t_vars *vars)
 		ft_put_image(vars, &vars->fire[(int)(vars->frame / 6) % 10],
 			(t_point){0, vars->screen.h * 0.5},
 			(t_point){vars->screen.w, vars->screen.h * 1.2});
+	}
+	if (vars->player.hp != vars->player.hp_start)
+	{
+		if ((int)vars->player.hp % 100 == 0)
+			play_sound(vars, "./sound/hurt.mp3");
 	}
 	if (vars->player.hp == 0)
 	{
