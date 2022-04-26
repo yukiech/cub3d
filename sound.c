@@ -47,6 +47,6 @@ void	sound_kill(void)
 {
 	const char	*command;
 
-	command = "killall afplay";
+	command = "pkill afplay";
 	system(command);
 }

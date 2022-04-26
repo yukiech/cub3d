@@ -1,7 +1,7 @@
 SRCS_DIR	= ./
 SRCS_FILES	=  main.c
-SRCS_FILES	+= draw.c free.c genmap_utils.c genmap.c hook.c hook2.c
-SRCS_FILES	+= hp.c images.c loading_menu.c math_game.c math.c
+SRCS_FILES	+= draw.c free.c genmap_utils.c genmap.c hook_loop.c hook_keys.c hook_mouse.c
+SRCS_FILES	+= hp.c images.c load_assets.c math_game.c math.c
 SRCS_FILES	+= minimap.c movements.c open_map.c pistol.c process_map.c
 SRCS_FILES	+= rays.c read_args.c screen.c sound.c tabs.c text.c walls_create.c walls_register.c
 
