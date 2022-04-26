@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:17 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 13:49:17 by jjaqueme         ###   ########.fr       */
+/*   Updated: 2022/04/26 15:46:47 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,17 @@ void	sound_music(t_vars *vars, char *title)
 void	play_sound(t_vars *vars, char *path)
 {
 	pid_t	pid;
+	char	*volume;
 
+	volume = "0.2";
+	if (ft_strcmp(path, "./sound/pistol.mp3") == 0)
+		volume = "0.8";
 	if (vars->player.has_sound == 0)
 		return ;
 	pid = fork();
 	if (pid == 0)
 	{
-		execlp("afplay", "afplay", "-v", "0.2", path, NULL);
+		execlp("afplay", "afplay", "-v", volume, path, NULL);
 	}
 }
 

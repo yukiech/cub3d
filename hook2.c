@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:16 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 14:27:58 by ahuber           ###   ########.fr       */
+/*   Updated: 2022/04/26 15:46:26 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@ void	ft_click_interact(t_vars *vars, t_ray *cast)
 	{
 		vars->map.walls[cast->wall].type = W_DOOR_OPEN;
 		vars->map.raw[(int)w.pos.y][(int)w.pos.x] = '0';
+		play_sound(vars, "./sound/door.mp3");
 	}
 	else if (w.type == W_DOOR_OPEN && ((int)vars->player.pos.x != (int)w.pos.x
 			|| (int)vars->player.pos.y != (int)w.pos.y))
 	{
 		vars->map.walls[cast->wall].type = W_DOOR;
 		vars->map.raw[(int)w.pos.y][(int)w.pos.x] = 'D';
+		play_sound(vars, "./sound/door.mp3");
 	}
 	else if (w.type == W_FINISH)
 	{
