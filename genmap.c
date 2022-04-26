@@ -22,7 +22,6 @@ void	ft_generate_map(t_vars *vars, unsigned int seed)
 {
 	int		inf;
 
-	printf("gen\n");
 	srand(seed);
 	vars->map.north.path = ft_strdup(GEN_NORTH);
 	vars->map.south.path = ft_strdup(GEN_SOUTH);
