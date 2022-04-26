@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:16 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 14:07:16 by ahuber           ###   ########.fr       */
+/*   Updated: 2022/04/26 14:32:36 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	set_char_stats(t_vars *vars)
 		vars->player.fov = radians(170);
 	else if (vars->loading.pos == 4)
 		vars->player.hp *= 2;
-	vars->player.hp_start = vars->player.hp;	
+	vars->player.hp_start = vars->player.hp;
 }
 
 #define LOADING_LEN 100
