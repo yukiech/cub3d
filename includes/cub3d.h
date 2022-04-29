@@ -6,7 +6,7 @@
 /*   By: jjaqueme <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:49:18 by jjaqueme          #+#    #+#             */
-/*   Updated: 2022/04/26 13:49:18 by jjaqueme         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:16:35 by ahuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@
 # define UCHAR unsigned char
 
 # ifndef WINDOW_WIDTH
-#  define WINDOW_WIDTH 800
+#  define WINDOW_WIDTH 1200
 # endif
 # ifndef WINDOW_HEIGHT
-#  define WINDOW_HEIGHT 800
+#  define WINDOW_HEIGHT 1200
 # endif
 
 # define RENDER_DIST 16
