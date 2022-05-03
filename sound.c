@@ -54,7 +54,9 @@ void	play_sound(t_vars *vars, char *path)
 void	sound_kill(void)
 {
 	const char	*command;
+	int			res;
 
 	command = "pkill afplay";
-	system(command);
+	res = system(command);
+	res += 0;
 }

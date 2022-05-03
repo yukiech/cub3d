@@ -12,29 +12,47 @@
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+size_t	ft_putnbr_fd(int n, int fd)
 {
-	int	pow;
-	int	flag;
-	int	temp;
-	int	sign;
+    size_t  res;
 
-	sign = 1;
+    res = 0;
+    if (n < 0)
+    {
+        res++;
+        res += ft_putchar_fd('-', fd);
+        if (n <= -10)
+            res += ft_putnbr_fd((n / 10) * -1, fd);
+    }
+    else if (n >= 10)
+        res += ft_putnbr_fd(n / 10, fd);
+
+    if (n >= 0)
+        res += ft_putchar_fd(n % 10 + '0', fd);
+    else
+        res += ft_putchar_fd((n % 10) * -1 + '0', fd);
+    
+    return (res);
+    
+    
+    /*
+    size_t  res;
+    
+    res = 0;
 	if (n < 0)
 	{
-		ft_putchar_fd('-', fd);
-		sign = sign * -1;
+		res += ft_putchar_fd('-', fd);
+        if (n <= -10)
+            res += ft_putnbr_fd((n / 10) * -1, fd);
 	}
-	flag = 0;
-	pow = 9;
-	while (pow >= 0)
-	{
-		temp = sign * ((n / ft_pow(10, pow)) % 10) + '0';
-		if (flag || pow == 0 || temp != '0')
-		{
-			flag = 1;
-			ft_putchar_fd(temp, fd);
-		}
-		pow--;
-	}
+    else
+    {
+        if (n >= 10)
+            res += ft_putnbr_fd(n, fd);
+    }
+    if (n >= 0)
+        res += ft_putchar_fd(n % 10 + '0', fd);
+    else
+        res += ft_putchar_fd((n * -1) % 10 + '0', fd);
+    return (res);*/
 }

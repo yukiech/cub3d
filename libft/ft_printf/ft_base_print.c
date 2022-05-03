@@ -15,16 +15,14 @@
 
 void	ft_myputchar_fd(char c, int fd, int *written)
 {
-	write(fd, &c, 1);
-	(*written)++;
+	*written += write(fd, &c, 1);
 }
 
 void	ft_myputstr_fd(char *s, int n, int fd, int *written)
 {
 	if (s == NULL)
 		return ;
-	write(fd, s, n);
-	(*written) += n;
+	*written += write(fd, s, n);
 }
 
 void	ft_putsint_fd(int nb, int fd, int *written)

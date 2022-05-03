@@ -20,9 +20,7 @@ t_ray	*ft_cast_rays(t_vars *vars, t_point ray_end)
 {
 	t_ray	*res;
 	t_ray	*best;
-	int		i;
 
-	i = 0;
 	res = malloc(sizeof(t_ray));
 	if (res == NULL)
 		return (NULL);
@@ -35,9 +33,7 @@ t_ray	*ft_cast_rays_inv(t_vars *vars, t_point ray_end)
 {
 	t_ray	*res;
 	t_ray	*best;
-	int		i;
 
-	i = 0;
 	res = malloc(sizeof(t_ray));
 	if (res == NULL)
 		return (NULL);
