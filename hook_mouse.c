@@ -71,8 +71,6 @@ static void	ft_click_interact(t_vars *vars, t_ray *cast)
 
 void	ft_next_level(t_vars *vars)
 {
-	char	*filename;
-
 	ft_free_map(vars);
 	vars->level++;
 	sound_kill();
@@ -87,11 +85,9 @@ void	ft_next_level(t_vars *vars)
 	{
 		sound_music(vars, "map_victory");
 		vars->player.pos.x = 0;
-		if (vars->map.next != NULL)
-			filename = vars->map.next;
-		else
-			filename = ft_itoa(rand());
-		ft_open_map(vars, &filename);
+		if (vars->map.next == NULL)
+			vars->map.next = ft_itoa(rand());
+		ft_open_map(vars, &vars->map.next);
 		ft_process_map(vars);
 		ft_register_walls(vars);
 		play_sound(vars, vars->map.music);
