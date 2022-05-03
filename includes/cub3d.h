@@ -33,10 +33,10 @@
 # define UCHAR unsigned char
 
 # ifndef WINDOW_WIDTH
-#  define WINDOW_WIDTH 1200
+#  define WINDOW_WIDTH 800
 # endif
 # ifndef WINDOW_HEIGHT
-#  define WINDOW_HEIGHT 1200
+#  define WINDOW_HEIGHT 800
 # endif
 
 # define RENDER_DIST 16
