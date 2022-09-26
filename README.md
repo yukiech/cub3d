@@ -21,6 +21,7 @@ Il s'agit donc, avec comme base une map 2D de type text, de réaliser un afficha
 # Utilisation
 
 > ./cub3d maps/little.cub<br />
+
 Déplacements WASD ou fleches directionelles.<br />
 Alt/Ctrl/Shift = speed boost. (vitesse de base très lente, je vous conseille le ninja :) )<br />
 Esc ou clic sur la croix rouge = exit proprement.<br />
